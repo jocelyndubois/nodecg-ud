@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		html,body {
+			background-color:transparent;
+			height:100%;
+		}
+		.container {
+			overflow: hidden;
+			height: 100%;
+		}
+		.PB_Infos {
+			font-size: 2em;
+			color: black;
+			opacity: 1;
+			transition: opacity 1s;
+		}
+		.PB_Infos.hide {
+			opacity: 0;
+		}
+		#players-table {
+			height: 100%;
+			width: 100%;
+		}
+
+		th, td {
+			width: 50%;
+			height: 50%;
+			vertical-align: bottom;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<table id="players-table">
+			<tbody>
+			<tr>
+				<td>
+					<div class="PB_Infos">
+						<div class="lightPb"><span>Light PB : <span id="runnerLightScore_1"></span>(<span id="runnerLightTime_1"></span>)</span></div>
+						<div class="darkPb"><span>Dark PB : <span id="runnerDarkScore_1"></span>(<span id="runnerDarkTime_1"></span>)</span></div>
+					</div>
+				</td>
+				<td>
+					<div class="PB_Infos">
+						<div class="lightPb"><span>Light PB : <span id="runnerLightScore_2"></span>(<span id="runnerLightTime_2"></span>)</span></div>
+						<div class="darkPb"><span>Dark PB : <span id="runnerDarkScore_2"></span>(<span id="runnerDarkTime_2"></span>)</span></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="PB_Infos">
+						<div class="lightPb"><span>Light PB : <span id="runnerLightScore_3"></span>(<span id="runnerLightTime_3"></span>)</span></div>
+						<div class="darkPb"><span>Dark PB : <span id="runnerDarkScore_3"></span>(<span id="runnerDarkTime_3"></span>)</span></div>
+					</div>
+				</td>
+				<td>
+					<div class="PB_Infos">
+						<div class="lightPb"><span>Light PB : <span id="runnerLightScore_4"></span>(<span id="runnerLightTime_4"></span>)</span></div>
+						<div class="darkPb"><span>Dark PB : <span id="runnerDarkScore_4"></span>(<span id="runnerDarkTime_4"></span>)</span></div>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+<script>
+	const runnerLightScoreReplicant_1 = nodecg.Replicant('runnerLightScore_1', 'players');
+	const runnerLightScoreReplicant_2 = nodecg.Replicant('runnerLightScore_2', 'players');
+	const runnerLightScoreReplicant_3 = nodecg.Replicant('runnerLightScore_3', 'players');
+	const runnerLightScoreReplicant_4 = nodecg.Replicant('runnerLightScore_4', 'players');
+
+	const runnerLightTimeReplicant_1 = nodecg.Replicant('runnerLightTime_1', 'players');
+	const runnerLightTimeReplicant_2 = nodecg.Replicant('runnerLightTime_2', 'players');
+	const runnerLightTimeReplicant_3 = nodecg.Replicant('runnerLightTime_3', 'players');
+	const runnerLightTimeReplicant_4 = nodecg.Replicant('runnerLightTime_4', 'players');
+
+	const runnerDarkScoreReplicant_1 = nodecg.Replicant('runnerDarkScore_1', 'players');
+	const runnerDarkScoreReplicant_2 = nodecg.Replicant('runnerDarkScore_2', 'players');
+	const runnerDarkScoreReplicant_3 = nodecg.Replicant('runnerDarkScore_3', 'players');
+	const runnerDarkScoreReplicant_4 = nodecg.Replicant('runnerDarkScore_4', 'players');
+
+	const runnerDarkTimeReplicant_1 = nodecg.Replicant('runnerDarkTime_1', 'players');
+	const runnerDarkTimeReplicant_2 = nodecg.Replicant('runnerDarkTime_2', 'players');
+	const runnerDarkTimeReplicant_3 = nodecg.Replicant('runnerDarkTime_3', 'players');
+	const runnerDarkTimeReplicant_4 = nodecg.Replicant('runnerDarkTime_4', 'players');
+
+	runnerLightScoreReplicant_1.on('change', (newValue, oldValue) => {
+		runnerLightScore_1.innerText = newValue;
+	});
+	runnerLightScoreReplicant_2.on('change', (newValue, oldValue) => {
+		runnerLightScore_2.innerText = newValue;
+	});
+	runnerLightScoreReplicant_3.on('change', (newValue, oldValue) => {
+		runnerLightScore_3.innerText = newValue;
+	});
+	runnerLightScoreReplicant_4.on('change', (newValue, oldValue) => {
+		runnerLightScore_4.innerText = newValue;
+	});
+
+	runnerLightTimeReplicant_1.on('change', (newValue, oldValue) => {
+		runnerLightTime_1.innerText = newValue;
+	});
+	runnerLightTimeReplicant_2.on('change', (newValue, oldValue) => {
+		runnerLightTime_2.innerText = newValue;
+	});
+	runnerLightTimeReplicant_3.on('change', (newValue, oldValue) => {
+		runnerLightTime_3.innerText = newValue;
+	});
+	runnerLightTimeReplicant_4.on('change', (newValue, oldValue) => {
+		runnerLightTime_4.innerText = newValue;
+	});
+
+	runnerDarkScoreReplicant_1.on('change', (newValue, oldValue) => {
+		runnerDarkScore_1.innerText = newValue;
+	});
+	runnerDarkScoreReplicant_2.on('change', (newValue, oldValue) => {
+		runnerDarkScore_2.innerText = newValue;
+	});
+	runnerDarkScoreReplicant_3.on('change', (newValue, oldValue) => {
+		runnerDarkScore_3.innerText = newValue;
+	});
+	runnerDarkScoreReplicant_4.on('change', (newValue, oldValue) => {
+		runnerDarkScore_4.innerText = newValue;
+	});
+
+	runnerDarkTimeReplicant_1.on('change', (newValue, oldValue) => {
+		runnerDarkTime_1.innerText = newValue;
+	});
+	runnerDarkTimeReplicant_2.on('change', (newValue, oldValue) => {
+		runnerDarkTime_2.innerText = newValue;
+	});
+	runnerDarkTimeReplicant_3.on('change', (newValue, oldValue) => {
+		runnerDarkTime_3.innerText = newValue;
+	});
+	runnerDarkTimeReplicant_4.on('change', (newValue, oldValue) => {
+		runnerDarkTime_4.innerText = newValue;
+	});
+
+	nodecg.listenFor('showPb', async query => {
+		var elements = document.getElementsByClassName("PB_Infos");
+
+		Array.from(elements).forEach((elements) => {
+			elements.classList.remove('hide');
+		});
+	});
+
+	nodecg.listenFor('hidePb', async query => {
+		var elements = document.getElementsByClassName("PB_Infos");
+
+		Array.from(elements).forEach((elements) => {
+			elements.classList.add('hide');
+		});
+	});
+</script>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		html,body {
+			background-color:white;
+			height:100%;
+		}
+		.container {
+			overflow: hidden;
+			height: 100%;
+		}
+		.runnerId {
+			font-size: 10em;
+			color: black;
+		}
+		#players-table {
+			height: 100%;
+			width: 100%;
+		}
+		#players-table, th, td {
+			border: 1px solid black;
+		}
+		th, td {
+			width: 50%;
+			height: 50%;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<table id="players-table">
+			<tbody>
+			<tr>
+				<td>
+					<span id="runnerId_1" class="runnerId"></span>
+				</td>
+				<td>
+					<span id="runnerId_2" class="runnerId"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span id="runnerId_3" class="runnerId"></span>
+				</td>
+				<td>
+					<span id="runnerId_4" class="runnerId"></span>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+<script>
+	// We can access Replicants from other bundles by specifying the bundle name as a second parameter.
+	// NodeCG requires that bundle names match their directory names, but you can always check the `package.json` to double check.
+	const runnerIdReplicant_1 = nodecg.Replicant('runnerId_1', 'players');
+	const runnerIdReplicant_2 = nodecg.Replicant('runnerId_2', 'players');
+	const runnerIdReplicant_3 = nodecg.Replicant('runnerId_3', 'players');
+	const runnerIdReplicant_4 = nodecg.Replicant('runnerId_4', 'players');
+
+	// Change will be called when the Replicant loads too, so we can use it to set the initial value.
+	runnerIdReplicant_1.on('change', (newValue, oldValue) => {
+		runnerId_1.innerText = newValue;
+	});
+	runnerIdReplicant_2.on('change', (newValue, oldValue) => {
+		runnerId_2.innerText = newValue;
+	});
+	runnerIdReplicant_3.on('change', (newValue, oldValue) => {
+		runnerId_3.innerText = newValue;
+	});
+	runnerIdReplicant_4.on('change', (newValue, oldValue) => {
+		runnerId_4.innerText = newValue;
+	});
+</script>
+</html>
