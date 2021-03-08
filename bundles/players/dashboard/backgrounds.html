@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<label>Backgrounds :</label>
+	<select name="backgroundSelect" id="backgroundSelect"></select>
+	<button id="loadBackground">Send</button>
+
+	<img src="/assets/players/background/Lawn%20mower.jpg" width="256" height="144"/>
+</body>
+
+<script>
+	const loadGameButton = document.querySelector('#loadGameButton');
+	loadGameButton.onclick = () => {
+		nodecg.sendMessage(
+			'loadGame',
+			gameSelect.value
+		);
+	};
+</script>
+</html>

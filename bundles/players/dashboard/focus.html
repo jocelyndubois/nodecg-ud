@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<button id="allFocusButton">All</button>
+	<button id="p1FocusButton">Player 1</button>
+	<button id="p2FocusButton">Player 2</button>
+	<button id="p3FocusButton">Player 3</button>
+	<button id="p4FocusButton">Player 4</button>
+	</br>
+	<button id="p1OnlyButton">P1 ONLY</button>
+	<button id="p2OnlyButton">P2 ONLY</button>
+	<button id="p3OnlyButton">P3 ONLY</button>
+	<button id="p4OnlyButton">P4 ONLY</button>
+</body>
+
+<script>
+	const allFocusButton = document.querySelector('#allFocusButton');
+
+	const p1FocusButton = document.querySelector('#p1FocusButton');
+	const p2FocusButton = document.querySelector('#p2FocusButton');
+	const p3FocusButton = document.querySelector('#p3FocusButton');
+	const p4FocusButton = document.querySelector('#p4FocusButton');
+
+	const p1OnlyButton = document.querySelector('#p1OnlyButton');
+
+	allFocusButton.onclick = () => {
+		nodecg.sendMessage(
+			'allFocus',
+			true
+		);
+	};
+
+	p1FocusButton.onclick = () => {
+		nodecg.sendMessage(
+			'p1Focus',
+			true
+		);
+	};
+
+	p2FocusButton.onclick = () => {
+		nodecg.sendMessage(
+			'p2Focus',
+			true
+		);
+	};
+
+	p3FocusButton.onclick = () => {
+		nodecg.sendMessage(
+			'p3Focus',
+			true
+		);
+	};
+
+	p4FocusButton.onclick = () => {
+		nodecg.sendMessage(
+			'p4Focus',
+			true
+		);
+	};
+
+	p1OnlyButton.onclick = () => {
+		nodecg.sendMessage(
+			'p1Only',
+			true
+		);
+	};
+
+	p2OnlyButton.onclick = () => {
+		nodecg.sendMessage(
+			'p2Only',
+			true
+		);
+	};
+
+	p3OnlyButton.onclick = () => {
+		nodecg.sendMessage(
+			'p3Only',
+			true
+		);
+	};
+
+	p4OnlyButton.onclick = () => {
+		nodecg.sendMessage(
+			'p4Only',
+			true
+		);
+	};
+</script>
+</html>

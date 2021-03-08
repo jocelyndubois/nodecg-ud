@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+	<style>
+		body {
+			background-color: transparent;
+			height:100%;
+			background-repeat: no-repeat;
+			overflow: hidden;
+		}
+		.container {
+			overflow: hidden;
+			height: 100%;
+		}
+		video#bgvid {
+			position: fixed; right: 0; bottom: 0;
+			min-width: 100%; min-height: 100%;
+			width: auto; height: auto; z-index: -100;
+			background-size: cover;
+		}
+		.hidden {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<video autoplay id="bgvid">
+		<source id="sourceVid" src="" type="video/mp4">
+	</video>
+</div>
+</body>
+
+<script>
+	const bgvid = document.querySelector('#bgvid');
+	const sourceVid = document.querySelector('#sourceVid');
+
+	const clips = nodecg.Replicant('assets:clips');
+
+	bgvid.addEventListener('ended',function () {
+		bgvid.classList.add('hidden');
+	}, false);
+
+
+	nodecg.listenFor('loadGameClip', async game => {
+		let found = false;
+		clips.value.forEach(function (clip) {
+			if (game + clip.ext == clip.base) {
+				sourceVid.src = clip.url;
+				found = true;
+			}
+		})
+
+		if (found) {
+			bgvid.load();
+			bgvid.classList.remove('hidden');
+			bgvid.play();
+		}
+	});
+
+	nodecg.listenFor('stopGameClip', async game => {
+			bgvid.pause();
+			bgvid.classList.add('hidden');
+	});
+</script>
+</html>

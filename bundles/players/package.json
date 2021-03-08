@@ -17,6 +17,27 @@
         "width": 8,
         "file": "players.html",
         "headerColor": "#9f9bbd"
+      },
+      {
+        "name": "Games",
+        "title": "Games",
+        "width": 4,
+        "file": "games.html",
+        "headerColor": "#9f9bbd"
+      },
+      {
+        "name": "Backgrounds",
+        "title": "Backgrounds",
+        "width": 4,
+        "file": "backgrounds.html",
+        "headerColor": "#9f9bbd"
+      },
+      {
+        "name": "focus",
+        "title": "focus",
+        "width": 3,
+        "file": "focus.html",
+        "headerColor": "#9f9bbd"
       }
     ],
     "graphics": [
@@ -26,9 +47,51 @@
         "height": 1080
       },
       {
+        "file": "players-display-full.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "background.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "card.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "clip.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
         "file": "players-PB.html",
         "width": 1920,
         "height": 1080
+      }
+    ],
+    "assetCategories": [
+      {
+        "name": "videos",
+        "title": "videos",
+        "allowedTypes": ["webm", "mp4", "mov"]
+      },
+      {
+        "name": "images",
+        "title": "images",
+        "allowedTypes": ["png", "jpg"]
+      },
+      {
+        "name": "background",
+        "title": "background",
+        "allowedTypes": ["png", "jpg"]
+      },
+      {
+        "name": "clips",
+        "title": "clips",
+        "allowedTypes": ["webm", "mp4", "mov"]
       }
     ]
   },

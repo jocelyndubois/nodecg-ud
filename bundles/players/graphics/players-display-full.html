@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+	<style>
+		html,body {
+			height:100%;
+			background-color: transparent;
+		}
+		.container {
+			overflow: hidden;
+			height: 100%;
+		}
+
+		.player-div {
+			width: 800px;
+			height: 600px;
+			transition: 0.2s;
+		}
+		.playerStream {
+			position: absolute;
+			left: 21px;
+			top: 97px;
+			width: 755px;
+			height: 407px;
+			z-index: 3;
+		}
+		.playerStream.main {
+			position: absolute;
+			left: 36px;
+			top: 186px;
+			width: 1208px;
+			height: 651px;
+			z-index: 3;
+		}
+		.playerStream.sub {
+			position: absolute;
+			left: 19px;
+			top: 78px;
+			width: 602px;
+			height: 325px;
+			z-index: 3;
+		}
+		.playerStream.only {
+			position: absolute;
+			left: 54px;
+			top: 52px;
+			width: 1811px;
+			height: 978px;
+			z-index: 3;
+		}
+
+		.top-left {
+			position: absolute;
+			left: 50px;
+			top: -50px;
+		}
+		.bottom-left {
+			position: absolute;
+			left: 50px;
+			top: 500px;
+		}
+		.top-right {
+			position: absolute;
+			left: 1000px;
+			top: -50px;
+		}
+		.bottom-right {
+			position: absolute;
+			left: 1000px;
+			top: 500px;
+		}
+
+		.main {
+			position: absolute;
+			left: 10px;
+			top: 0px;
+			width: 1280px;
+			height: 1024px;
+			z-index: 1;
+		}
+		.top {
+			position: absolute;
+			left: 1265px;
+			top: -60px;
+			width: 640px;
+			height: 480px;
+			z-index: 2;
+		}
+		.middle {
+			position: absolute;
+			left: 1265px;
+			top: 290px;
+			width: 640px;
+			height: 480px;
+			z-index: 2;
+		}
+		.bottom {
+			position: absolute;
+			left: 1265px;
+			top: 640px;
+			width: 640px;
+			height: 480px;
+			z-index: 2;
+		}
+
+		.only {
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			width: 1920px;
+			height: 1080px;
+		}
+
+		.hidden {
+			visibility: hidden;
+			transition: 0s;
+		}
+
+		.player-name {
+			display: none;
+			position: absolute;
+			width: 95%;
+			height: 50px;
+			z-index: 1;de
+			bottom: 48px;
+			left: 20px;
+		}
+		.player-name>div {
+			text-align: center;
+			font-size: 2em;
+			color: whitesmoke;
+		}
+		#player-1-name {
+			background-color: grey;
+		}
+		#player-2-name {
+			background-color: orange;
+		}
+		#player-3-name {
+			background-color: red;
+		}
+		#player-4-name {
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div id="player-1" class="player-div top-left">
+			<div id="player1Stream" class="playerStream twitch-top-left"></div>
+			<video width="100%" height="100%" autoplay loop>
+				<source src="../../../assets/players/videos/UDmd00_frame_A.webm" type="video/mp4" />
+			</video>
+			<div id="player-1-name" class="player-name">
+				<div id="runnerId_1" class="runnerId"></div>
+			</div>
+		</div>
+		<div id="player-2" class="player-div bottom-left">
+			<div id="player2Stream" class="playerStream twitch-bottom-left"></div>
+			<video width="100%" height="100%" autoplay loop>
+				<source src="../../../assets/players/videos/UDmd00_frame_A.webm" type="video/mp4" />
+			</video>
+			<div id="player-2-name" class="player-name">
+				<div id="runnerId_2" class="runnerId"></div>
+			</div>
+		</div>
+		<div id="player-3" class="player-div top-right">
+			<div id="player3Stream" class="playerStream twitch-top-right"></div>
+
+			<video width="100%" height="100%" autoplay loop>
+				<source src="../../../assets/players/videos/UDmd00_frame_A.webm" type="video/mp4" />
+			</video>
+			<div id="player-3-name" class="player-name">
+				<div id="runnerId_3" class="runnerId"></div>
+			</div>
+		</div>
+		<div id="player-4" class="player-div bottom-right">
+			<div id="player4Stream" class="playerStream twitch-bottom-right"></div>
+			<video width="100%" height="100%" autoplay loop>
+				<source src="../../../assets/players/videos/UDmd00_frame_A.webm" type="video/mp4" />
+			</video>
+			<div id="player-4-name" class="player-name">
+				<div id="runnerId_4" class="runnerId"></div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	// We can access Replicants from other bundles by specifying the bundle name as a second parameter.
+	// NodeCG requires that bundle names match their directory names, but you can always check the `package.json` to double check.
+	const runnerIdReplicant_1 = nodecg.Replicant('runnerId_1', 'players');
+	const runnerIdReplicant_2 = nodecg.Replicant('runnerId_2', 'players');
+	const runnerIdReplicant_3 = nodecg.Replicant('runnerId_3', 'players');
+	const runnerIdReplicant_4 = nodecg.Replicant('runnerId_4', 'players');
+
+	const player1 = document.getElementById('player-1');
+	const player2 = document.getElementById('player-2');
+	const player3 = document.getElementById('player-3');
+	const player4 = document.getElementById('player-4');
+
+	const videos = nodecg.Replicant('assets:videos');
+	console.log(videos);
+
+	const player1Stream = document.querySelector('#player1Stream');
+	const player2Stream = document.querySelector('#player2Stream');
+	const player3Stream = document.querySelector('#player3Stream');
+	const player4Stream = document.querySelector('#player4Stream');
+
+	let options = {
+		width: '100%',
+		height: '100%',
+		channel: 'empty',
+		layout: "video",
+		parent: ['localhost']
+	};
+	let p1Stream = new Twitch.Player('player1Stream', options);
+	let p2Stream = new Twitch.Player('player2Stream', options);
+	let p3Stream = new Twitch.Player('player3Stream', options);
+	let p4Stream = new Twitch.Player('player4Stream', options);
+
+
+	// Change will be called when the Replicant loads too, so we can use it to set the initial value.
+	runnerIdReplicant_1.on('change', (newValue, oldValue) => {
+		runnerId_1.innerText = newValue;
+		p1Stream.setChannel(newValue);
+	});
+	runnerIdReplicant_2.on('change', (newValue, oldValue) => {
+		runnerId_2.innerText = newValue;
+		p2Stream.setChannel(newValue);
+	});
+	runnerIdReplicant_3.on('change', (newValue, oldValue) => {
+		runnerId_3.innerText = newValue;
+		p3Stream.setChannel(newValue);
+	});
+	runnerIdReplicant_4.on('change', (newValue, oldValue) => {
+		runnerId_4.innerText = newValue;
+		p4Stream.setChannel(newValue);
+	});
+
+	nodecg.listenFor('allFocus', async query => {
+		removePositionClasses();
+		player1.classList.add('top-left');
+		player2.classList.add('bottom-left');
+		player3.classList.add('top-right');
+		player4.classList.add('bottom-right');
+	});
+
+	nodecg.listenFor('p1Focus', async query => {
+		removePositionClasses();
+		player1.classList.add('main');
+		player2.classList.add('top');
+		player3.classList.add('middle');
+		player4.classList.add('bottom');
+
+		player1Stream.classList.add('main');
+		player2Stream.classList.add('sub');
+		player3Stream.classList.add('sub');
+		player4Stream.classList.add('sub');
+	});
+
+	nodecg.listenFor('p2Focus', async query => {
+		removePositionClasses();
+		player2.classList.add('main');
+		player1.classList.add('top');
+		player3.classList.add('middle');
+		player4.classList.add('bottom');
+
+		player2Stream.classList.add('main');
+		player1Stream.classList.add('sub');
+		player3Stream.classList.add('sub');
+		player4Stream.classList.add('sub');
+	});
+
+	nodecg.listenFor('p3Focus', async query => {
+		removePositionClasses();
+		player3.classList.add('main');
+		player2.classList.add('top');
+		player1.classList.add('middle');
+		player4.classList.add('bottom');
+
+		player3Stream.classList.add('main');
+		player1Stream.classList.add('sub');
+		player2Stream.classList.add('sub');
+		player4Stream.classList.add('sub');
+	});
+
+	nodecg.listenFor('p4Focus', async query => {
+		removePositionClasses();
+		player4.classList.add('main');
+		player2.classList.add('top');
+		player3.classList.add('middle');
+		player1.classList.add('bottom');
+
+		player4Stream.classList.add('main');
+		player2Stream.classList.add('sub');
+		player3Stream.classList.add('sub');
+		player1Stream.classList.add('sub');
+	});
+
+	nodecg.listenFor('p1Only', async query => {
+		removePositionClasses();
+		player2.classList.add('hidden');
+		player3.classList.add('hidden');
+		player4.classList.add('hidden');
+		player1.classList.add('only');
+
+		player2Stream.classList.add('hidden');
+		player3Stream.classList.add('hidden');
+		player4Stream.classList.add('hidden');
+		player1Stream.classList.add('only');
+	});
+
+	nodecg.listenFor('p2Only', async query => {
+		removePositionClasses();
+		player1.classList.add('hidden');
+		player3.classList.add('hidden');
+		player4.classList.add('hidden');
+		player2.classList.add('only');
+
+		player1Stream.classList.add('hidden');
+		player3Stream.classList.add('hidden');
+		player4Stream.classList.add('hidden');
+		player2Stream.classList.add('only');
+	});
+
+	nodecg.listenFor('p3Only', async query => {
+		removePositionClasses();
+		player2.classList.add('hidden');
+		player1.classList.add('hidden');
+		player4.classList.add('hidden');
+		player3.classList.add('only');
+
+		player2Stream.classList.add('hidden');
+		player1Stream.classList.add('hidden');
+		player4Stream.classList.add('hidden');
+		player3Stream.classList.add('only');
+	});
+
+	nodecg.listenFor('p4Only', async query => {
+		removePositionClasses();
+		player2.classList.add('hidden');
+		player3.classList.add('hidden');
+		player1.classList.add('hidden');
+		player4.classList.add('only');
+
+		player2Stream.classList.add('hidden');
+		player3Stream.classList.add('hidden');
+		player1Stream.classList.add('hidden');
+		player4Stream.classList.add('only');
+	});
+
+	function removePositionClasses() {
+		let classes = [
+			'top-left',
+			'bottom-left',
+			'top-right',
+			'bottom-right',
+			'main',
+			'top',
+			'middle',
+			'bottom',
+			'hidden',
+			'only',
+		];
+
+		classes.forEach(function(posClass){
+			player1.classList.remove(posClass);
+			player2.classList.remove(posClass);
+			player3.classList.remove(posClass);
+			player4.classList.remove(posClass);
+		});
+
+		let classesStream = [
+			'main',
+			'sub',
+			'only',
+			'hidden',
+		];
+
+		classesStream.forEach(function(posClassStream){
+			player1Stream.classList.remove(posClassStream);
+			player2Stream.classList.remove(posClassStream);
+			player3Stream.classList.remove(posClassStream);
+			player4Stream.classList.remove(posClassStream);
+		});
+	}
+
+</script>
+</html>
