@@ -23,7 +23,8 @@
         "title": "Clip",
         "width": 2,
         "file": "clips.html",
-        "headerColor": "#9f9bbd"
+        "headerColor": "#9f9bbd",
+        "workspace": "Full page"
       },
       {
         "name": "Games",
@@ -37,14 +38,16 @@
         "title": "Tournaments",
         "width": 3,
         "file": "tournaments.html",
-        "headerColor": "#9f9bbd"
+        "headerColor": "#9f9bbd",
+        "workspace": "Full page"
       },
       {
         "name": "Backgrounds",
         "title": "Backgrounds",
         "width": 4,
         "file": "backgrounds.html",
-        "headerColor": "#9f9bbd"
+        "headerColor": "#9f9bbd",
+        "workspace": "Full page"
       },
       {
         "name": "OBS",
