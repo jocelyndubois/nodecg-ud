@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
 <body>
-	<table>
+	<table class="table table-striped">
 		<thead>
-			<th>&nbsp;</th>
+			<th><a href="#" class="btn btn-sm btn-primary" id="submitButton">Send</a></th>
 			<th>Runner 1</th>
 			<th>Runner 2</th>
 			<th>Runner 3</th>
@@ -32,20 +35,20 @@
 					<span>Light PB:</span>
 				</td>
 				<td>
-					<input id="runnerLightScore_1" type="text" placeholder="0"></input>
-					<input id="runnerLightTime_1" type="text" placeholder="00:00:00"></input>
+					<span id="runnerLightScore_1"></span>
+					(<span id="runnerLightTime_1"></span>)
 				</td>
 				<td>
-					<input id="runnerLightScore_2" type="text" placeholder="0"></input>
-					<input id="runnerLightTime_2" type="text" placeholder="00:00:00"></input>
+					<span id="runnerLightScore_2"></span>
+					(<span id="runnerLightTime_2"></span>)
 				</td>
 				<td>
-					<input id="runnerLightScore_3" type="text" placeholder="0"></input>
-					<input id="runnerLightTime_3" type="text" placeholder="00:00:00"></input>
+					<span id="runnerLightScore_3"></span>
+					(<span id="runnerLightTime_3"></span>)
 				</td>
 				<td>
-					<input id="runnerLightScore_4" type="text" placeholder="0"></input>
-					<input id="runnerLightTime_4" type="text" placeholder="00:00:00"></input>
+					<span id="runnerLightScore_4"></span>
+					(<span id="runnerLightTime_4"></span>)
 				</td>
 			</tr>
 			<tr>
@@ -53,52 +56,36 @@
 					<span>Dark PB:</span>
 				</td>
 				<td>
-					<input id="runnerDarkScore_1" type="text" placeholder="0"></input>
-					<input id="runnerDarkTime_1" type="text" placeholder="00:00:00"></input>
+					<span id="runnerDarkScore_1"></span>
+					(<span id="runnerDarkTime_1"></span>)
 				</td>
 				<td>
-					<input id="runnerDarkScore_2" type="text" placeholder="0"></input>
-					<input id="runnerDarkTime_2" type="text" placeholder="00:00:00"></input>
+					<span id="runnerDarkScore_2"></span>
+					(<span id="runnerDarkTime_2"></span>)
 				</td>
 				<td>
-					<input id="runnerDarkScore_3" type="text" placeholder="0"></input>
-					<input id="runnerDarkTime_3" type="text" placeholder="00:00:00"></input>
+					<span id="runnerDarkScore_3"></span>
+					(<span id="runnerDarkTime_3"></span>)
 				</td>
 				<td>
-					<input id="runnerDarkScore_4" type="text" placeholder="0"></input>
-					<input id="runnerDarkTime_4" type="text" placeholder="00:00:00"></input>
+					<span id="runnerDarkScore_4"></span>
+					(<span id="runnerDarkTime_4"></span>)
 				</td>
 			</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td><button id="showCard_1">Show card</button></td>
-			<td><button id="showCard_2">Show card</button></td>
-			<td><button id="showCard_3">Show card</button></td>
-			<td><button id="showCard_4">Show card</button></td>
+			<td><button class="btn btn-sm btn-primary" id="showCard_1">Show card</button></td>
+			<td><button class="btn btn-sm btn-primary" id="showCard_2">Show card</button></td>
+			<td><button class="btn btn-sm btn-primary" id="showCard_3">Show card</button></td>
+			<td><button class="btn btn-sm btn-primary" id="showCard_4">Show card</button></td>
 		</tr>
 		</tbody>
 	</table>
-	<button id="submitButton">Update</button>
-	<button id="hideCardsButton">Hide cards</button>
-	<button id="showPbButton">Show PB</button>
-	<button id="hidePbButton">Hide PB</button>
 
-	</br>
-	</br>
+	<a href="#" class="btn btn-sm btn-danger" id="hideCardsButton">Hide cards</a>
 
-	<label>Season :</label>
-	<input type="number" id="seasonInput" placeholder="seasonId"/>
-	<button id="fetchGamesButton">Fetch Games</button>
 
-	</br>
-	</br>
-
-	<label>Game :</label>
-	<select name="gameSelect" id="gameSelect"></select>
-	<button id="fetchPbButton">Fetch PBs</button>
-	<button id="loadGameButton">Load Game</button>
-	<button id="loadGameClipButton">Launch Clip</button>
-	<button id="stopGameClipButton">Stop Clip</button>
+	<button class="btn btn-sm btn-primary" id="fetchPbButton">Update <span id="currentGame"></span> (<span id="currentSeason"></span>) PBs</button>
 </body>
 
 <script>
@@ -113,12 +100,15 @@
 	const showCard_4 = document.querySelector('#showCard_4');
 	const hideCardsButton = document.querySelector('#hideCardsButton');
 
+	const season = nodecg.Replicant('season');
+	const game = nodecg.Replicant('game');
+
 	showCard_1.onclick = () => {
 		nodecg.sendMessage(
 			'showCard',
 			{
 				runner: runnerId_1.value,
-				season: seasonInput.value,
+				season: season.value,
 			}
 		);
 	};
@@ -128,7 +118,7 @@
 			'showCard',
 			{
 				runner: runnerId_2.value,
-				season: seasonInput.value,
+				season: season.value,
 			}
 		);
 	};
@@ -138,7 +128,7 @@
 			'showCard',
 			{
 				runner: runnerId_3.value,
-				season: seasonInput.value,
+				season: season.value,
 			}
 		);
 	};
@@ -148,7 +138,7 @@
 			'showCard',
 			{
 				runner: runnerId_4.value,
-				season: seasonInput.value,
+				season: season.value,
 			}
 		);
 	};
@@ -207,69 +197,69 @@
 	const runnerDarkTimeReplicant_3 = nodecg.Replicant('runnerDarkTime_3');
 	const runnerDarkTimeReplicant_4 = nodecg.Replicant('runnerDarkTime_4');
 
-	runnerIdReplicant_1.on('change', (newValue, oldValue) => {
+	runnerIdReplicant_1.on('change', (newValue) => {
 		runnerId_1.value = newValue;
 	});
-	runnerIdReplicant_2.on('change', (newValue, oldValue) => {
+	runnerIdReplicant_2.on('change', (newValue) => {
 		runnerId_2.value = newValue;
 	});
-	runnerIdReplicant_3.on('change', (newValue, oldValue) => {
+	runnerIdReplicant_3.on('change', (newValue) => {
 		runnerId_3.value = newValue;
 	});
-	runnerIdReplicant_4.on('change', (newValue, oldValue) => {
+	runnerIdReplicant_4.on('change', (newValue) => {
 		runnerId_4.value = newValue;
 	});
 
-	runnerLightScoreReplicant_1.on('change', (newValue, oldValue) => {
-		runnerLightScore_1.value = newValue;
+	runnerLightScoreReplicant_1.on('change', (newValue) => {
+		runnerLightScore_1.innerHTML = newValue;
 	});
-	runnerLightScoreReplicant_2.on('change', (newValue, oldValue) => {
-		runnerLightScore_2.value = newValue;
+	runnerLightScoreReplicant_2.on('change', (newValue) => {
+		runnerLightScore_2.innerHTML = newValue;
 	});
-	runnerLightScoreReplicant_3.on('change', (newValue, oldValue) => {
-		runnerLightScore_3.value = newValue;
+	runnerLightScoreReplicant_3.on('change', (newValue) => {
+		runnerLightScore_3.innerHTML = newValue;
 	});
-	runnerLightScoreReplicant_4.on('change', (newValue, oldValue) => {
-		runnerLightScore_4.value = newValue;
-	});
-
-	runnerLightTimeReplicant_1.on('change', (newValue, oldValue) => {
-		runnerLightTime_1.value = newValue;
-	});
-	runnerLightTimeReplicant_2.on('change', (newValue, oldValue) => {
-		runnerLightTime_2.value = newValue;
-	});
-	runnerLightTimeReplicant_3.on('change', (newValue, oldValue) => {
-		runnerLightTime_3.value = newValue;
-	});
-	runnerLightTimeReplicant_4.on('change', (newValue, oldValue) => {
-		runnerLightTime_4.value = newValue;
+	runnerLightScoreReplicant_4.on('change', (newValue) => {
+		runnerLightScore_4.innerHTML = newValue;
 	});
 
-	runnerDarkScoreReplicant_1.on('change', (newValue, oldValue) => {
-		runnerDarkScore_1.value = newValue;
+	runnerLightTimeReplicant_1.on('change', (newValue) => {
+		runnerLightTime_1.innerHTML = newValue;
 	});
-	runnerDarkScoreReplicant_2.on('change', (newValue, oldValue) => {
-		runnerDarkScore_2.value = newValue;
+	runnerLightTimeReplicant_2.on('change', (newValue) => {
+		runnerLightTime_2.innerHTML = newValue;
 	});
-	runnerDarkScoreReplicant_3.on('change', (newValue, oldValue) => {
-		runnerDarkScore_3.value = newValue;
+	runnerLightTimeReplicant_3.on('change', (newValue) => {
+		runnerLightTime_3.innerHTML = newValue;
 	});
-	runnerDarkScoreReplicant_4.on('change', (newValue, oldValue) => {
-		runnerDarkScore_4.value = newValue;
+	runnerLightTimeReplicant_4.on('change', (newValue) => {
+		runnerLightTime_4.innerHTML = newValue;
 	});
 
-	runnerDarkTimeReplicant_1.on('change', (newValue, oldValue) => {
-		runnerDarkTime_1.value = newValue;
+	runnerDarkScoreReplicant_1.on('change', (newValue) => {
+		runnerDarkScore_1.innerHTML = newValue;
 	});
-	runnerDarkTimeReplicant_2.on('change', (newValue, oldValue) => {
-		runnerDarkTime_2.value = newValue;
+	runnerDarkScoreReplicant_2.on('change', (newValue) => {
+		runnerDarkScore_2.innerHTML = newValue;
 	});
-	runnerDarkTimeReplicant_3.on('change', (newValue, oldValue) => {
-		runnerDarkTime_3.value = newValue;
+	runnerDarkScoreReplicant_3.on('change', (newValue) => {
+		runnerDarkScore_3.innerHTML = newValue;
 	});
-	runnerDarkTimeReplicant_4.on('change', (newValue, oldValue) => {
-		runnerDarkTime_4.value = newValue;
+	runnerDarkScoreReplicant_4.on('change', (newValue) => {
+		runnerDarkScore_4.innerHTML = newValue;
+	});
+
+	runnerDarkTimeReplicant_1.on('change', (newValue) => {
+		runnerDarkTime_1.innerHTML = newValue;
+	});
+	runnerDarkTimeReplicant_2.on('change', (newValue) => {
+		runnerDarkTime_2.innerHTML = newValue;
+	});
+	runnerDarkTimeReplicant_3.on('change', (newValue) => {
+		runnerDarkTime_3.innerHTML = newValue;
+	});
+	runnerDarkTimeReplicant_4.on('change', (newValue) => {
+		runnerDarkTime_4.innerHTML = newValue;
 	});
 
 	submitButton.onclick = () => {
@@ -279,108 +269,40 @@
 		runnerIdReplicant_3.value = runnerId_3.value;
 		runnerIdReplicant_4.value = runnerId_4.value;
 
-		runnerLightScoreReplicant_1.value = runnerLightScore_1.value;
-		runnerLightScoreReplicant_2.value = runnerLightScore_2.value;
-		runnerLightScoreReplicant_3.value = runnerLightScore_3.value;
-		runnerLightScoreReplicant_4.value = runnerLightScore_4.value;
+		runnerLightScoreReplicant_1.value = runnerLightScore_1.innerHTML;
+		runnerLightScoreReplicant_2.value = runnerLightScore_2.innerHTML;
+		runnerLightScoreReplicant_3.value = runnerLightScore_3.innerHTML;
+		runnerLightScoreReplicant_4.value = runnerLightScore_4.innerHTML;
 
-		runnerLightTimeReplicant_1.value = runnerLightTime_1.value;
-		runnerLightTimeReplicant_2.value = runnerLightTime_2.value;
-		runnerLightTimeReplicant_3.value = runnerLightTime_3.value;
-		runnerLightTimeReplicant_4.value = runnerLightTime_4.value;
+		runnerLightTimeReplicant_1.value = runnerLightTime_1.innerHTML;
+		runnerLightTimeReplicant_2.value = runnerLightTime_2.innerHTML;
+		runnerLightTimeReplicant_3.value = runnerLightTime_3.innerHTML;
+		runnerLightTimeReplicant_4.value = runnerLightTime_4.innerHTML;
 
-		runnerDarkScoreReplicant_1.value = runnerDarkScore_1.value;
-		runnerDarkScoreReplicant_2.value = runnerDarkScore_2.value;
-		runnerDarkScoreReplicant_3.value = runnerDarkScore_3.value;
-		runnerDarkScoreReplicant_4.value = runnerDarkScore_4.value;
+		runnerDarkScoreReplicant_1.value = runnerDarkScore_1.innerHTML;
+		runnerDarkScoreReplicant_2.value = runnerDarkScore_2.innerHTML;
+		runnerDarkScoreReplicant_3.value = runnerDarkScore_3.innerHTML;
+		runnerDarkScoreReplicant_4.value = runnerDarkScore_4.innerHTML;
 
-		runnerDarkTimeReplicant_1.value = runnerDarkTime_1.value;
-		runnerDarkTimeReplicant_2.value = runnerDarkTime_2.value;
-		runnerDarkTimeReplicant_3.value = runnerDarkTime_3.value;
-		runnerDarkTimeReplicant_4.value = runnerDarkTime_4.value;
+		runnerDarkTimeReplicant_1.value = runnerDarkTime_1.innerHTML;
+		runnerDarkTimeReplicant_2.value = runnerDarkTime_2.innerHTML;
+		runnerDarkTimeReplicant_3.value = runnerDarkTime_3.innerHTML;
+		runnerDarkTimeReplicant_4.value = runnerDarkTime_4.innerHTML;
 	};
 
-	const showPbButton = document.querySelector('#showPbButton');
-	showPbButton.onclick = () => {
-		nodecg.sendMessage(
-			'showPb',
-			true
-		);
-	};
 
-	const hidePbButton = document.querySelector('#hidePbButton');
-	hidePbButton.onclick = () => {
-		nodecg.sendMessage(
-			'hidePb',
-			true
-		);
-	};
+	//[FETCH PB]
+	const currentSeason = document.querySelector('#currentSeason');
+	season.on('change', (newSeason) => {
+		currentSeason.innerHTML = newSeason;
+	});
 
-	const loadGameButton = document.querySelector('#loadGameButton');
-	loadGameButton.onclick = () => {
-		nodecg.sendMessage(
-			'loadGame',
-			gameSelect.value
-		);
-	};
+	const currentGame = document.querySelector('#currentGame');
+	game.on('change', (newGame) => {
+		currentGame.innerHTML = newGame;
+	});
 
-	const loadGameClipButton = document.querySelector('#loadGameClipButton');
-	loadGameClipButton.onclick = () => {
-		nodecg.sendMessage(
-			'loadGameClip',
-			gameSelect.value
-		);
-	};
-
-	const stopGameClipButton = document.querySelector('#stopGameClipButton');
-	stopGameClipButton.onclick = () => {
-		nodecg.sendMessage(
-			'stopGameClip',
-			gameSelect.value
-		);
-	};
-
-	const gameSelect = document.querySelector('#gameSelect');
 	const fetchPbButton = document.querySelector('#fetchPbButton');
-	const seasonInput = document.querySelector('#seasonInput');
-	const fetchGamesButton = document.querySelector('#fetchGamesButton');
-
-	const seasonInputReplicant = nodecg.Replicant('seasonInput');
-	seasonInputReplicant.on('change', (newValue, oldValue) => {
-		seasonInput.value = newValue;
-	});
-
-	fetchGamesButton.onclick = () => {
-		nodecg.sendMessage(
-			'fetchGamesList',
-			seasonInput.value
-		);
-
-		seasonInputReplicant.value = seasonInput.value;
-	};
-
-	const fetchGamesListReplicant = nodecg.Replicant('fetchGamesList');
-	fetchGamesListReplicant.on('change', (newValue, oldValue) => {
-		if (!newValue) {
-			return;
-		}
-
-		//First, we clear the old games list.
-		var length = gameSelect.options.length;
-		for (let i = length-1; i >= 0; i--) {
-			gameSelect.options[i].remove();
-		}
-
-		//Then we add the new one.
-		for (let i = 0; i < newValue.length; i++) {
-			let game = document.createElement("option");
-			game.value = newValue[i];
-			game.text = newValue[i];
-
-			gameSelect.add(game);
-		}
-	});
-
 	fetchPbButton.onclick = () => {
 		nodecg.sendMessage(
 			'fetchPBList',
@@ -391,15 +313,14 @@
 					3: runnerId_3.value,
 					4: runnerId_4.value,
 				},
-				game: gameSelect.value,
-				season: seasonInput.value
+				game: game.value,
+				season: season.value
 			}
 		);
 	};
 
-
 	const fetchPbListReplicant = nodecg.Replicant('fetchPbList');
-	fetchPbListReplicant.on('change', (newValue, oldValue) => {
+	fetchPbListReplicant.on('change', (newValue) => {
 		if (!newValue) {
 			return;
 		}
@@ -410,10 +331,10 @@
 			let darkScore = 'runnerDarkScore_' + key;
 			let darkTime = 'runnerDarkTime_' + key;
 
-			eval(lightScore).value = infos.light.score;
-			eval(lightTime).value = new Date(infos.light.time * 1000).toISOString().substr(11, 8);
-			eval(darkScore).value = infos.dark.score;
-			eval(darkTime).value = new Date(infos.dark.time * 1000).toISOString().substr(11, 8);
+			eval(lightScore).innerHTML = infos.light.score;
+			eval(lightTime).innerHTML = new Date(infos.light.time * 1000).toISOString().substr(11, 8);
+			eval(darkScore).innerHTML = infos.dark.score;
+			eval(darkTime).innerHTML = new Date(infos.dark.time * 1000).toISOString().substr(11, 8);
 		}
 	});
 </script>

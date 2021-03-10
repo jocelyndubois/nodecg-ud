@@ -3,18 +3,57 @@
 <body>
 	<label>Backgrounds :</label>
 	<select name="backgroundSelect" id="backgroundSelect"></select>
-	<button id="loadBackground">Send</button>
+	<button id="fetchBackgroundButton">Fetch backgrounds</button>
+	<button id="loadBackgroundButton">Send</button>
 
-	<img src="/assets/players/background/Lawn%20mower.jpg" width="256" height="144"/>
+	<img id="demoBackground" src="#" width="256" height="144"/>
 </body>
 
 <script>
-	const loadGameButton = document.querySelector('#loadGameButton');
-	loadGameButton.onclick = () => {
-		nodecg.sendMessage(
-			'loadGame',
-			gameSelect.value
-		);
+	const backgrounds = nodecg.Replicant('assets:background');
+	const background = nodecg.Replicant('background');
+	const backgroundSelect = document.querySelector('#backgroundSelect');
+	const demoBackground = document.querySelector('#demoBackground');
+
+	const fetchBackgroundButton = document.querySelector('#fetchBackgroundButton');
+	fetchBackgroundButton.onclick = () => {
+		loadBacks();
 	};
+
+	const loadBackgroundButton = document.querySelector('#loadBackgroundButton');
+	loadBackgroundButton.onclick = () => {
+		background.value = backgroundSelect.value;
+	};
+
+	function loadBacks() {
+		var length = backgroundSelect.options.length;
+		for (let i = length-1; i >= 0; i--) {
+			backgroundSelect.options[i].remove();
+		}
+
+		let counter = 0;
+		backgrounds.value.forEach(function (background) {
+			let back = document.createElement("option");
+			back.value = background.url;
+			back.text = background.name;
+			if (0 === counter) {
+				back.setAttribute('selected', 'selected');
+			}
+
+			backgroundSelect.add(back);
+			++counter;
+		});
+
+		backgroundSelect.onchange();
+	}
+
+	backgroundSelect.onchange = () => {
+		demoBackground.src = backgroundSelect.value;
+	}
+
+
+	backgrounds.on('change', (newValue) => {
+		loadBacks();
+	});
 </script>
 </html>

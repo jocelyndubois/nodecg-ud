@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<input type="text" class="form-control" id="tournamentId" placeholder="tournamentId"/>
+			</div>
+			<div class="col">
+				<a href="#" class="btn btn-success" id="showTournament">Show</a>
+				<a href="#" class="btn btn-danger" id="hideTournament">Hide</a>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	const tournamentId = document.querySelector('#tournamentId');
+
+	const showTournament = document.querySelector('#showTournament');
+	showTournament.onclick = () => {
+		nodecg.sendMessage(
+			'showTournament',
+			tournamentId.value
+		);
+	};
+
+	const hideTournament = document.querySelector('#hideTournament');
+	hideTournament.onclick = () => {
+		nodecg.sendMessage(
+			'hideTournament'
+		);
+	};
+</script>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<select class="form-control form-select form-select-sm" name="clipsSelect" id="clipsSelect"></select>
+		</br>
+		<div class="btn-group">
+			<a href="#" class="btn btn-primary" id="fetchClipsButton">Fetch clips</a>
+			<a href="#" class="btn btn-success" id="loadClipButton">Send</a>
+			<a href="#" class="btn btn-danger" id="stopClipButton">Stop</a>
+		</div>
+	</div>
+
+<!--	<img id="demoBackground" src="#" width="256" height="144"/>-->
+</body>
+
+<script>
+	const clips = nodecg.Replicant('assets:clips');
+	const clip = nodecg.Replicant('clip');
+	const clipsSelect = document.querySelector('#clipsSelect');
+
+	const fetchClipsButton = document.querySelector('#fetchClipsButton');
+	fetchClipsButton.onclick = () => {
+		loadClips();
+	};
+
+	const loadClipButton = document.querySelector('#loadClipButton');
+	loadClipButton.onclick = () => {
+		clip.value = clipsSelect.value;
+		nodecg.sendMessage(
+			'startClip'
+		);
+	};
+
+	function loadClips() {
+		var length = clipsSelect.options.length;
+		for (let i = length-1; i >= 0; i--) {
+			clipsSelect.options[i].remove();
+		}
+
+		let counter = 0;
+		clips.value.forEach(function (clip) {
+			let opt = document.createElement("option");
+			opt.value = clip.url;
+			opt.text = clip.name;
+			if (0 === counter) {
+				opt.setAttribute('selected', 'selected');
+			}
+
+			clipsSelect.add(opt);
+			++counter;
+		});
+	}
+
+	clips.on('change', () => {
+		loadClips();
+	});
+
+
+	const stopClipButton = document.querySelector('#stopClipButton');
+	stopClipButton.onclick = () => {
+		nodecg.sendMessage(
+			'stopClip'
+		);
+	};
+
+</script>
+</html>

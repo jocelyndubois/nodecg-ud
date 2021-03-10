@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+	<style>
+		html,body {
+			height:100%;
+			background-color: transparent;
+		}
+		.container {
+			overflow: hidden;
+			height: 100%;
+		}
+
+		.player-banner {
+			height: 60px;
+			width: 100%;
+			position: fixed; left: 0; top: 0;
+		}
+
+		#player-3 {
+			background-color: #09AB19;
+			color: white;
+		}
+
+		#runnerId_3 {
+			position: relative;
+			font-size: 3em;
+			left: 15px;
+			top: 0px;
+		}
+
+		.Pbs {
+			position: relative;
+			top: -56px;
+			float: right;
+			font-size: 3em;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div id="player-3" class="player-banner">
+			<div id="runnerId_3"></div>
+
+			<div class="Pbs">
+				<span id="lightPbScore">0</span> (<span id="lightPbTime">00:00:00</span>) / <span id="darkPbScore">0</span> (<span id="darkPbTime">00:00:00</span>)
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	const runnerId_3 = document.querySelector('#runnerId_3');
+	const lightPbScore = document.querySelector('#lightPbScore');
+	const lightPbTime = document.querySelector('#lightPbTime');
+	const darkPbScore = document.querySelector('#darkPbScore');
+	const darkPbTime = document.querySelector('#darkPbTime');
+
+
+	const runnerIdReplicant = nodecg.Replicant('runnerId_3', 'players');
+
+	const runnerLightScoreReplicant = nodecg.Replicant('runnerLightScore_3', 'players');
+	const runnerLightTimeReplicant = nodecg.Replicant('runnerLightTime_3', 'players');
+	const runnerDarkScoreReplicant = nodecg.Replicant('runnerDarkScore_3', 'players');
+	const runnerDarkTimeReplicant = nodecg.Replicant('runnerDarkTime_3', 'players');
+
+	runnerLightScoreReplicant.on('change', (newValue) => {
+		lightPbScore.innerHTML = newValue;
+	});
+	runnerLightTimeReplicant.on('change', (newValue) => {
+		lightPbTime.innerHTML = newValue;
+	});
+	runnerDarkScoreReplicant.on('change', (newValue) => {
+		darkPbScore.innerHTML = newValue;
+	});
+	runnerDarkTimeReplicant.on('change', (newValue) => {
+		darkPbTime.innerHTML = newValue;
+	});
+
+	runnerIdReplicant.on('change', (newValue) => {
+		runnerId_3.innerText = newValue.toUpperCase();
+	});
+</script>
+</html>

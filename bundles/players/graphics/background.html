@@ -21,20 +21,9 @@
 </body>
 
 <script>
-
-	const backgrounds = nodecg.Replicant('assets:background');
-
-	nodecg.listenFor('loadGame', async game => {
-		let found = false;
-		backgrounds.value.forEach(function (background) {
-			if (game + background.ext == background.base) {
-				document.body.style.backgroundImage = "url('" + background.url + "')";
-				found = true;
-			}
-		})
-		if (!found) {
-			document.body.style.backgroundImage = "url('../../../assets/players/images/UDmd00_BG_A_01.png')";
-		}
+	const background = nodecg.Replicant('background');
+	background.on('change', (backgroundUrl) => {
+		document.body.style.backgroundImage = "url('" + backgroundUrl + "')";
 	});
 </script>
 </html>

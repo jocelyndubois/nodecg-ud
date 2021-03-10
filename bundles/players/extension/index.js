@@ -23,16 +23,19 @@ module.exports = nodecg => {
 							results[key] = {};
 						}
 
-						if ('grind' == PB.game.groupment) {
+
+						if ('grind' == PB.game.groupment || 'light' == PB.game.groupment) {
 							nodecg.log.info(`[${query.game}]Found light PB. Score : ${PB.score}. Time: ${PB.time}`);
 							results[key].light = {
-								score: PB.score,
+								score: PB.score ?? 0,
 								time: PB.time
 							}
-						} else if ('race' == PB.game.groupment) {
+						} else if ('race' == PB.game.groupment || 'dark' == PB.game.groupment) {
+							console.log(PB.score);
+
 							nodecg.log.info(`[${query.game}]Found dark PB. Score : ${PB.score}. Time: ${PB.time}`);
 							results[key].dark = {
-								score: PB.score,
+								score: PB.score ?? 0,
 								time: PB.time
 							}
 						}
@@ -55,9 +58,14 @@ module.exports = nodecg => {
 		try {
 			let results = [];
 
+			let groupment = 'grind';
+			if (9 === query) {
+				groupment = 'light';
+			}
+
 			const apiResponse = await axios.get('https://www.ultimedecathlon.com/graphql', {
 				params: {
-					query: 'query getGames {  activeSeasonGames (season: ' + query + ', groupment: "grind") {    name  }}'
+					query: 'query getGames {  activeSeasonGames (season: ' + query + ', groupment: "' + groupment + '") {    name  }}'
 				}
 			});
 
@@ -72,4 +80,66 @@ module.exports = nodecg => {
 		}
 	});
 
+
+	const gameInfos = nodecg.Replicant('getGameInfos');
+
+	nodecg.listenFor('getGameInfos', async query => {
+		try {
+			let gameResult = {};
+
+			let apiResponseLight = await axios.get('https://www.ultimedecathlon.com/graphql', {
+				params: {
+					query: 'query slip {  activeSeasonGames(season: ' + query.season + ', groupment: ' + (query.season == 9 ? "light" : "grind") + ') {    id    name    category  minScore maxScore    bestTime    middleTime    fewestTime    groupment    twitchName    hexColor    pathInformation {      path      width    }  }}'
+				}
+			});
+			gameResult = aggregateGameInfos(query, apiResponseLight.data.data.activeSeasonGames, gameResult);
+
+			let apiResponseDark = await axios.get('https://www.ultimedecathlon.com/graphql', {
+				params: {
+					query: 'query slip {  activeSeasonGames(season: ' + query.season + ', groupment: ' + (query.season == 9 ? 'dark' : 'race') + ') {    id    name    category  minScore maxScore   bestTime    middleTime    fewestTime    groupment    twitchName    hexColor    pathInformation {      path      width    }  }}'
+				}
+			});
+			gameResult = aggregateGameInfos(query, apiResponseDark.data.data.activeSeasonGames, gameResult);
+
+			gameInfos.value = gameResult;
+		} catch (error) {
+			nodecg.log.error(error);
+		}
+	});
+
+
+	function aggregateGameInfos(query, games, gameResult) {
+		games.forEach(function(game){
+			if (query.game === game.name) {
+				gameResult.name = game.name;
+				gameResult.hexColor = game.hexColor;
+				gameResult.pathInformation = {
+					path: game.pathInformation.path,
+					width: game.pathInformation.width
+				};
+
+				if ('light' === game.groupment || 'grind' === game.groupment) {
+					gameResult.light = {
+						category: game.category,
+						bestTime: game.bestTime,
+						middleTime: game.middleTime,
+						fewestTime: game.fewestTime,
+						minScore: game.minScore,
+						maxScore: game.maxScore,
+					}
+				} else {
+					gameResult.dark = {
+						category: game.category,
+						bestTime: game.bestTime,
+						middleTime: game.middleTime,
+						fewestTime: game.fewestTime,
+						minScore: game.minScore,
+						maxScore: game.maxScore,
+					}
+				}
+			}
+		})
+
+		return gameResult;
+	}
 }

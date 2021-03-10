@@ -36,32 +36,23 @@
 	const bgvid = document.querySelector('#bgvid');
 	const sourceVid = document.querySelector('#sourceVid');
 
-	const clips = nodecg.Replicant('assets:clips');
-
 	bgvid.addEventListener('ended',function () {
 		bgvid.classList.add('hidden');
 	}, false);
 
 
-	nodecg.listenFor('loadGameClip', async game => {
-		let found = false;
-		clips.value.forEach(function (clip) {
-			if (game + clip.ext == clip.base) {
-				sourceVid.src = clip.url;
-				found = true;
-			}
-		})
+	const clip = nodecg.Replicant('clip');
+	nodecg.listenFor('startClip', () => {
+		sourceVid.src = clip.value;
 
-		if (found) {
-			bgvid.load();
-			bgvid.classList.remove('hidden');
-			bgvid.play();
-		}
+		bgvid.load();
+		bgvid.classList.remove('hidden');
+		bgvid.play();
 	});
 
-	nodecg.listenFor('stopGameClip', async game => {
-			bgvid.pause();
-			bgvid.classList.add('hidden');
+	nodecg.listenFor('stopClip', () => {
+		bgvid.pause();
+		bgvid.classList.add('hidden');
 	});
 </script>
 </html>

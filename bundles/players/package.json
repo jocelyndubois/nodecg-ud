@@ -14,15 +14,30 @@
       {
         "name": "Players",
         "title": "Players",
-        "width": 8,
+        "width": 7,
         "file": "players.html",
+        "headerColor": "#9f9bbd"
+      },
+      {
+        "name": "Clips",
+        "title": "Clip",
+        "width": 2,
+        "file": "clips.html",
         "headerColor": "#9f9bbd"
       },
       {
         "name": "Games",
         "title": "Games",
-        "width": 4,
+        "width": 6,
         "file": "games.html",
+        "headerColor": "#9f9bbd"
+      },
+
+      {
+        "name": "Tournaments",
+        "title": "Tournaments",
+        "width": 3,
+        "file": "tournaments.html",
         "headerColor": "#9f9bbd"
       },
       {
@@ -31,23 +46,46 @@
         "width": 4,
         "file": "backgrounds.html",
         "headerColor": "#9f9bbd"
-      },
-      {
-        "name": "focus",
-        "title": "focus",
-        "width": 3,
-        "file": "focus.html",
-        "headerColor": "#9f9bbd"
       }
     ],
     "graphics": [
       {
-        "file": "players-display.html",
+        "file": "players-display-full.html",
         "width": 1920,
         "height": 1080
       },
       {
-        "file": "players-display-full.html",
+        "file": "player-1.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "player-2.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "player-3.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "player-4.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "game.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "chrono.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "commentators.html",
         "width": 1920,
         "height": 1080
       },
@@ -62,22 +100,17 @@
         "height": 1080
       },
       {
-        "file": "clip.html",
+        "file": "tournament.html",
         "width": 1920,
         "height": 1080
       },
       {
-        "file": "players-PB.html",
+        "file": "clip.html",
         "width": 1920,
         "height": 1080
       }
     ],
     "assetCategories": [
-      {
-        "name": "videos",
-        "title": "videos",
-        "allowedTypes": ["webm", "mp4", "mov"]
-      },
       {
         "name": "images",
         "title": "images",
