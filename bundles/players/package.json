@@ -56,11 +56,6 @@
     ],
     "graphics": [
       {
-        "file": "players-display-full.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
         "file": "player-1.html",
         "width": 1920,
         "height": 1080
@@ -87,8 +82,8 @@
       },
       {
         "file": "chrono.html",
-        "width": 1920,
-        "height": 1080
+        "width": 512,
+        "height": 512
       },
       {
         "file": "commentators.html",
