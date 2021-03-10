@@ -18,16 +18,16 @@
 					<span>Pseudo:</span>
 				</td>
 				<td>
-					<input id="runnerId_1" type="text" placeholder="pseudo"></input>
+					<input id="runnerId_1" type="text" placeholder="pseudo"/>
 				</td>
 				<td>
-					<input id="runnerId_2" type="text" placeholder="pseudo"></input>
+					<input id="runnerId_2" type="text" placeholder="pseudo"/>
 				</td>
 				<td>
-					<input id="runnerId_3" type="text" placeholder="pseudo"></input>
+					<input id="runnerId_3" type="text" placeholder="pseudo"/>
 				</td>
 				<td>
-					<input id="runnerId_4" type="text" placeholder="pseudo"></input>
+					<input id="runnerId_4" type="text" placeholder="pseudo"/>
 				</td>
 			</tr>
 			<tr>
@@ -74,10 +74,22 @@
 			</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td><button class="btn btn-sm btn-primary" id="showCard_1">Show card</button></td>
-			<td><button class="btn btn-sm btn-primary" id="showCard_2">Show card</button></td>
-			<td><button class="btn btn-sm btn-primary" id="showCard_3">Show card</button></td>
-			<td><button class="btn btn-sm btn-primary" id="showCard_4">Show card</button></td>
+			<td>
+				<button class="btn btn-sm btn-success loadRtmp" data-player="1" id="loadRtmp_1">Load</button>
+				<button class="btn btn-sm btn-primary" id="showCard_1">Card</button>
+			</td>
+			<td>
+				<button class="btn btn-sm btn-success loadRtmp" data-player="2" id="loadRtmp_2">Load</button>
+				<button class="btn btn-sm btn-primary" id="showCard_2">Card</button>
+			</td>
+			<td>
+				<button class="btn btn-sm btn-success loadRtmp" data-player="3" id="loadRtmp_3">Load</button>
+				<button class="btn btn-sm btn-primary" id="showCard_3">Card</button>
+			</td>
+			<td>
+				<button class="btn btn-sm btn-success loadRtmp" data-player="4" id="loadRtmp_4">Load</button>
+				<button class="btn btn-sm btn-primary" id="showCard_4">Card</button>
+			</td>
 		</tr>
 		</tbody>
 	</table>
@@ -100,8 +112,50 @@
 	const showCard_4 = document.querySelector('#showCard_4');
 	const hideCardsButton = document.querySelector('#hideCardsButton');
 
+	const loadRtmp_1 = document.querySelector('#loadRtmp_1');
+	const loadRtmp_2 = document.querySelector('#loadRtmp_2');
+	const loadRtmp_3 = document.querySelector('#loadRtmp_3');
+	const loadRtmp_4 = document.querySelector('#loadRtmp_4');
+
 	const season = nodecg.Replicant('season');
 	const game = nodecg.Replicant('game');
+
+	loadRtmp_1.onclick = () => {
+		nodecg.sendMessage(
+			'loadRTMP',
+			{
+				id: 1,
+				runner: runnerId_1.value,
+			}
+		);
+	};
+	loadRtmp_2.onclick = () => {
+		nodecg.sendMessage(
+			'loadRTMP',
+			{
+				id: 2,
+				runner: runnerId_2.value,
+			}
+		);
+	};
+	loadRtmp_3.onclick = () => {
+		nodecg.sendMessage(
+			'loadRTMP',
+			{
+				id: 3,
+				runner: runnerId_3.value,
+			}
+		);
+	};
+	loadRtmp_4.onclick = () => {
+		nodecg.sendMessage(
+			'loadRTMP',
+			{
+				id: 4,
+				runner: runnerId_4.value,
+			}
+		);
+	};
 
 	showCard_1.onclick = () => {
 		nodecg.sendMessage(

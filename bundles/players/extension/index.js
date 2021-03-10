@@ -1,10 +1,26 @@
+const {OBSUtility} = require('nodecg-utility-obs');
 const axios = require('axios');
 
-
 module.exports = nodecg => {
+	const obs = new OBSUtility(nodecg);
+
+	obs.replicants.previewScene.on('change', () => {console.log('slip')});
+
+	nodecg.listenFor('loadRTMP', async query => {
+		try {
+			await obs.send("SetSourceSettings", {
+				sourceName: 'player-' + query.id + '-rtmp',
+				sourceSettings: {
+					is_local_file: false,
+					input: "rtmp://stream.ultimedecathlon.com/stream/" + query.runner,
+				},
+			});
+		} catch (error) {
+			nodecg.log.error(error);
+		}
+	});
 
 	const fetchPbListReplicant = nodecg.Replicant('fetchPbList');
-
 	nodecg.listenFor('fetchPBList', async query => {
 		try {
 			let results = {};
@@ -53,7 +69,6 @@ module.exports = nodecg => {
 
 
 	const fetchGamesListReplicant = nodecg.Replicant('fetchGamesList');
-
 	nodecg.listenFor('fetchGamesList', async query => {
 		try {
 			let results = [];
@@ -82,7 +97,6 @@ module.exports = nodecg => {
 
 
 	const gameInfos = nodecg.Replicant('getGameInfos');
-
 	nodecg.listenFor('getGameInfos', async query => {
 		try {
 			let gameResult = {};

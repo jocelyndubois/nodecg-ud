@@ -45,6 +45,13 @@
         "width": 4,
         "file": "backgrounds.html",
         "headerColor": "#9f9bbd"
+      },
+      {
+        "name": "OBS",
+        "title": "OBS",
+        "width": 3,
+        "file": "obs.html",
+        "headerColor": "#9f9bbd"
       }
     ],
     "graphics": [
@@ -138,6 +145,8 @@
     ]
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "bower-npm-resolver": "^0.11.0",
+    "nodecg-utility-obs": "^6.1.7"
   }
 }
