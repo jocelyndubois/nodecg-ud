@@ -51,7 +51,8 @@
         "title": "OBS",
         "width": 3,
         "file": "obs.html",
-        "headerColor": "#9f9bbd"
+        "headerColor": "#9f9bbd",
+        "workspace": "EXTERNAL"
       }
     ],
     "graphics": [

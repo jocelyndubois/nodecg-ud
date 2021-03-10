@@ -2,6 +2,16 @@
 <html>
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		.btn-twitch {
+			background-color: #944BFF;
+			color: white;
+		}
+		.btn-twitch:hover {
+			background-color: #9437FF;
+			color: white;
+		}
+	</style>
 </head>
 <body>
 <div class="container">
@@ -14,6 +24,7 @@
 		<div class="col-md-6">
 			<label for="gameSelect" class="form-label">Game :</label>
 			<select class="form-control form-select form-select-sm" name="gameSelect" id="gameSelect"></select>
+			<a class="btn btn-twitch" id="sendToTwitch">Twitch</a>
 		</div>
 		<div class="col-6">
 			<label for="gameName" class="form-label">Name</label>
@@ -87,6 +98,7 @@
 	const gameSelect = document.querySelector('#gameSelect');
 	const seasonInput = document.querySelector('#seasonInput');
 	const fetchGamesButton = document.querySelector('#fetchGamesButton');
+	const sendToTwitch = document.querySelector('#sendToTwitch');
 	const sendLight = document.querySelector('#sendLight');
 	const sendDark = document.querySelector('#sendDark');
 
@@ -121,6 +133,12 @@
 			'fetchGamesList',
 			seasonInput.value
 		);
+	};
+
+	sendToTwitch.onclick = () => {
+		nodecg.sendMessageToBundle('twitchUpdateChannelInfo', 'nodecg-speedcontrol', {
+			game: game.value
+		});
 	};
 
 	startLight.onclick = () => {
