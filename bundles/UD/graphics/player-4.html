@@ -57,29 +57,12 @@
 	const darkPbScore = document.querySelector('#darkPbScore');
 	const darkPbTime = document.querySelector('#darkPbTime');
 
-
-	const runnerIdReplicant = nodecg.Replicant('runnerId_4', 'players');
-
-	const runnerLightScoreReplicant = nodecg.Replicant('runnerLightScore_4', 'players');
-	const runnerLightTimeReplicant = nodecg.Replicant('runnerLightTime_4', 'players');
-	const runnerDarkScoreReplicant = nodecg.Replicant('runnerDarkScore_4', 'players');
-	const runnerDarkTimeReplicant = nodecg.Replicant('runnerDarkTime_4', 'players');
-
-	runnerLightScoreReplicant.on('change', (newValue) => {
-		lightPbScore.innerHTML = newValue;
-	});
-	runnerLightTimeReplicant.on('change', (newValue) => {
-		lightPbTime.innerHTML = newValue;
-	});
-	runnerDarkScoreReplicant.on('change', (newValue) => {
-		darkPbScore.innerHTML = newValue;
-	});
-	runnerDarkTimeReplicant.on('change', (newValue) => {
-		darkPbTime.innerHTML = newValue;
-	});
-
-	runnerIdReplicant.on('change', (newValue) => {
-		runnerId_4.innerText = newValue.toUpperCase();
-	});
+	nodecg.listenFor('updateUser-4', async infos => {
+		runnerId_4.innerText = infos.player.toUpperCase();
+		lightPbScore.innerText = infos.light.score;
+		lightPbTime.innerText = infos.light.time;
+		darkPbScore.innerText = infos.dark.score;
+		darkPbTime.innerText = infos.dark.time;
+	})
 </script>
 </html>

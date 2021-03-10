@@ -30,7 +30,6 @@ module.exports = nodecg => {
 					}
 				});
 
-
 				apiResponse.data.data.userCardInformations.pbList.forEach(function(PB){
 					if (query.game == PB.game.name) {
 						if (!results[key]) {
@@ -39,13 +38,11 @@ module.exports = nodecg => {
 
 
 						if ('grind' == PB.game.groupment || 'light' == PB.game.groupment) {
-							nodecg.log.info(`[${query.game}]Found light PB. Score : ${PB.score}. Time: ${PB.time}`);
 							results[key].light = {
 								score: PB.score ? PB.score : 0,
 								time: PB.time
 							}
 						} else if ('race' == PB.game.groupment || 'dark' == PB.game.groupment) {
-							nodecg.log.info(`[${query.game}]Found dark PB. Score : ${PB.score}. Time: ${PB.time}`);
 							results[key].dark = {
 								score: PB.score ? PB.score : 0,
 								time: PB.time

@@ -251,97 +251,48 @@
 	const runnerDarkTimeReplicant_3 = nodecg.Replicant('runnerDarkTime_3');
 	const runnerDarkTimeReplicant_4 = nodecg.Replicant('runnerDarkTime_4');
 
-	runnerIdReplicant_1.on('change', (newValue) => {
-		runnerId_1.value = newValue;
-	});
-	runnerIdReplicant_2.on('change', (newValue) => {
-		runnerId_2.value = newValue;
-	});
-	runnerIdReplicant_3.on('change', (newValue) => {
-		runnerId_3.value = newValue;
-	});
-	runnerIdReplicant_4.on('change', (newValue) => {
-		runnerId_4.value = newValue;
-	});
+	for (let i = 1; i <= 4; i++) {
+		eval('runnerIdReplicant_' + i).on('change', (newValue) => {
+			eval('runnerId_' + i).value = newValue;
+		});
 
-	runnerLightScoreReplicant_1.on('change', (newValue) => {
-		runnerLightScore_1.innerHTML = newValue;
-	});
-	runnerLightScoreReplicant_2.on('change', (newValue) => {
-		runnerLightScore_2.innerHTML = newValue;
-	});
-	runnerLightScoreReplicant_3.on('change', (newValue) => {
-		runnerLightScore_3.innerHTML = newValue;
-	});
-	runnerLightScoreReplicant_4.on('change', (newValue) => {
-		runnerLightScore_4.innerHTML = newValue;
-	});
-
-	runnerLightTimeReplicant_1.on('change', (newValue) => {
-		runnerLightTime_1.innerHTML = newValue;
-	});
-	runnerLightTimeReplicant_2.on('change', (newValue) => {
-		runnerLightTime_2.innerHTML = newValue;
-	});
-	runnerLightTimeReplicant_3.on('change', (newValue) => {
-		runnerLightTime_3.innerHTML = newValue;
-	});
-	runnerLightTimeReplicant_4.on('change', (newValue) => {
-		runnerLightTime_4.innerHTML = newValue;
-	});
-
-	runnerDarkScoreReplicant_1.on('change', (newValue) => {
-		runnerDarkScore_1.innerHTML = newValue;
-	});
-	runnerDarkScoreReplicant_2.on('change', (newValue) => {
-		runnerDarkScore_2.innerHTML = newValue;
-	});
-	runnerDarkScoreReplicant_3.on('change', (newValue) => {
-		runnerDarkScore_3.innerHTML = newValue;
-	});
-	runnerDarkScoreReplicant_4.on('change', (newValue) => {
-		runnerDarkScore_4.innerHTML = newValue;
-	});
-
-	runnerDarkTimeReplicant_1.on('change', (newValue) => {
-		runnerDarkTime_1.innerHTML = newValue;
-	});
-	runnerDarkTimeReplicant_2.on('change', (newValue) => {
-		runnerDarkTime_2.innerHTML = newValue;
-	});
-	runnerDarkTimeReplicant_3.on('change', (newValue) => {
-		runnerDarkTime_3.innerHTML = newValue;
-	});
-	runnerDarkTimeReplicant_4.on('change', (newValue) => {
-		runnerDarkTime_4.innerHTML = newValue;
-	});
+		eval('runnerLightScoreReplicant_' + i).on('change', (newValue) => {
+			eval('runnerLightScore_' + i).innerHTML = newValue;
+		});
+		eval('runnerLightTimeReplicant_' + i).on('change', (newValue) => {
+			eval('runnerLightTime_' + i).innerHTML = newValue;
+		});
+		eval('runnerDarkScoreReplicant_' + i).on('change', (newValue) => {
+			eval('runnerDarkScore_' + i).innerHTML = newValue;
+		});
+		eval('runnerDarkTimeReplicant_' + i).on('change', (newValue) => {
+			eval('runnerDarkTime_' + i).innerHTML = newValue;
+		});
+	}
 
 	submitButton.onclick = () => {
-		// A Replicant can be modified by modifying its `value`.
-		runnerIdReplicant_1.value = runnerId_1.value;
-		runnerIdReplicant_2.value = runnerId_2.value;
-		runnerIdReplicant_3.value = runnerId_3.value;
-		runnerIdReplicant_4.value = runnerId_4.value;
+		for (let i = 1; i <= 4; i++) {
+			nodecg.sendMessage(
+				'updateUser-' + i,
+				{
+					player: eval('runnerId_' + i).value,
+					light: {
+						score: eval('runnerLightScore_' + i).innerHTML,
+						time: eval('runnerLightTime_' + i).innerHTML,
+					},
+					dark: {
+						score: eval('runnerDarkScore_' + i).innerHTML,
+						time: eval('runnerDarkTime_' + i).innerHTML,
+					}
+				}
+			);
 
-		runnerLightScoreReplicant_1.value = runnerLightScore_1.innerHTML;
-		runnerLightScoreReplicant_2.value = runnerLightScore_2.innerHTML;
-		runnerLightScoreReplicant_3.value = runnerLightScore_3.innerHTML;
-		runnerLightScoreReplicant_4.value = runnerLightScore_4.innerHTML;
-
-		runnerLightTimeReplicant_1.value = runnerLightTime_1.innerHTML;
-		runnerLightTimeReplicant_2.value = runnerLightTime_2.innerHTML;
-		runnerLightTimeReplicant_3.value = runnerLightTime_3.innerHTML;
-		runnerLightTimeReplicant_4.value = runnerLightTime_4.innerHTML;
-
-		runnerDarkScoreReplicant_1.value = runnerDarkScore_1.innerHTML;
-		runnerDarkScoreReplicant_2.value = runnerDarkScore_2.innerHTML;
-		runnerDarkScoreReplicant_3.value = runnerDarkScore_3.innerHTML;
-		runnerDarkScoreReplicant_4.value = runnerDarkScore_4.innerHTML;
-
-		runnerDarkTimeReplicant_1.value = runnerDarkTime_1.innerHTML;
-		runnerDarkTimeReplicant_2.value = runnerDarkTime_2.innerHTML;
-		runnerDarkTimeReplicant_3.value = runnerDarkTime_3.innerHTML;
-		runnerDarkTimeReplicant_4.value = runnerDarkTime_4.innerHTML;
+			eval('runnerIdReplicant_' + i).value = eval('runnerId_' + i).value;
+			eval('runnerLightScoreReplicant_' + i).value = eval('runnerLightScore_' + i).value;
+			eval('runnerLightTimeReplicant_' + i).value = eval('runnerLightTime_' + i).value;
+			eval('runnerDarkScoreReplicant_' + i).value = eval('runnerDarkScore_' + i).value;
+			eval('runnerDarkTimeReplicant_' + i).value = eval('runnerDarkTime_' + i).value;
+		}
 	};
 
 
