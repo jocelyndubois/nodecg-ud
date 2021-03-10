@@ -32,7 +32,6 @@
         "file": "games.html",
         "headerColor": "#9f9bbd"
       },
-
       {
         "name": "Tournaments",
         "title": "Tournaments",
@@ -114,17 +113,27 @@
       {
         "name": "images",
         "title": "images",
-        "allowedTypes": ["png", "jpg"]
+        "allowedTypes": [
+          "png",
+          "jpg"
+        ]
       },
       {
         "name": "background",
         "title": "background",
-        "allowedTypes": ["png", "jpg"]
+        "allowedTypes": [
+          "png",
+          "jpg"
+        ]
       },
       {
         "name": "clips",
         "title": "clips",
-        "allowedTypes": ["webm", "mp4", "mov"]
+        "allowedTypes": [
+          "webm",
+          "mp4",
+          "mov"
+        ]
       }
     ]
   },
