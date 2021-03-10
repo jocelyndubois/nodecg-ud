@@ -236,10 +236,10 @@
 		gameCategoryDark.value = infos.dark.category;
 
 
-		gameMinScoreLight.value = infos.light.minScore ?? '';
-		gameMaxScoreLight.value = infos.light.maxScore ?? '';
-		gameMinScoreDark.value = infos.dark.minScore ?? '';
-		gameMaxScoreDark.value = infos.dark.maxScore ?? '';
+		gameMinScoreLight.value = infos.light.minScore ? infos.light.minScore : '';
+		gameMaxScoreLight.value = infos.light.maxScore ? infos.light.maxScore : '';
+		gameMinScoreDark.value = infos.dark.minScore ? infos.dark.minScore : '';
+		gameMaxScoreDark.value = infos.dark.maxScore ? infos.dark.maxScore : '';
 
 		gameMaxTimeLight.value = new Date(infos.light.bestTime * 1000).toISOString().substr(11, 8);
 		gameMaxTimeLight.dataset.seconds = infos.light.bestTime;
