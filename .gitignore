@@ -5,8 +5,8 @@
 /build/node_modules
 npm-debug.log
 
-bundles/players/bower_components
-bundles/players/node_modules
+bundles/UD/bower_components
+bundles/UD/node_modules
 
 # Datastores
 /db/**
