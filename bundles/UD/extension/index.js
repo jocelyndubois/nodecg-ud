@@ -4,8 +4,6 @@ const axios = require('axios');
 module.exports = nodecg => {
 	const obs = new OBSUtility(nodecg);
 
-	obs.replicants.previewScene.on('change', () => {console.log('slip')});
-
 	nodecg.listenFor('loadRTMP', async query => {
 		try {
 			await obs.send("SetSourceSettings", {
@@ -47,8 +45,6 @@ module.exports = nodecg => {
 								time: PB.time
 							}
 						} else if ('race' == PB.game.groupment || 'dark' == PB.game.groupment) {
-							console.log(PB.score);
-
 							nodecg.log.info(`[${query.game}]Found dark PB. Score : ${PB.score}. Time: ${PB.time}`);
 							results[key].dark = {
 								score: PB.score ? PB.score : 0,
@@ -83,7 +79,6 @@ module.exports = nodecg => {
 					query: 'query getGames {  activeSeasonGames (season: ' + query + ', groupment: "' + groupment + '") {    name  }}'
 				}
 			});
-
 
 			apiResponse.data.data.activeSeasonGames.forEach(function(game){
 				results.push(game.name);
