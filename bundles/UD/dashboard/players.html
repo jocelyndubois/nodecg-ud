@@ -98,9 +98,24 @@
 		</tbody>
 	</table>
 
-	<h4>Actions</h4>
-	<a href="#" class="btn btn-sm btn-danger" id="hideCardsButton">Hide cards</a>
-	<button class="btn btn-sm btn-primary" id="fetchPbButton">Update PBs</button>
+	<div class="row">
+		<div class="col">
+			<h4>Actions</h4>
+			<a href="#" class="btn btn-sm btn-danger" id="hideCardsButton">Hide cards</a>
+			<button class="btn btn-sm btn-primary" id="fetchPbButton">Update PBs</button>
+		</div>
+		<div class="col">
+			<h4>Commentators</h4>
+			<div class="row">
+				<div class="col-8">
+					<input type="text" class="form-control" id="commentators" value="Twyn & CdV"/>
+				</div>
+				<div class="col-4">
+					<a href="#" class="btn btn-sm btn-success" id="updateCommentator">Update</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 <script>
@@ -142,6 +157,9 @@
 
 	const submitButton = document.querySelector('#submitButton');
 	const fetchPbButton = document.querySelector('#fetchPbButton');
+
+	const updateCommentator = document.querySelector('#updateCommentator');
+	const commentators = document.querySelector('#commentators');
 
 	$( document ).ready(function() {
 		//[PLAYERS dependant functions]
@@ -271,6 +289,14 @@
 				}
 			}
 		})
+
+		//[COMMENTATORS]
+		updateCommentator.onclick = () => {
+			nodecg.sendMessage(
+				'updateCommentators',
+				commentators.value
+			);
+		};
 	});
 </script>
 </html>

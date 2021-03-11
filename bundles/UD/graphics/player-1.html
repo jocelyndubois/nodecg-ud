@@ -1,48 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="css/global.css">
+	<link rel="stylesheet" href="css/players.css">
 	<script src="https://player.twitch.tv/js/embed/v1.js"></script>
-	<style>
-		html,body {
-			height:100%;
-			background-color: transparent;
-		}
-		.container {
-			overflow: hidden;
-			height: 100%;
-		}
-
-		.player-banner {
-			height: 60px;
-			width: 100%;
-			position: fixed; left: 0; top: 0;
-		}
-
-		#player-1 {
-			background-color: #FF0000;
-			color: white;
-		}
-
-		#runnerId_1 {
-			position: relative;
-			font-size: 3em;
-			left: 15px;
-			top: 0px;
-		}
-
-		.Pbs {
-			position: relative;
-			top: -56px;
-			float: right;
-			font-size: 3em;
-		}
-	</style>
 </head>
 <body>
 	<div class="container">
 		<div id="player-1" class="player-banner">
-			<div id="runnerId_1"></div>
-
+			<div id="runnerId_1" class="runner"></div>
 			<div class="Pbs">
 				<span id="lightPbScore">0</span> (<span id="lightPbTime">00:00:00</span>) / <span id="darkPbScore">0</span> (<span id="darkPbTime">00:00:00</span>)
 			</div>

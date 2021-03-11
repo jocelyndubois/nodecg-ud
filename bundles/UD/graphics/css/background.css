@@ -1,0 +1,10 @@
+body {
+	background-image: url("../../../assets/players/images/UDmd00_BG_A_01.png");
+	height:100%;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+.container {
+	overflow: hidden;
+	height: 100%;
+}

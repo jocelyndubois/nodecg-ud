@@ -1,0 +1,16 @@
+html,body {
+	height:100%;
+	background-color: transparent;
+	margin: 0;
+}
+.container {
+	overflow: hidden;
+	height: 100%;
+}
+#tournamentIframe {
+	opacity: 1;
+	transition: opacity 0.5s;
+}
+#tournamentIframe.hidden {
+	opacity: 0;
+}

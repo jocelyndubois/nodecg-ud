@@ -1,0 +1,48 @@
+html,body {
+	height:100%;
+	background-color: transparent;
+}
+.container {
+	overflow: hidden;
+	height: 100%;
+}
+
+.player-banner {
+	height: 60px;
+	width: 100%;
+	position: fixed; left: 0; top: 0;
+}
+
+#player-1 {
+	background-color: #FF0000;
+	color: white;
+}
+
+#player-2 {
+	background-color: #18B0C2;
+	color: white;
+}
+
+#player-3 {
+	background-color: #09AB19;
+	color: white;
+}
+
+#player-4 {
+	background-color: #8B09AB;
+	color: white;
+}
+
+.player {
+	position: relative;
+	font-size: 3em;
+	left: 15px;
+	top: 0px;
+}
+
+.Pbs {
+	position: relative;
+	top: -56px;
+	float: right;
+	font-size: 3em;
+}

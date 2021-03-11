@@ -1,0 +1,13 @@
+html,body {
+	height:100%;
+	background-color: transparent;
+}
+.container {
+	overflow: hidden;
+	height: 100%;
+	color: white;
+}
+
+#commentators {
+	font-size: 5em;
+}
