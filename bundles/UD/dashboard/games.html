@@ -2,16 +2,12 @@
 <html>
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<style>
-		.btn-twitch {
-			background-color: #944BFF;
-			color: white;
-		}
-		.btn-twitch:hover {
-			background-color: #9437FF;
-			color: white;
-		}
-	</style>
+	<link rel="stylesheet" href="css/global.css">
+	<link rel="stylesheet" href="css/games.css">
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/replicants.js"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
 </head>
 <body>
 <div class="container">
@@ -36,7 +32,7 @@
 		</div>
 		<div class="col-md-2">
 			<svg id= "gameSvg" data-width="1000" viewBox="0,0,1000,1000" height="75" width="75">
-				<path id="gameSvgPath" d=""/>
+				<path id="gameSvgPath" d="" fill="#FFFFFF"/>
 			</svg>
 		</div>
 		<div class="col-6">
@@ -79,17 +75,23 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="col-md-6">
-			<a class="btn btn-light" id="sendLight">Send light</a>
-			<a class="btn btn-success" id="startLight">Start</a>
-			<a class="btn btn-danger" id="stopLight">Stop</a>
-		</div>
-		<div class="col-md-6">
-			<a class="btn btn-dark" id="sendDark">Send dark</a>
-			<a class="btn btn-success" id="startDark">Start</a>
-			<a class="btn btn-danger" id="stopDark">Stop</a>
-		</div>
 	</form>
+
+	<div class="row">
+		<div class="col">
+			<h4>Game</h4>
+			<a class="btn btn-light" id="sendLight">Send</a>
+			<a class="btn btn-dark" id="sendDark">Send</a>
+		</div>
+		<div class="col">
+			<h4>Chrono</h4>
+			<a class="btn btn-light" id="startLight"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 26 26"><polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 19.3 13.04 9.33 6.69"/></svg></a>
+			<a class="btn btn-dark" id="startDark"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 26 26"><polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 19.3 13.04 9.33 6.69" fill="#FFFFFF"/></svg></a>
+			<a class="btn btn-danger" id="stop"><svg xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 100 100"><path d="M 10 10 H 90 V 90 H 10 L 10 10"/></svg></a>
+
+		</div>
+	</div>
+
 
 </div>
 </body>
@@ -103,10 +105,8 @@
 	const sendDark = document.querySelector('#sendDark');
 
 	const startLight = document.querySelector('#startLight');
-	const stopLight = document.querySelector('#stopLight');
-
 	const startDark = document.querySelector('#startDark');
-	const stopDark = document.querySelector('#stopDark');
+	const stop = document.querySelector('#stop');
 
 	const gameName = document.querySelector('#gameName');
 	const gameColor = document.querySelector('#gameColor');
@@ -125,153 +125,151 @@
 	const gameMinScoreDark = document.querySelector('#gameMinScoreDark');
 	const gameMaxScoreDark = document.querySelector('#gameMaxScoreDark');
 
-	const season = nodecg.Replicant('season');
-	const game = nodecg.Replicant('game');
+	$( document ).ready(function() {
+		fetchGamesButton.onclick = () => {
+			nodecg.sendMessage(
+				'fetchGamesList',
+				seasonInput.value
+			);
+		};
 
-	fetchGamesButton.onclick = () => {
-		nodecg.sendMessage(
-			'fetchGamesList',
-			seasonInput.value
-		);
-	};
+		sendToTwitch.onclick = () => {
+			nodecg.sendMessageToBundle('twitchUpdateChannelInfo', 'nodecg-speedcontrol', {
+				game: game.value
+			});
+		};
 
-	sendToTwitch.onclick = () => {
-		nodecg.sendMessageToBundle('twitchUpdateChannelInfo', 'nodecg-speedcontrol', {
-			game: game.value
+		//[CHRONO]
+		startLight.onclick = () => {
+			nodecg.sendMessage(
+				'startTimer',
+				{
+					bestTime: gameMaxTimeLight.dataset.seconds,
+					middleTime: gameMidTimeLight.dataset.seconds,
+					minScore: gameMinScoreLight.value,
+					maxScore: gameMaxScoreLight.value,
+				}
+			);
+		};
+		startDark.onclick = () => {
+			nodecg.sendMessage(
+				'startTimer',
+				{
+					bestTime: gameMaxTimeDark.dataset.seconds,
+					middleTime: gameMidTimeDark.dataset.seconds,
+					minScore: gameMinScoreDark.value,
+					maxScore: gameMaxScoreDark.value,
+				}
+			);
+		};
+		stop.onclick = () => {
+			nodecg.sendMessage('stopTimer');
+		};
+
+		//[GAME INFOS]
+		sendLight.onclick = () => {
+			nodecg.sendMessage(
+				'sendGameInfos',
+				{
+					name: gameName.value,
+					category: gameCategoryLight.value,
+					path: gameSvgPath.getAttribute('d'),
+					width: gameSvg.dataset.width,
+				}
+			);
+		};
+		sendDark.onclick = () => {
+			nodecg.sendMessage(
+				'sendGameInfos',
+				{
+					name: gameName.value,
+					category: gameCategoryDark.value,
+					path: gameSvgPath.getAttribute('d'),
+					width: gameSvg.dataset.width,
+				}
+			);
+		};
+
+		seasonInput.onchange = () => {
+			season.value = seasonInput.value;
+			fetchRunnersList();
+		}
+		season.on('change', () => {
+			seasonInput.value = season.value;
 		});
-	};
 
-	startLight.onclick = () => {
-		nodecg.sendMessage(
-			'startTimer',
-			{
-				bestTime: gameMaxTimeLight.dataset.seconds,
-				middleTime: gameMidTimeLight.dataset.seconds,
-				minScore: gameMinScoreLight.value,
-				maxScore: gameMaxScoreLight.value,
-			}
-		);
-	};
+		gameSelect.onchange = () => {
+			game.value = gameSelect.value;
 
-	stopLight.onclick = () => {
-		nodecg.sendMessage('stopTimer');
-	};
-
-	startDark.onclick = () => {
-		nodecg.sendMessage(
-			'startTimer',
-			{
-				bestTime: gameMaxTimeDark.dataset.seconds,
-				middleTime: gameMidTimeDark.dataset.seconds,
-				minScore: gameMinScoreDark.value,
-				maxScore: gameMaxScoreDark.value,
-			}
-		);
-	};
-
-	stopDark.onclick = () => {
-		nodecg.sendMessage('stopTimer');
-	};
-
-	sendLight.onclick = () => {
-		nodecg.sendMessage(
-			'sendGameInfos',
-			{
-				name: gameName.value,
-				category: gameCategoryLight.value,
-				path: gameSvgPath.getAttribute('d'),
-				width: gameSvg.dataset.width,
-			}
-		);
-	};
-
-	sendDark.onclick = () => {
-		nodecg.sendMessage(
-			'sendGameInfos',
-			{
-				name: gameName.value,
-				category: gameCategoryDark.value,
-				path: gameSvgPath.getAttribute('d'),
-				width: gameSvg.dataset.width,
-			}
-		);
-	};
-
-	season.on('change', () => {
-		seasonInput.value = season.value;
-	});
-
-	gameSelect.onchange = () => {
-		game.value = gameSelect.value;
-
-		nodecg.sendMessage(
-			'getGameInfos',
-			{
-				season: seasonInput.value,
-				game: gameSelect.value
-			},
-		);
-	}
-
-	const fetchGamesListReplicant = nodecg.Replicant('fetchGamesList');
-	fetchGamesListReplicant.on('change', (newValue) => {
-		if (!newValue) {
-			return;
+			nodecg.sendMessage(
+				'getGameInfos',
+				{
+					season: seasonInput.value,
+					game: gameSelect.value
+				},
+			);
 		}
 
-		//First, we clear the old games list.
-		var length = gameSelect.options.length;
-		for (let i = length-1; i >= 0; i--) {
-			gameSelect.options[i].remove();
-		}
+		fetchGamesListReplicant.on('change', (newValue) => {
+			if (!newValue) {
+				return;
+			}
 
-		//Then we add the new one.
-		for (let i = 0; i < newValue.length; i++) {
-			let game = document.createElement("option");
-			game.value = newValue[i];
-			game.text = newValue[i];
+			if (gameSelect.options) {
+				//First, we clear the old games list.
+				var length = gameSelect.options.length;
+				for (let i = length-1; i >= 0; i--) {
+					gameSelect.options[i].remove();
+				}
+			}
 
-			gameSelect.add(game);
-		}
+			//Then we add the new one.
+			for (let i = 0; i < newValue.length; i++) {
+				let game = document.createElement("option");
+				game.value = newValue[i];
+				game.text = newValue[i];
 
-		season.value = seasonInput.value;
-		gameSelect.onchange();
-	});
+				gameSelect.add(game);
+			}
 
-	const gameInfos = nodecg.Replicant('getGameInfos');
-	gameInfos.on('change', (infos) => {
-		if (!infos) {
-			return;
-		}
+			season.value = seasonInput.value;
+			gameSelect.onchange();
+		});
 
-		gameName.value = infos.name;
-		gameColor.value = infos.hexColor;
-		gameSvg.setAttribute('viewBox', '0,0,' + infos.pathInformation.width + ',' + infos.pathInformation.width);
-		gameSvg.dataset.width = infos.pathInformation.width;
-		gameSvgPath.setAttribute('d', infos.pathInformation.path);
+		gameInfos.on('change', (infos) => {
+			if (!infos) {
+				return;
+			}
 
-		gameCategoryLight.value = infos.light.category;
-		gameCategoryDark.value = infos.dark.category;
+			gameName.value = infos.name;
+			gameColor.value = infos.hexColor;
+			gameSvg.setAttribute('viewBox', '0,0,' + infos.pathInformation.width + ',' + infos.pathInformation.width);
+			gameSvg.dataset.width = infos.pathInformation.width;
+			gameSvgPath.setAttribute('d', infos.pathInformation.path);
+
+			gameCategoryLight.value = infos.light.category;
+			gameCategoryDark.value = infos.dark.category;
 
 
-		gameMinScoreLight.value = infos.light.minScore ? infos.light.minScore : '';
-		gameMaxScoreLight.value = infos.light.maxScore ? infos.light.maxScore : '';
-		gameMinScoreDark.value = infos.dark.minScore ? infos.dark.minScore : '';
-		gameMaxScoreDark.value = infos.dark.maxScore ? infos.dark.maxScore : '';
+			gameMinScoreLight.value = infos.light.minScore ? infos.light.minScore : '';
+			gameMaxScoreLight.value = infos.light.maxScore ? infos.light.maxScore : '';
+			gameMinScoreDark.value = infos.dark.minScore ? infos.dark.minScore : '';
+			gameMaxScoreDark.value = infos.dark.maxScore ? infos.dark.maxScore : '';
 
-		gameMaxTimeLight.value = new Date(infos.light.bestTime * 1000).toISOString().substr(11, 8);
-		gameMaxTimeLight.dataset.seconds = infos.light.bestTime;
-		gameMidTimeLight.value = new Date(infos.light.middleTime * 1000).toISOString().substr(11, 8);
-		gameMidTimeLight.dataset.seconds = infos.light.middleTime;
-		gameFewTimeLight.value = new Date(infos.light.fewestTime * 1000).toISOString().substr(11, 8);
-		gameFewTimeLight.dataset.seconds = infos.light.fewestTime;
+			gameMaxTimeLight.value = new Date(infos.light.bestTime * 1000).toISOString().substr(11, 8);
+			gameMaxTimeLight.dataset.seconds = infos.light.bestTime;
+			gameMidTimeLight.value = new Date(infos.light.middleTime * 1000).toISOString().substr(11, 8);
+			gameMidTimeLight.dataset.seconds = infos.light.middleTime;
+			gameFewTimeLight.value = new Date(infos.light.fewestTime * 1000).toISOString().substr(11, 8);
+			gameFewTimeLight.dataset.seconds = infos.light.fewestTime;
 
-		gameMaxTimeDark.value = new Date(infos.dark.bestTime * 1000).toISOString().substr(11, 8);
-		gameMaxTimeDark.dataset.seconds = infos.dark.bestTime;
-		gameMidTimeDark.value = new Date(infos.dark.middleTime * 1000).toISOString().substr(11, 8);
-		gameMidTimeDark.dataset.seconds = infos.dark.middleTime;
-		gameFewTimeDark.value = new Date(infos.dark.fewestTime * 1000).toISOString().substr(11, 8);
-		gameFewTimeDark.dataset.seconds = infos.dark.fewestTime;
+			gameMaxTimeDark.value = new Date(infos.dark.bestTime * 1000).toISOString().substr(11, 8);
+			gameMaxTimeDark.dataset.seconds = infos.dark.bestTime;
+			gameMidTimeDark.value = new Date(infos.dark.middleTime * 1000).toISOString().substr(11, 8);
+			gameMidTimeDark.dataset.seconds = infos.dark.middleTime;
+			gameFewTimeDark.value = new Date(infos.dark.fewestTime * 1000).toISOString().substr(11, 8);
+			gameFewTimeDark.dataset.seconds = infos.dark.fewestTime;
+		});
 	});
 </script>
 </html>

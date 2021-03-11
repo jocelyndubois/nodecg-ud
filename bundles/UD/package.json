@@ -14,14 +14,14 @@
       {
         "name": "Players",
         "title": "Players",
-        "width": 8,
+        "width": 7,
         "file": "players.html",
         "headerColor": "#9f9bbd"
       },
       {
         "name": "Clips",
         "title": "Clip",
-        "width": 2,
+        "width": 3,
         "file": "clips.html",
         "headerColor": "#9f9bbd",
         "workspace": "Full page"
@@ -44,7 +44,7 @@
       {
         "name": "Backgrounds",
         "title": "Backgrounds",
-        "width": 4,
+        "width": 3,
         "file": "backgrounds.html",
         "headerColor": "#9f9bbd",
         "workspace": "Full page"

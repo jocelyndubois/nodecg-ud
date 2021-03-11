@@ -2,15 +2,22 @@
 <html>
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/global.css">
+	<script type="text/javascript" src="js/replicants.js"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
 </head>
 <body>
 	<div class="container">
-		<select class="form-control form-select form-select-sm" name="clipsSelect" id="clipsSelect"></select>
-		</br>
-		<div class="btn-group">
-			<a href="#" class="btn btn-primary" id="fetchClipsButton">Fetch clips</a>
-			<a href="#" class="btn btn-success" id="loadClipButton">Send</a>
-			<a href="#" class="btn btn-danger" id="stopClipButton">Stop</a>
+		<div class="row">
+			<div class="col">
+				<select class="form-control form-select form-select-sm" name="clipsSelect" id="clipsSelect"></select>
+
+			</div>
+			<div class="col">
+				<a href="#" class="hidden btn btn-light" id="fetchClipsButton">Fetch clips</a>
+				<a href="#" class="btn btn-success" id="loadClipButton">Send</a>
+				<a href="#" class="btn btn-danger" id="stopClipButton">Stop</a>
+			</div>
 		</div>
 	</div>
 
@@ -18,8 +25,6 @@
 </body>
 
 <script>
-	const clips = nodecg.Replicant('assets:clips');
-	const clip = nodecg.Replicant('clip');
 	const clipsSelect = document.querySelector('#clipsSelect');
 
 	const fetchClipsButton = document.querySelector('#fetchClipsButton');

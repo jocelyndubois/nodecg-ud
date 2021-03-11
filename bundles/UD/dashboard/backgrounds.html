@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/global.css">
+	<script type="text/javascript" src="js/replicants.js"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
+</head>
 <body>
-	<label>Backgrounds :</label>
-	<select name="backgroundSelect" id="backgroundSelect"></select>
-	<button id="fetchBackgroundButton">Fetch backgrounds</button>
-	<button id="loadBackgroundButton">Send</button>
-
+	<div class="row">
+		<div class="col-6">
+			<select class="name-select form-control form-select form-select-sm" name="backgroundSelect" id="backgroundSelect"></select>
+		</div>
+		<div class="col-6">
+			<a class="hidden btn btn-light" id="fetchBackgroundButton">Refresh list</a>
+			<a class="btn btn-success" id="loadBackgroundButton">Send</a>
+		</div>
+	</div>
+	<h4>Preview :</h4>
 	<img id="demoBackground" src="#" width="256" height="144"/>
 </body>
 
 <script>
-	const backgrounds = nodecg.Replicant('assets:background');
-	const background = nodecg.Replicant('background');
 	const backgroundSelect = document.querySelector('#backgroundSelect');
 	const demoBackground = document.querySelector('#demoBackground');
 

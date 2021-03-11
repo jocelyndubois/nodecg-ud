@@ -61,6 +61,27 @@ module.exports = nodecg => {
 	});
 
 
+	const runnerListReplicant = nodecg.Replicant('runnerList');
+	nodecg.listenFor('fetchRunnersList', async query => {
+		try {
+			let results = [];
+
+			const apiResponse = await axios.get('https://www.ultimedecathlon.com/graphql', {
+				params: {
+					query: 'query AllRunners {  activeSeasonUsers(season: ' + query.season + ', paginator: {page: 1, nbPerPage: 1000}) {    totalPages    data {      id      username      alias    }  }}'
+				}
+			});
+
+			apiResponse.data.data.activeSeasonUsers.data.forEach(function(runner){
+				results.push(runner);
+			})
+
+			runnerListReplicant.value = results;
+		} catch (error) {
+			nodecg.log.error(error);
+		}
+	});
+
 	const fetchGamesListReplicant = nodecg.Replicant('fetchGamesList');
 	nodecg.listenFor('fetchGamesList', async query => {
 		try {
