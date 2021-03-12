@@ -31,6 +31,8 @@
 		lightPbTime.innerText = infos.light.time;
 		darkPbScore.innerText = infos.dark.score;
 		darkPbTime.innerText = infos.dark.time;
+		playerDiv.classList.remove('hidden');
+		cardIframe.classList.add('hidden');
 	})
 
 	nodecg.listenFor('showAllCards-3', async infos => {
