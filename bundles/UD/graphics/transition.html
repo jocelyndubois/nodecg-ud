@@ -65,6 +65,8 @@
 	const player_score_4 = document.querySelector('#player-score-4');
 
 	nodecg.listenFor('showTransition', infos => {
+		document.body.style.backgroundImage = "url('" + infos.background + "')";
+
 		topLeft.innerHTML = infos.topLeft.toUpperCase();
 		topRight.innerHTML = infos.topRight.toUpperCase();
 		nextGame.src = 'img/games/UD' + season.value + '/' + string_to_slug(infos.game) + '.png'
@@ -75,8 +77,6 @@
 			eval('player_time_' + i).innerHTML = infos.players[i].time;
 			eval('player_score_' + i).innerHTML = infos.players[i].score;
 		}
-
-		document.body.style.backgroundImage = "url('" + infos.background + "')";
 
 		container.classList.remove('hidden');
 	});
