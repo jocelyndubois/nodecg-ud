@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="css/global.css">
+	<link rel="stylesheet" href="css/background.css">
+	<link rel="stylesheet" href="css/transition.css">
+
+	<script type="text/javascript" src="js/replicants.js"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
+</head>
+<body>
+<div class="container hidden">
+	<div id="header">
+		<div id="topLeft">TOURNOIS XXX</div>
+		<div id="topRight">EPREUVE XX/XX</div>
+	</div>
+
+	<div id="nextGameBand">JEU SUIVANT</div>
+	<div id="nextGameLogo">
+		<img src="#" alt="" id="nextGame"/>
+	</div>
+	<div id="bestTime">MEILLEUR TEMPS AU CHAMPIONNAT</div>
+	<div class="players" id="player-1">
+		<div class="player-name" id="player-name-1"></div>
+		<div class="player-time" id="player-time-1"></div>
+		<div class="player-score" id="player-score-1"></div>
+	</div>
+	<div class="players" id="player-2">
+		<div class="player-name" id="player-name-2"></div>
+		<div class="player-time" id="player-time-2"></div>
+		<div class="player-score" id="player-score-2"></div>
+	</div>
+	<div class="players" id="player-3">
+		<div class="player-name" id="player-name-3"></div>
+		<div class="player-time" id="player-time-3"></div>
+		<div class="player-score" id="player-score-3"></div>
+	</div>
+	<div class="players" id="player-4">
+		<div class="player-name" id="player-name-4"></div>
+		<div class="player-time" id="player-time-4"></div>
+		<div class="player-score" id="player-score-4"></div>
+	</div>
+</div>
+</body>
+
+<script>
+	const container = document.querySelector('.container');
+	const topLeft = document.querySelector('#topLeft');
+	const topRight = document.querySelector('#topRight');
+	const nextGame = document.querySelector('#nextGame');
+	const player_name_1 = document.querySelector('#player-name-1');
+	const player_name_2 = document.querySelector('#player-name-2');
+	const player_name_3 = document.querySelector('#player-name-3');
+	const player_name_4 = document.querySelector('#player-name-4');
+
+	const player_time_1 = document.querySelector('#player-time-1');
+	const player_time_2 = document.querySelector('#player-time-2');
+	const player_time_3 = document.querySelector('#player-time-3');
+	const player_time_4 = document.querySelector('#player-time-4');
+
+
+	const player_score_1 = document.querySelector('#player-score-1');
+	const player_score_2 = document.querySelector('#player-score-2');
+	const player_score_3 = document.querySelector('#player-score-3');
+	const player_score_4 = document.querySelector('#player-score-4');
+
+	nodecg.listenFor('showTransition', infos => {
+		topLeft.innerHTML = infos.topLeft.toUpperCase();
+		topRight.innerHTML = infos.topRight.toUpperCase();
+		nextGame.src = 'img/games/UD' + season.value + '/' + string_to_slug(infos.game) + '.png'
+		nextGame.alt = infos.game;
+
+		for (let i = 1; i <= 4; i++) {
+			eval('player_name_' + i).innerHTML = infos.players[i].name;
+			eval('player_time_' + i).innerHTML = infos.players[i].time;
+			eval('player_score_' + i).innerHTML = infos.players[i].score;
+		}
+
+		document.body.style.backgroundImage = "url('" + infos.background + "')";
+
+		container.classList.remove('hidden');
+	});
+
+	nodecg.listenFor('hideTransition', () => {
+		container.classList.add('hidden');
+		document.body.style.backgroundImage = "";
+		document.body.style.backgroundColor = "transparent";
+
+	});
+</script>
+</html>

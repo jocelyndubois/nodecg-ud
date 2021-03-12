@@ -27,6 +27,7 @@ const runnerDarkTimeReplicant_3 = nodecg.Replicant('runnerDarkTime_3');
 const runnerDarkTimeReplicant_4 = nodecg.Replicant('runnerDarkTime_4');
 
 const fetchPbListReplicant = nodecg.Replicant('fetchPbList');
+const fetchPbAggregatedListReplicant = nodecg.Replicant('fetchPbAggregatedList');
 const runnerListReplicant = nodecg.Replicant('runnerList');
 
 

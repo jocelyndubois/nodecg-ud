@@ -60,7 +60,6 @@ module.exports = nodecg => {
 		}
 	});
 
-
 	const runnerListReplicant = nodecg.Replicant('runnerList');
 	nodecg.listenFor('fetchRunnersList', async query => {
 		try {
@@ -134,6 +133,42 @@ module.exports = nodecg => {
 		}
 	});
 
+	const fetchPbAggregatedListReplicant = nodecg.Replicant('fetchPbAggregatedList');
+	nodecg.listenFor('fetchPbAggregatedList', async query => {
+		try {
+			let results = {};
+
+			for (const [key, player] of Object.entries(query.players)) {
+				const apiResponse = await axios.get('https://www.ultimedecathlon.com/graphql', {
+					params: {
+						query: 'query AllPBs {  userCardInformations(season: ' + query.season + ', username: "' + player + '", showEmptyPb: true) {    pbList {      game {        name        groupment      }      time      score    }  }}'
+					}
+				});
+
+				apiResponse.data.data.userCardInformations.pbList.forEach(function(PB){
+					if (query.game === PB.game.name) {
+						if (!results[key]) {
+							results[key] = {
+								score: null,
+								time: null,
+							};
+						}
+
+						if (!results[key].time || (PB.time && (PB.time < results[key].time))) {
+							results[key] = {
+								score: PB.score ? PB.score : 0,
+								time: PB.time
+							}
+						}
+					}
+				})
+			}
+
+			fetchPbAggregatedListReplicant.value = results;
+		} catch (error) {
+			nodecg.log.error(error);
+		}
+	});
 
 	function aggregateGameInfos(query, games, gameResult) {
 		games.forEach(function(game){

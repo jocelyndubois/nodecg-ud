@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/global.css">
+	<link rel="stylesheet" href="css/games.css">
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/replicants.js"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript" src="js/backgrounds.js"></script>
+</head>
+<body>
+<div class="container">
+	<form class="row g-3">
+		<div class="col-md-6">
+			<label for="gameSelect" class="form-label">NEXT GAME</label>
+			<select class="form-control form-select form-select-sm" name="gameSelect" id="gameSelect"></select>
+		</div>
+		<div class="col-md-6">
+			<label for="backgroundSelect" class="form-label">BACKGROUND</label>
+			<select class="name-select form-control form-select form-select-sm" name="backgroundSelect" id="backgroundSelect"></select>
+		</div>
+		<div class="col-6">
+			<label for="topLeft" class="form-label">TOP LEFT</label>
+			<input type="text" class="form-control" id="topLeft" value="TOURNOIS XXX"/>
+		</div>
+		<div class="col-md-6">
+			<label for="topRight" class="form-label">TOP RIGHT</label>
+			<input type="text" class="form-control" id="topRight" value="épreuve 01/10"/>
+		</div>
+		<div class="col-md-12">
+			<table class="table table-striped">
+				<tbody>
+				<tr>
+					<td>
+						<label for="runnerId_1" class="form-label">PLAYERS 1</label>
+						<select id="runnerId_1" class="name-select form-control form-select form-select-sm" type="text" placeholder="pseudo"></select>
+					</td>
+					<td>
+						<label for="runnerId_2" class="form-label">PLAYERS 2</label>
+						<select id="runnerId_2" class="name-select form-control form-select form-select-sm" type="text" placeholder="pseudo"></select>
+					</td>
+					<td>
+						<label for="runnerId_3" class="form-label">PLAYERS 3</label>
+						<select id="runnerId_3" class="name-select form-control form-select form-select-sm" type="text" placeholder="pseudo"></select>
+					</td>
+					<td>
+						<label for="runnerId_4" class="form-label">PLAYERS 4</label>
+						<select id="runnerId_4" class="name-select form-control form-select form-select-sm" type="text" placeholder="pseudo"></select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span id="runnerScore_1">0</span>
+						(<span id="runnerTime_1">00:00:00</span>)
+					</td>
+					<td>
+						<span id="runnerScore_2">0</span>
+						(<span id="runnerTime_2">00:00:00</span>)
+					</td>
+					<td>
+						<span id="runnerScore_3">0</span>
+						(<span id="runnerTime_3">00:00:00</span>)
+					</td>
+					<td>
+						<span id="runnerScore_4">0</span>
+						(<span id="runnerTime_4">00:00:00</span>)
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</form>
+
+	<div class="row">
+		<div class="col">
+			<h4>Actions</h4>
+			<a class="btn btn-success" id="showButton">Show</a>
+			<a class="btn btn-danger" id="hideButton">Hide</a>
+		</div>
+	</div>
+	<h4>Preview :</h4>
+	<img id="demoBackground" src="#" width="256" height="144"/>
+</div>
+</body>
+
+<script>
+	const gameSelect = document.querySelector('#gameSelect');
+	const backgroundSelect = document.querySelector('#backgroundSelect');
+
+	const topLeft = document.querySelector('#topLeft');
+	const topRight = document.querySelector('#topRight');
+
+	const runnerId_1 = document.querySelector('#runnerId_1');
+	const runnerId_2 = document.querySelector('#runnerId_2');
+	const runnerId_3 = document.querySelector('#runnerId_3');
+	const runnerId_4 = document.querySelector('#runnerId_4');
+
+	const runnerScore_1 = document.querySelector('#runnerScore_1');
+	const runnerScore_2 = document.querySelector('#runnerScore_2');
+	const runnerScore_3 = document.querySelector('#runnerScore_3');
+	const runnerScore_4 = document.querySelector('#runnerScore_4');
+
+	const runnerTime_1 = document.querySelector('#runnerTime_1');
+	const runnerTime_2 = document.querySelector('#runnerTime_2');
+	const runnerTime_3 = document.querySelector('#runnerTime_3');
+	const runnerTime_4 = document.querySelector('#runnerTime_4');
+
+	const showButton = document.querySelector('#showButton');
+	const hideButton = document.querySelector('#hideButton');
+
+	let selectedRunnerNames = {
+		1: '',
+		2: '',
+		3: '',
+		4: '',
+	}
+	for (let i = 1; i <= 4; i++) {
+		eval('runnerId_' + i).onchange = () => {
+			selectedRunnerNames[i] = $( "#runnerId_" + i + " option:selected" ).text();
+			fetchPBAggregatedList();
+		};
+	}
+
+	//[DISPLAY/HIDE]
+	showButton.onclick = () => {
+		nodecg.sendMessage(
+			'showTransition',
+			{
+				topLeft: topLeft.value,
+				topRight: topRight.value,
+				game: gameSelect.value,
+				background: backgroundSelect.value,
+				players: {
+					1: {
+						name: selectedRunnerNames[1],
+						time: runnerTime_1.innerHTML,
+						score: runnerScore_1.innerHTML,
+					},
+					2: {
+						name: selectedRunnerNames[2],
+						time: runnerTime_2.innerHTML,
+						score: runnerScore_2.innerHTML,
+					},
+					3: {
+						name: selectedRunnerNames[3],
+						time: runnerTime_3.innerHTML,
+						score: runnerScore_3.innerHTML,
+					},
+					4: {
+						name: selectedRunnerNames[4],
+						time: runnerTime_4.innerHTML,
+						score: runnerScore_4.innerHTML,
+					},
+				}
+			}
+		);
+	}
+	hideButton.onclick = () => {
+		nodecg.sendMessage(
+			'hideTransition'
+		);
+	}
+
+	//[FETCH LISTS]
+	fetchGamesListReplicant.on('change', (newValue) => {
+		if (!newValue) {
+			return;
+		}
+
+		if (gameSelect.options) {
+			//First, we clear the old games list.
+			var length = gameSelect.options.length;
+			for (let i = length-1; i >= 0; i--) {
+				gameSelect.options[i].remove();
+			}
+		}
+
+		//Then we add the new one.
+		for (let i = 0; i < newValue.length; i++) {
+			let game = document.createElement("option");
+			game.value = newValue[i];
+			game.text = newValue[i];
+
+			gameSelect.add(game);
+		}
+
+		gameSelect.onchange();
+	});
+	backgroundSelect.onchange = () => {
+		demoBackground.src = backgroundSelect.value;
+	}
+	runnerListReplicant.on('change', (runners) => {
+		if (!runners) {
+			return;
+		}
+
+		for (let j = 1; j <= 4; j++) {
+			if (eval('runnerId_' + j).options) {
+				//First, we clear the old runner list.
+				let length = eval('runnerId_' + j).options.length;
+				for (let i = length-1; i >= 0; i--) {
+					eval('runnerId_' + j).options[i].remove();
+				}
+			}
+
+			//Then we add the new one.
+			for (let i = 0; i < runners.length; i++) {
+				let runnerName = runners[i].alias ? runners[i].alias : runners[i].username;
+
+				let opt = document.createElement("option");
+				opt.value = runners[i].username;
+				opt.text = runnerName;
+				if (runners[i].username === eval('runnerIdReplicant_' + j).value) {
+					opt.selected = true;
+				}
+
+				eval('runnerId_' + j).add(opt);
+			}
+
+			eval('runnerId_' + j).onchange();
+		}
+	})
+
+	//[RECALC PBs]
+	gameSelect.onchange = () => {
+		fetchPBAggregatedList();
+	}
+	function fetchPBAggregatedList() {
+		nodecg.sendMessage(
+			'fetchPbAggregatedList',
+			{
+				players : {
+					1: runnerId_1.value,
+					2: runnerId_2.value,
+					3: runnerId_3.value,
+					4: runnerId_4.value,
+				},
+				game: gameSelect.value,
+				season: season.value
+			}
+		);
+	}
+	fetchPbAggregatedListReplicant.on('change', (newValue) => {
+		if (!newValue) {
+			return;
+		}
+
+		for (const [key, infos] of Object.entries(newValue)) {
+			let runnerScore = 'runnerScore_' + key;
+			let runnerTime = 'runnerTime_' + key;
+
+			eval(runnerScore).innerHTML = infos.score;
+			eval(runnerTime).innerHTML = new Date(infos.time * 1000).toISOString().substr(11, 8);
+		}
+	});
+</script>
+</html>

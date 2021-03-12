@@ -16,14 +16,14 @@
         "title": "Players",
         "width": 7,
         "file": "players.html",
-        "headerColor": "#9f9bbd"
+        "headerColor": "#525F78"
       },
       {
         "name": "Clips",
         "title": "Clip",
         "width": 3,
         "file": "clips.html",
-        "headerColor": "#9f9bbd",
+        "headerColor": "#525F78",
         "workspace": "Full page"
       },
       {
@@ -31,14 +31,14 @@
         "title": "Games",
         "width": 6,
         "file": "games.html",
-        "headerColor": "#9f9bbd"
+        "headerColor": "#525F78"
       },
       {
         "name": "Tournaments",
         "title": "Tournaments",
         "width": 3,
         "file": "tournaments.html",
-        "headerColor": "#9f9bbd",
+        "headerColor": "#525F78",
         "workspace": "Full page"
       },
       {
@@ -46,7 +46,15 @@
         "title": "Backgrounds",
         "width": 3,
         "file": "backgrounds.html",
-        "headerColor": "#9f9bbd",
+        "headerColor": "#525F78",
+        "workspace": "Full page"
+      },
+      {
+        "name": "Transition",
+        "title": "Transition",
+        "width": 6,
+        "file": "transition.html",
+        "headerColor": "#525F78",
         "workspace": "Full page"
       },
       {
@@ -54,7 +62,7 @@
         "title": "OBS",
         "width": 3,
         "file": "obs.html",
-        "headerColor": "#9f9bbd",
+        "headerColor": "#525F78",
         "workspace": "EXTERNAL"
       }
     ],
@@ -111,6 +119,11 @@
       },
       {
         "file": "clip.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "transition.html",
         "width": 1920,
         "height": 1080
       }
