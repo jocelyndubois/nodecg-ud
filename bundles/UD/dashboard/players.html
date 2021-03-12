@@ -250,7 +250,7 @@
 				nodecg.sendMessage(
 					'updateUser-' + i,
 					{
-						player: eval('runnerId_' + i).value,
+						player: $( "#runnerId_" + i + " option:selected" ).text(),
 						PB : {
 							score: score,
 							time: time,
