@@ -1,3 +1,12 @@
+@font-face {
+	font-family: pixel;
+	src: url('../font/VT323-Regular.ttf');
+}
+
 .hidden {
 	display: none;
+}
+
+html, body {
+	font-family: pixel, monospace;
 }

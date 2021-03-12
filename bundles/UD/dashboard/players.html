@@ -232,17 +232,28 @@
 		};
 		submitButton.onclick = () => {
 			for (let i = 1; i <= 4; i++) {
+				let lightScore = parseInt(eval('runnerLightScore_' + i).innerHTML);
+				let darkScore = parseInt(eval('runnerDarkScore_' + i).innerHTML);
+				let lightTime = eval('runnerLightTime_' + i).innerHTML;
+				let darkTime = eval('runnerDarkTime_' + i).innerHTML;
+
+				let score = null;
+				let time = null;
+				if (lightScore > darkScore) {
+					score = lightScore;
+					time = lightTime;
+				} else {
+					score = darkScore;
+					time = darkTime;
+				}
+
 				nodecg.sendMessage(
 					'updateUser-' + i,
 					{
 						player: eval('runnerId_' + i).value,
-						light: {
-							score: eval('runnerLightScore_' + i).innerHTML,
-							time: eval('runnerLightTime_' + i).innerHTML,
-						},
-						dark: {
-							score: eval('runnerDarkScore_' + i).innerHTML,
-							time: eval('runnerDarkTime_' + i).innerHTML,
+						PB : {
+							score: score,
+							time: time,
 						}
 					}
 				);

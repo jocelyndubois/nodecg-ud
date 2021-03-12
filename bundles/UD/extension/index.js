@@ -3,6 +3,7 @@ const axios = require('axios');
 
 module.exports = nodecg => {
 	const obs = new OBSUtility(nodecg);
+	const graphUrl = 'https://www.ultimedecathlon.com/graphql';
 
 	nodecg.listenFor('loadRTMP', async query => {
 		try {
@@ -24,7 +25,7 @@ module.exports = nodecg => {
 			let results = {};
 
 			for (const [key, player] of Object.entries(query.players)) {
-				const apiResponse = await axios.get('https://www.ultimedecathlon.com/graphql', {
+				const apiResponse = await axios.get(graphUrl, {
 					params: {
 						query: 'query AllPBs {  userCardInformations(season: ' + query.season + ', username: "' + player + '", showEmptyPb: true) {    pbList {      game {        name        groupment      }      time      score    }  }}'
 					}
@@ -65,7 +66,7 @@ module.exports = nodecg => {
 		try {
 			let results = [];
 
-			const apiResponse = await axios.get('https://www.ultimedecathlon.com/graphql', {
+			const apiResponse = await axios.get(graphUrl, {
 				params: {
 					query: 'query AllRunners {  activeSeasonUsers(season: ' + query.season + ', paginator: {page: 1, nbPerPage: 1000}) {    totalPages    data {      id      username      alias    }  }}'
 				}
@@ -87,13 +88,13 @@ module.exports = nodecg => {
 			let results = [];
 
 			let groupment = 'grind';
-			if (9 === query) {
+			if (9 === parseInt(query)) {
 				groupment = 'light';
 			}
 
-			const apiResponse = await axios.get('https://www.ultimedecathlon.com/graphql', {
+			const apiResponse = await axios.get(graphUrl, {
 				params: {
-					query: 'query getGames {  activeSeasonGames (season: ' + query + ', groupment: "' + groupment + '") {    name  }}'
+					query: 'query getGames {  activeSeasonGames (season: ' + query + ', groupment: "' + groupment + '") {    name  }}',
 				}
 			});
 
@@ -113,16 +114,17 @@ module.exports = nodecg => {
 		try {
 			let gameResult = {};
 
-			let apiResponseLight = await axios.get('https://www.ultimedecathlon.com/graphql', {
+			let apiResponseLight = await axios.get(graphUrl, {
 				params: {
-					query: 'query slip {  activeSeasonGames(season: ' + query.season + ', groupment: ' + (query.season == 9 ? "light" : "grind") + ') {    id    name    category  minScore maxScore    bestTime    middleTime    fewestTime    groupment    twitchName    hexColor    pathInformation {      path      width    }  }}'
+					query: 'query gameInfos {  activeSeasonGames(season: ' + query.season + ', groupment: ' + (parseInt(query.season) === 9 ? "light" : "grind") + ') {    id    name    category  minScore maxScore    bestTime    middleTime    fewestTime    groupment    twitchName    hexColor    pathInformation {      path      width    }  }}'
 				}
 			});
+
 			gameResult = aggregateGameInfos(query, apiResponseLight.data.data.activeSeasonGames, gameResult);
 
-			let apiResponseDark = await axios.get('https://www.ultimedecathlon.com/graphql', {
+			let apiResponseDark = await axios.get(graphUrl, {
 				params: {
-					query: 'query slip {  activeSeasonGames(season: ' + query.season + ', groupment: ' + (query.season == 9 ? 'dark' : 'race') + ') {    id    name    category  minScore maxScore   bestTime    middleTime    fewestTime    groupment    twitchName    hexColor    pathInformation {      path      width    }  }}'
+					query: 'query gameInfos {  activeSeasonGames(season: ' + query.season + ', groupment: ' + (parseInt(query.season) === 9 ? 'dark' : 'race') + ') {    id    name    category  minScore maxScore   bestTime    middleTime    fewestTime    groupment    twitchName    hexColor    pathInformation {      path      width    }  }}'
 				}
 			});
 			gameResult = aggregateGameInfos(query, apiResponseDark.data.data.activeSeasonGames, gameResult);
@@ -139,7 +141,7 @@ module.exports = nodecg => {
 			let results = {};
 
 			for (const [key, player] of Object.entries(query.players)) {
-				const apiResponse = await axios.get('https://www.ultimedecathlon.com/graphql', {
+				const apiResponse = await axios.get(graphUrl, {
 					params: {
 						query: 'query AllPBs {  userCardInformations(season: ' + query.season + ', username: "' + player + '", showEmptyPb: true) {    pbList {      game {        name        groupment      }      time      score    }  }}'
 					}
@@ -154,7 +156,7 @@ module.exports = nodecg => {
 							};
 						}
 
-						if (!results[key].time || (PB.time && (PB.time < results[key].time))) {
+						if (!results[key].score || (PB.score && (PB.score < results[key].score))) {
 							results[key] = {
 								score: PB.score ? PB.score : 0,
 								time: PB.time

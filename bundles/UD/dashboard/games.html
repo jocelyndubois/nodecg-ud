@@ -87,7 +87,8 @@
 			<h4>Chrono</h4>
 			<a class="btn btn-light" id="startLight"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 26 26"><polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 19.3 13.04 9.33 6.69"/></svg></a>
 			<a class="btn btn-dark" id="startDark"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 26 26"><polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 19.3 13.04 9.33 6.69" fill="#FFFFFF"/></svg></a>
-			<a class="btn btn-danger" id="stop"><svg xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 100 100"><path d="M 10 10 H 90 V 90 H 10 L 10 10"/></svg></a>
+			<a class="btn btn-secondary" id="startBoth"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 26 26"><polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 19.3 13.04 9.33 6.69" fill="#FFFFFF"/></svg></a>
+			<a class="btn btn-danger" id="stop"><svg xmlns="http://www.w3.org/2000/svg" width="13px" height="13px" viewBox="0 0 100 100"><path d="M 10 10 H 90 V 90 H 10 L 10 10"/></svg></a>
 
 		</div>
 	</div>
@@ -106,6 +107,7 @@
 
 	const startLight = document.querySelector('#startLight');
 	const startDark = document.querySelector('#startDark');
+	const startBoth = document.querySelector('#startBoth');
 	const stop = document.querySelector('#stop');
 
 	const gameName = document.querySelector('#gameName');
@@ -144,10 +146,19 @@
 			nodecg.sendMessage(
 				'startTimer',
 				{
-					bestTime: gameMaxTimeLight.dataset.seconds,
-					middleTime: gameMidTimeLight.dataset.seconds,
-					minScore: gameMinScoreLight.value,
-					maxScore: gameMaxScoreLight.value,
+					category: 'light',
+					light : {
+						bestTime: gameMaxTimeLight.dataset.seconds,
+						middleTime: gameMidTimeLight.dataset.seconds,
+						minScore: gameMinScoreLight.value,
+						maxScore: gameMaxScoreLight.value,
+					},
+					dark: {
+						bestTime: gameMaxTimeDark.dataset.seconds,
+						middleTime: gameMidTimeDark.dataset.seconds,
+						minScore: gameMinScoreDark.value,
+						maxScore: gameMaxScoreDark.value,
+					}
 				}
 			);
 		};
@@ -155,10 +166,39 @@
 			nodecg.sendMessage(
 				'startTimer',
 				{
-					bestTime: gameMaxTimeDark.dataset.seconds,
-					middleTime: gameMidTimeDark.dataset.seconds,
-					minScore: gameMinScoreDark.value,
-					maxScore: gameMaxScoreDark.value,
+					category: 'dark',
+					light : {
+						bestTime: gameMaxTimeLight.dataset.seconds,
+						middleTime: gameMidTimeLight.dataset.seconds,
+						minScore: gameMinScoreLight.value,
+						maxScore: gameMaxScoreLight.value,
+					},
+					dark: {
+						bestTime: gameMaxTimeDark.dataset.seconds,
+						middleTime: gameMidTimeDark.dataset.seconds,
+						minScore: gameMinScoreDark.value,
+						maxScore: gameMaxScoreDark.value,
+					}
+				}
+			);
+		};
+		startBoth.onclick = () => {
+			nodecg.sendMessage(
+				'startTimer',
+				{
+					category: 'both',
+					light : {
+						bestTime: gameMaxTimeLight.dataset.seconds,
+						middleTime: gameMidTimeLight.dataset.seconds,
+						minScore: gameMinScoreLight.value,
+						maxScore: gameMaxScoreLight.value,
+					},
+					dark: {
+						bestTime: gameMaxTimeDark.dataset.seconds,
+						middleTime: gameMidTimeDark.dataset.seconds,
+						minScore: gameMinScoreDark.value,
+						maxScore: gameMaxScoreDark.value,
+					}
 				}
 			);
 		};

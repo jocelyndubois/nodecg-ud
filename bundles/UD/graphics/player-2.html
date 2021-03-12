@@ -10,7 +10,7 @@
 		<div id="player-2" class="player-banner">
 			<div id="runnerId_2" class="runner"></div>
 			<div class="Pbs">
-				<span id="lightPbScore">0</span> (<span id="lightPbTime">00:00:00</span>) / <span id="darkPbScore">0</span> (<span id="darkPbTime">00:00:00</span>)
+				<span id="pbScore">0</span> (<span id="pbTime">00:00:00</span>)
 			</div>
 		</div>
 	</div>
@@ -20,17 +20,13 @@
 	const cardIframe = document.querySelector('#cardIframe');
 	const playerDiv = document.querySelector('#player-2');
 	const runnerId_2 = document.querySelector('#runnerId_2');
-	const lightPbScore = document.querySelector('#lightPbScore');
-	const lightPbTime = document.querySelector('#lightPbTime');
-	const darkPbScore = document.querySelector('#darkPbScore');
-	const darkPbTime = document.querySelector('#darkPbTime');
+	const pbScore = document.querySelector('#pbScore');
+	const pbTime = document.querySelector('#pbTime');
 
 	nodecg.listenFor('updateUser-2', async infos => {
 		runnerId_2.innerText = infos.player.toUpperCase();
-		lightPbScore.innerText = infos.light.score;
-		lightPbTime.innerText = infos.light.time;
-		darkPbScore.innerText = infos.dark.score;
-		darkPbTime.innerText = infos.dark.time;
+		pbScore.innerText = infos.PB.score;
+		pbTime.innerText = infos.PB.time;
 		playerDiv.classList.remove('hidden');
 		cardIframe.classList.add('hidden');
 	})
