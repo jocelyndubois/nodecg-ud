@@ -14,7 +14,10 @@
 
 <body>
 <div class="container">
-	<video autoplay muted id="chronoVid">
+	<video autoplay muted class="hidden" id="chronoVid">
+		<source src="/assets/UD/ud-utils/chrono-start.webm" type="video/webm">
+	</video>
+	<video autoplay muted loop id="chronoVidLoop">
 		<source src="/assets/UD/ud-utils/chrono.webm" type="video/webm">
 	</video>
 	<div id="chronoInfos">
@@ -30,6 +33,7 @@
 	const scoreLightSpan = document.querySelector('#scoreLight');
 	const scoreDarkSpan = document.querySelector('#scoreDark');
 	const chronoVid = document.querySelector('#chronoVid');
+	const chronoVidLoop = document.querySelector('#chronoVidLoop');
 
 	// Convert time to a format of hours, minutes, seconds, and milliseconds
 	function timeToString(time) {
@@ -38,10 +42,6 @@
 
 		let diffInMin = (diffInHrs - hh) * 60;
 		let mm = Math.floor(diffInMin);
-		if (currentMinute !== mm) {
-			currentMinute = mm;
-			chronoVid.play();
-		}
 
 		let diffInSec = (diffInMin - mm) * 60;
 		let ss = Math.floor(diffInSec);
@@ -56,7 +56,6 @@
 	// Declare variables to use in our functions below
 	let startTime;
 	let elapsedTime = 0;
-	let currentMinute = 0;
 	let timerInterval;
 	const maxSeasonTimes = {
 		6: 500,
@@ -90,7 +89,6 @@
 		scoreLightSpan.innerHTML = "";
 		scoreDarkSpan.innerHTML = "";
 		elapsedTime = 0;
-		currentMinute = 0;
 	}
 
 	nodecg.listenFor('startTimer', async gameInfos => {
@@ -108,7 +106,18 @@
 		chrono.dataset.category = gameInfos.category;
 
 		start();
+
+		chronoVid.load();
+		chronoVidLoop.load();
+		chronoVidLoop.classList.add('hidden');
+		chronoVid.classList.remove('hidden');
+		chronoVid.play();
 	});
+
+	chronoVid.addEventListener('ended',function () {
+		chronoVidLoop.classList.remove('hidden');
+		chronoVid.classList.add('hidden');
+	}, false);
 
 	nodecg.listenFor('stopTimer', async query => {
 		reset();
