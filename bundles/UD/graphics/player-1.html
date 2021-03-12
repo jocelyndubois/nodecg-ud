@@ -6,6 +6,7 @@
 </head>
 <body>
 	<div class="container">
+		<iframe id="cardIframe" class="hidden" width="100%" height="100%" src="" frameborder="0"></iframe>
 		<div id="player-1" class="player-banner">
 			<div id="runnerId_1" class="runner"></div>
 			<div class="Pbs">
@@ -16,6 +17,8 @@
 </body>
 
 <script>
+	const cardIframe = document.querySelector('#cardIframe');
+	const playerDiv = document.querySelector('#player-1');
 	const runnerId_1 = document.querySelector('#runnerId_1');
 	const lightPbScore = document.querySelector('#lightPbScore');
 	const lightPbTime = document.querySelector('#lightPbTime');
@@ -28,6 +31,14 @@
 		lightPbTime.innerText = infos.light.time;
 		darkPbScore.innerText = infos.dark.score;
 		darkPbTime.innerText = infos.dark.time;
+		playerDiv.classList.remove('hidden');
+		cardIframe.classList.add('hidden');
+	})
+
+	nodecg.listenFor('showAllCards-1', async infos => {
+		cardIframe.src = 'https://www.ultimedecathlon.com/runners/' + infos.runner + '/card/s' + infos.season;
+		playerDiv.classList.add('hidden');
+		cardIframe.classList.remove('hidden');
 	})
 </script>
 </html>

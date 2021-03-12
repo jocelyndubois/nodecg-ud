@@ -10,7 +10,12 @@
 <body>
 	<table class="table table-striped">
 		<thead>
-			<th><a href="#" class="btn btn-sm btn-primary" id="submitButton">Send</a></th>
+			<th>
+				<div class="btn-group" role="group" aria-label="Basic example">
+					<a href="#" class="btn btn-sm btn-primary" id="submitButton">INFOS</a>
+					<a href="#" class="btn btn-sm btn-secondary" id="sendAllCards">CARDS</a>
+				</div>
+			</th>
 			<th>Runner 1</th>
 			<th>Runner 2</th>
 			<th>Runner 3</th>
@@ -156,6 +161,7 @@
 	const runnerDarkTime_4 = document.querySelector('#runnerDarkTime_4');
 
 	const submitButton = document.querySelector('#submitButton');
+	const sendAllCards = document.querySelector('#sendAllCards');
 	const fetchPbButton = document.querySelector('#fetchPbButton');
 
 	const updateCommentator = document.querySelector('#updateCommentator');
@@ -211,6 +217,18 @@
 				'hideCard',
 				false
 			);
+		};
+
+		sendAllCards.onclick = () => {
+			for (let i = 1; i <= 4; i++) {
+				nodecg.sendMessage(
+					'showAllCards-' + i,
+					{
+						runner: eval('runnerIdReplicant_' + i).value,
+						season: season.value,
+					}
+				);
+			}
 		};
 		submitButton.onclick = () => {
 			for (let i = 1; i <= 4; i++) {
