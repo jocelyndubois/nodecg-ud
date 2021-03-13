@@ -17,7 +17,7 @@
 	<video autoplay muted class="hidden" id="chronoVid">
 		<source src="/assets/UD/ud-utils/chrono-start.webm" type="video/webm">
 	</video>
-	<video autoplay muted loop id="chronoVidLoop">
+	<video autoplay muted loop class="hidden" id="chronoVidLoop">
 		<source src="/assets/UD/ud-utils/chrono.webm" type="video/webm">
 	</video>
 	<div id="chronoInfos">
@@ -89,6 +89,8 @@
 		scoreLightSpan.innerHTML = "";
 		scoreDarkSpan.innerHTML = "";
 		elapsedTime = 0;
+		chronoVidLoop.classList.add('hidden');
+		chronoVid.classList.add('hidden');
 	}
 
 	nodecg.listenFor('startTimer', async gameInfos => {
