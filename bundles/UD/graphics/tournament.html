@@ -14,7 +14,7 @@
 	const tournamentIframe = document.querySelector('#tournamentIframe');
 
 	nodecg.listenFor('showTournament', async id => {
-		tournamentIframe.src = 'https://www.ultimedecathlon.com/tournois/streaming/' + id;
+		tournamentIframe.src = 'https://www.ultimedecathlon.com/tournois/streaming/' + id + '?transparent=1';
 		tournamentIframe.classList.remove('hidden');
 	});
 	nodecg.listenFor('hideTournament', async () => {

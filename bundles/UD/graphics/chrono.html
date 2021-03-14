@@ -91,6 +91,8 @@
 		elapsedTime = 0;
 		chronoVidLoop.classList.add('hidden');
 		chronoVid.classList.add('hidden');
+		chronoVidLoop.pause();
+		chronoVid.pause();
 	}
 
 	nodecg.listenFor('startTimer', async gameInfos => {
