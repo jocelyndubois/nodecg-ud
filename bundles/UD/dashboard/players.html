@@ -85,19 +85,15 @@
 			<td>&nbsp;</td>
 			<td>
 				<button class="btn btn-sm btn-success loadRtmp" data-player="1" id="loadRtmp_1">RTMP</button>
-				<button class="btn btn-sm btn-primary" id="showCard_1">Card</button>
 			</td>
 			<td>
 				<button class="btn btn-sm btn-success loadRtmp" data-player="2" id="loadRtmp_2">RTMP</button>
-				<button class="btn btn-sm btn-primary" id="showCard_2">Card</button>
 			</td>
 			<td>
 				<button class="btn btn-sm btn-success loadRtmp" data-player="3" id="loadRtmp_3">RTMP</button>
-				<button class="btn btn-sm btn-primary" id="showCard_3">Card</button>
 			</td>
 			<td>
 				<button class="btn btn-sm btn-success loadRtmp" data-player="4" id="loadRtmp_4">RTMP</button>
-				<button class="btn btn-sm btn-primary" id="showCard_4">Card</button>
 			</td>
 		</tr>
 		</tbody>
@@ -129,10 +125,6 @@
 	const runnerId_3 = document.querySelector('#runnerId_3');
 	const runnerId_4 = document.querySelector('#runnerId_4');
 
-	const showCard_1 = document.querySelector('#showCard_1');
-	const showCard_2 = document.querySelector('#showCard_2');
-	const showCard_3 = document.querySelector('#showCard_3');
-	const showCard_4 = document.querySelector('#showCard_4');
 	const hideCardsButton = document.querySelector('#hideCardsButton');
 
 	const loadRtmp_1 = document.querySelector('#loadRtmp_1');
@@ -197,16 +189,6 @@
 					{
 						id: i,
 						runner: eval('runnerIdReplicant_' + i).value,
-					}
-				);
-			};
-
-			eval('showCard_' + i).onclick = () => {
-				nodecg.sendMessage(
-					'showCard',
-					{
-						runner: eval('runnerIdReplicant_' + i).value,
-						season: season.value,
 					}
 				);
 			};

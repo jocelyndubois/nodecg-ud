@@ -27,7 +27,7 @@
 		</div>
 		<div class="col-md-6">
 			<label for="topRight" class="form-label">TOP RIGHT</label>
-			<input type="text" class="form-control" id="topRight" value="épreuve 01/10"/>
+			<input type="text" class="form-control" id="topRight" value="epreuve 01/10"/>
 		</div>
 		<div class="col-md-12">
 			<table class="table table-striped">
@@ -117,6 +117,11 @@
 		4: '',
 	}
 	for (let i = 1; i <= 4; i++) {
+		eval('runnerIdReplicant_' + i).on('change', (pseudo) => {
+			eval('runnerId_' + i).value = pseudo;
+			eval('runnerId_' + i).onchange();
+		});
+
 		eval('runnerId_' + i).onchange = () => {
 			selectedRunnerNames[i] = $( "#runnerId_" + i + " option:selected" ).text();
 			fetchPBAggregatedList();

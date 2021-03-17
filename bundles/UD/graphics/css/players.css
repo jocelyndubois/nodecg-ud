@@ -36,22 +36,22 @@ html,body {
 
 .runner {
 	position: relative;
-	font-size: 3em;
+	font-size: 3.5em;
 	left: 15px;
-	top: 0px;
+	top: 0;
 }
 
 .Pbs {
 	position: relative;
 	top: -56px;
 	float: right;
-	font-size: 3em;
+	font-size: 3.5em;
 }
 
 #cardIframe {
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	opacity: 1;
 	transition: opacity 0.5s;
 }

@@ -6,6 +6,7 @@ html,body {
 	overflow: hidden;
 	height: 100%;
 	color: white;
+	word-spacing: 1em;
 }
 
 #header {
@@ -17,9 +18,9 @@ html,body {
 
 #topLeft {
 	position: relative;
-	font-size: 3em;
+	font-size: 3.5em;
 	left: 15px;
-	top: 0px;
+	top: 0;
 }
 
 #topRight {
@@ -29,17 +30,17 @@ html,body {
 	position: relative;
 	top: -56px;
 	float: right;
-	font-size: 3em;
+	font-size: 3.5em;
 	margin: 0 auto;
 	text-align: center;
 }
 
 #nextGameBand {
 	position: absolute;
-	font-size: 3em;
+	font-size: 3.5em;
 	width: 100%;
 	top: 150px;
-	left: 0px;
+	left: 0;
 	height: 60px;
 	background-color: #4C4C4C;
 	margin: 0 auto;
@@ -50,7 +51,7 @@ html,body {
 	position: absolute;
 	width: 100%;
 	top: 210px;
-	left: 0px;
+	left: 0;
 	height: 350px;
 	background-color: lightblue;
 	margin: 0 auto;
@@ -63,10 +64,10 @@ html,body {
 
 #bestTime {
 	position: absolute;
-	font-size: 3em;
+	font-size: 3.5em;
 	width: 100%;
 	top: 560px;
-	left: 0px;
+	left: 0;
 	height: 60px;
 	background-color: #4A6F7F;
 	margin: 0 auto;
@@ -79,7 +80,7 @@ html,body {
 }
 
 #player-1 {
-	left: 0px;
+	left: 0;
 	position: absolute;
 	top: 800px;
 }
@@ -104,7 +105,7 @@ html,body {
 
 .player-name {
 	height: 67px;
-	font-size: 3em;
+	font-size: 3.5em;
 	border: 1px solid white;
 	margin: 0 auto;
 	text-align: center;
@@ -130,7 +131,7 @@ html,body {
 	height: 67px;
 	background-color: #1F505C;
 	border: 1px solid white;
-	font-size: 3em;
+	font-size: 3.5em;
 	margin: 0 auto;
 	text-align: center;
 }
@@ -139,7 +140,7 @@ html,body {
 	height: 67px;
 	background-color: #182023;
 	border: 1px solid white;
-	font-size: 3em;
+	font-size: 3.5em;
 	margin: 0 auto;
 	text-align: center;
 }
