@@ -4,41 +4,48 @@
 	<link rel="stylesheet" href="css/global.css">
 	<link rel="stylesheet" href="css/background.css">
 	<link rel="stylesheet" href="css/transition.css">
+<!--	<link rel="stylesheet" href="css/fonts/UD7.css">-->
+<!--	<link rel="stylesheet" href="css/fonts/UD9.css">-->
 
 	<script type="text/javascript" src="js/replicants.js"></script>
 	<script type="text/javascript" src="js/utils.js"></script>
 </head>
 <body>
 <div class="container hidden">
+	<img src="img/transition/overlay.png" id="overlay">
 	<div id="header">
 		<div id="topLeft">TOURNOIS XXX</div>
-		<div id="topRight">EPREUVE XX/XX</div>
+		<div id="topRight">Jeux n° XX/XX</div>
 	</div>
 
-	<div id="nextGameBand">JEU SUIVANT</div>
+	<video autoplay loop muted id="bgvid">
+		<source id="sourceVid" src="#" type="video/mp4">
+	</video>
+	<div id="nextGameBand">SUPER SLIP</div>
 	<div id="nextGameLogo">
 		<img src="#" alt="" id="nextGame"/>
 	</div>
-	<div id="bestTime">MEILLEUR TEMPS AU CHAMPIONNAT</div>
-	<div class="players" id="player-1">
-		<div class="player-name" id="player-name-1"></div>
-		<div class="player-time" id="player-time-1"></div>
-		<div class="player-score" id="player-score-1"></div>
-	</div>
-	<div class="players" id="player-2">
-		<div class="player-name" id="player-name-2"></div>
-		<div class="player-time" id="player-time-2"></div>
-		<div class="player-score" id="player-score-2"></div>
-	</div>
-	<div class="players" id="player-3">
-		<div class="player-name" id="player-name-3"></div>
-		<div class="player-time" id="player-time-3"></div>
-		<div class="player-score" id="player-score-3"></div>
-	</div>
-	<div class="players" id="player-4">
-		<div class="player-name" id="player-name-4"></div>
-		<div class="player-time" id="player-time-4"></div>
-		<div class="player-score" id="player-score-4"></div>
+	<div id="players">
+		<div class="players" id="player-1">
+			<div class="player-name" id="player-name-1"></div>
+			<div class="player-time" id="player-time-1"></div>
+			<div class="player-score"><span id="player-score-1"></span> Points</div>
+		</div>
+		<div class="players" id="player-2">
+			<div class="player-name" id="player-name-2"></div>
+			<div class="player-time" id="player-time-2"></div>
+			<div class="player-score"><span id="player-score-2"></span> Points</div>
+		</div>
+		<div class="players" id="player-3">
+			<div class="player-name" id="player-name-3"></div>
+			<div class="player-time" id="player-time-3"></div>
+			<div class="player-score"><span id="player-score-3"></span> Points</div>
+		</div>
+		<div class="players" id="player-4">
+			<div class="player-name" id="player-name-4"></div>
+			<div class="player-time" id="player-time-4"></div>
+			<div class="player-score"><span id="player-score-4"></span> Points</div>
+		</div>
 	</div>
 </div>
 </body>
@@ -48,6 +55,9 @@
 	const topLeft = document.querySelector('#topLeft');
 	const topRight = document.querySelector('#topRight');
 	const nextGame = document.querySelector('#nextGame');
+	const nextGameBand = document.querySelector('#nextGameBand');
+	const bgvid = document.querySelector('#bgvid');
+	const sourceVid = document.querySelector('#sourceVid');
 
 	const player_name_1 = document.querySelector('#player-name-1');
 	const player_name_2 = document.querySelector('#player-name-2');
@@ -65,12 +75,20 @@
 	const player_score_4 = document.querySelector('#player-score-4');
 
 	nodecg.listenFor('showTransition', infos => {
-		document.body.style.backgroundImage = "url('" + infos.background + "')";
+		sourceVid.src = infos.background;
+		bgvid.load();
+		bgvid.play();
 
-		topLeft.innerHTML = infos.topLeft.toUpperCase();
-		topRight.innerHTML = infos.topRight.toUpperCase();
+		document.body.style.backgroundImage = "url('img/background.png')";
+
+
+		topLeft.innerHTML = infos.topLeft;
+		topRight.innerHTML = infos.topRight;
 		nextGame.src = 'img/games/UD' + season.value + '/' + string_to_slug(infos.game) + '.png'
 		nextGame.alt = infos.game;
+		nextGameBand.innerHTML = infos.game;
+		nextGameBand.removeAttribute('class');
+		nextGameBand.classList.add(string_to_slug(infos.game));
 
 		for (let i = 1; i <= 4; i++) {
 			eval('player_name_' + i).innerHTML = infos.players[i].name;

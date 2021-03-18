@@ -1,0 +1,89 @@
+@font-face {
+	font-family: kirbys-dream-land;
+	src: url('../../font/games/UD7/kirbys-dream-land.ttf');
+}
+
+.kirbys-dream-land {
+	font-family: kirbys-dream-land, monospace;
+}
+
+@font-face {
+	font-family: lawn-mower;
+	src: url('../../font/games/UD7/lawn-mower.ttf');
+}
+
+.lawn-mower {
+	font-family: lawn-mower, monospace;
+}
+
+@font-face {
+	font-family: megaman-1-6;
+	src: url('../../font/games/UD7/megaman-1-6.ttf');
+}
+
+.megaman-1-6 {
+	font-family: megaman-1-6, monospace;
+}
+
+@font-face {
+	font-family: minit;
+	src: url('../../font/games/UD7/minit.otf');
+}
+
+.minit {
+	font-family: minit, monospace;
+}
+
+@font-face {
+	font-family: neo-turf-masters;
+	src: url('../../font/games/UD7/neo-turf-masters.ttf');
+}
+
+.neo-turf-masters {
+	font-family: neo-turf-masters, monospace;
+}
+
+@font-face {
+	font-family: out-there-somewhere;
+	src: url('../../font/games/UD7/out-there-somewhere.otf');
+}
+
+.out-there-somewhere {
+	font-family: out-there-somewhere, monospace;
+}
+
+@font-face {
+	font-family: the-messenger;
+	src: url('../../font/games/UD7/the-messenger.ttf');
+}
+
+.the-messenger {
+	font-family: the-messenger, monospace;
+}
+
+@font-face {
+	font-family: trackmania-stadium;
+	src: url('../../font/games/UD7/trackmania-stadium.TTF');
+}
+
+.trackmania-stadium {
+	font-family: trackmania-stadium, monospace;
+}
+
+@font-face {
+	font-family: vvvvvv;
+	src: url('../../font/games/UD7/vvvvvv.otf');
+}
+
+.vvvvvv {
+	font-family: vvvvvv, monospace;
+}
+
+@font-face {
+	font-family: wrack;
+	src: url('../../font/games/UD7/wrack.ttf');
+}
+
+.wrack {
+	font-family: wrack, monospace;
+}

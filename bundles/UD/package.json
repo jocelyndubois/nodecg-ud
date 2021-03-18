@@ -100,7 +100,7 @@
       {
         "file": "commentators.html",
         "width": 1920,
-        "height": 1080
+        "height": 80
       },
       {
         "file": "background.html",
@@ -170,10 +170,11 @@
         ]
       },
       {
-        "name": "ud-utils",
-        "title": "UD Utils",
+        "name": "back-clips",
+        "title": "BACK Clips",
         "allowedTypes": [
-          "webm"
+          "webm",
+          "mp4"
         ]
       }
     ]

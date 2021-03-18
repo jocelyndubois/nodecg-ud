@@ -2,6 +2,7 @@ html,body {
 	height:100%;
 	background-color: transparent;
 	overflow: hidden;
+	color: white;
 }
 .container {
 	overflow: hidden;
@@ -14,7 +15,7 @@ html,body {
 	position: fixed; left: 0; top: 0;
 }
 
-#player-1 {
+/*#player-1 {
 	background-color: #FF0000;
 	color: white;
 }
@@ -32,7 +33,7 @@ html,body {
 #player-4 {
 	background-color: #8B09AB;
 	color: white;
-}
+}*/
 
 .runner {
 	position: relative;

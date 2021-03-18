@@ -8,7 +8,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="js/replicants.js"></script>
 	<script type="text/javascript" src="js/utils.js"></script>
-	<script type="text/javascript" src="js/backgrounds.js"></script>
+	<script type="text/javascript" src="js/background-clips.js"></script>
 </head>
 <body>
 <div class="container">
@@ -18,8 +18,8 @@
 			<select class="form-control form-select form-select-sm" name="gameSelect" id="gameSelect"></select>
 		</div>
 		<div class="col-md-6">
-			<label for="backgroundSelect" class="form-label">BACKGROUND</label>
-			<select class="name-select form-control form-select form-select-sm" name="backgroundSelect" id="backgroundSelect"></select>
+			<label for="backgroundClipsSelect" class="form-label">BACKGROUND</label>
+			<select class="name-select form-control form-select form-select-sm" name="backgroundClipsSelect" id="backgroundClipsSelect"></select>
 		</div>
 		<div class="col-6">
 			<label for="topLeft" class="form-label">TOP LEFT</label>
@@ -27,7 +27,7 @@
 		</div>
 		<div class="col-md-6">
 			<label for="topRight" class="form-label">TOP RIGHT</label>
-			<input type="text" class="form-control" id="topRight" value="epreuve 01/10"/>
+			<input type="text" class="form-control" id="topRight" value="Jeux n° 01/10"/>
 		</div>
 		<div class="col-md-12">
 			<table class="table table-striped">
@@ -81,13 +81,15 @@
 		</div>
 	</div>
 	<h4>Preview :</h4>
-	<img id="demoBackground" src="#" width="256" height="144"/>
+	<video autoplay loop muted id="demoBackground"  width="256" height="144">
+		<source id="sourceVid" src="#" type="video/mp4">
+	</video>
 </div>
 </body>
 
 <script>
 	const gameSelect = document.querySelector('#gameSelect');
-	const backgroundSelect = document.querySelector('#backgroundSelect');
+	const backgroundClipsSelect = document.querySelector('#backgroundClipsSelect');
 
 	const topLeft = document.querySelector('#topLeft');
 	const topRight = document.querySelector('#topRight');
@@ -136,7 +138,7 @@
 				topLeft: topLeft.value,
 				topRight: topRight.value,
 				game: gameSelect.value,
-				background: backgroundSelect.value,
+				background: backgroundClipsSelect.value,
 				players: {
 					1: {
 						name: selectedRunnerNames[1],
@@ -193,8 +195,8 @@
 
 		gameSelect.onchange();
 	});
-	backgroundSelect.onchange = () => {
-		demoBackground.src = backgroundSelect.value;
+	backgroundClipsSelect.onchange = () => {
+		demoBackground.src = backgroundClipsSelect.value;
 	}
 	runnerListReplicant.on('change', (runners) => {
 		if (!runners) {

@@ -34,6 +34,8 @@ const runnerListReplicant = nodecg.Replicant('runnerList');
 const backgrounds = nodecg.Replicant('assets:background');
 const background = nodecg.Replicant('background');
 
+const backgroundClips = nodecg.Replicant('assets:back-clips');
+
 const clips = nodecg.Replicant('assets:clips');
 const clip = nodecg.Replicant('clip');
 

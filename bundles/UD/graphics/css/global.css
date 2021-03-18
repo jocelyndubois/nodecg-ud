@@ -3,6 +3,12 @@
 	src: url('../font/ARCADECLASSIC.TTF');
 }
 
+@font-face {
+	font-family: roboto;
+	src: url('../font/RobotoSlab.ttf');
+}
+
+
 .hidden {
 	display: none;
 }

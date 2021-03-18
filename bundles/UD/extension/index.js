@@ -31,28 +31,30 @@ module.exports = nodecg => {
 					}
 				});
 
-				apiResponse.data.data.userCardInformations.pbList.forEach(function(PB){
-					if (query.game == PB.game.name) {
-						if (!results[key]) {
-							results[key] = {};
-						}
-
-
-						if ('grind' == PB.game.groupment || 'light' == PB.game.groupment) {
-							results[key].light = {
-								score: PB.score ? PB.score : 0,
-								time: PB.time
+				if (apiResponse.data.data.userCardInformations.pbList) {
+					apiResponse.data.data.userCardInformations.pbList.forEach(function(PB){
+						if (query.game == PB.game.name) {
+							if (!results[key]) {
+								results[key] = {};
 							}
-						} else if ('race' == PB.game.groupment || 'dark' == PB.game.groupment) {
-							results[key].dark = {
-								score: PB.score ? PB.score : 0,
-								time: PB.time
+
+
+							if ('grind' == PB.game.groupment || 'light' == PB.game.groupment) {
+								results[key].light = {
+									score: PB.score ? PB.score : 0,
+									time: PB.time
+								}
+							} else if ('race' == PB.game.groupment || 'dark' == PB.game.groupment) {
+								results[key].dark = {
+									score: PB.score ? PB.score : 0,
+									time: PB.time
+								}
 							}
+
+
 						}
-
-
-					}
-				})
+					})
+				}
 			}
 
 			fetchPbListReplicant.value = results;
@@ -72,9 +74,11 @@ module.exports = nodecg => {
 				}
 			});
 
-			apiResponse.data.data.activeSeasonUsers.data.forEach(function(runner){
-				results.push(runner);
-			})
+			if (apiResponse.data.data.activeSeasonUsers.data) {
+				apiResponse.data.data.activeSeasonUsers.data.forEach(function(runner){
+					results.push(runner);
+				})
+			}
 
 			runnerListReplicant.value = results;
 		} catch (error) {
@@ -98,9 +102,11 @@ module.exports = nodecg => {
 				}
 			});
 
-			apiResponse.data.data.activeSeasonGames.forEach(function(game){
-				results.push(game.name);
-			})
+			if (sponse.data.data.activeSeasonGames) {
+				apiResponse.data.data.activeSeasonGames.forEach(function(game){
+					results.push(game.name);
+				})
+			}
 
 			fetchGamesListReplicant.value = results;
 		} catch (error) {
@@ -147,23 +153,25 @@ module.exports = nodecg => {
 					}
 				});
 
-				apiResponse.data.data.userCardInformations.pbList.forEach(function(PB){
-					if (query.game === PB.game.name) {
-						if (!results[key]) {
-							results[key] = {
-								score: null,
-								time: null,
-							};
-						}
+				if (apiResponse.data.data.userCardInformations.pbList) {
+					apiResponse.data.data.userCardInformations.pbList.forEach(function(PB){
+						if (query.game === PB.game.name) {
+							if (!results[key]) {
+								results[key] = {
+									score: null,
+									time: null,
+								};
+							}
 
-						if (!results[key].score || (PB.score && (PB.score < results[key].score))) {
-							results[key] = {
-								score: PB.score ? PB.score : 0,
-								time: PB.time
+							if (!results[key].score || (PB.score && (PB.score < results[key].score))) {
+								results[key] = {
+									score: PB.score ? PB.score : 0,
+									time: PB.time
+								}
 							}
 						}
-					}
-				})
+					})
+				}
 			}
 
 			fetchPbAggregatedListReplicant.value = results;
@@ -173,36 +181,38 @@ module.exports = nodecg => {
 	});
 
 	function aggregateGameInfos(query, games, gameResult) {
-		games.forEach(function(game){
-			if (query.game === game.name) {
-				gameResult.name = game.name;
-				gameResult.hexColor = game.hexColor;
-				gameResult.pathInformation = {
-					path: game.pathInformation.path,
-					width: game.pathInformation.width
-				};
+		if (games) {
+			games.forEach(function(game){
+				if (query.game === game.name) {
+					gameResult.name = game.name;
+					gameResult.hexColor = game.hexColor;
+					gameResult.pathInformation = {
+						path: game.pathInformation.path,
+						width: game.pathInformation.width
+					};
 
-				if ('light' === game.groupment || 'grind' === game.groupment) {
-					gameResult.light = {
-						category: game.category,
-						bestTime: game.bestTime,
-						middleTime: game.middleTime,
-						fewestTime: game.fewestTime,
-						minScore: game.minScore,
-						maxScore: game.maxScore,
-					}
-				} else {
-					gameResult.dark = {
-						category: game.category,
-						bestTime: game.bestTime,
-						middleTime: game.middleTime,
-						fewestTime: game.fewestTime,
-						minScore: game.minScore,
-						maxScore: game.maxScore,
+					if ('light' === game.groupment || 'grind' === game.groupment) {
+						gameResult.light = {
+							category: game.category,
+							bestTime: game.bestTime,
+							middleTime: game.middleTime,
+							fewestTime: game.fewestTime,
+							minScore: game.minScore,
+							maxScore: game.maxScore,
+						}
+					} else {
+						gameResult.dark = {
+							category: game.category,
+							bestTime: game.bestTime,
+							middleTime: game.middleTime,
+							fewestTime: game.fewestTime,
+							minScore: game.minScore,
+							maxScore: game.maxScore,
+						}
 					}
 				}
-			}
-		})
+			})
+		}
 
 		return gameResult;
 	}
