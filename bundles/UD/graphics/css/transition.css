@@ -111,6 +111,7 @@ html,body {
 	left: 0;
 	height: 346px;
 	background-image: url("../img/background.png");
+	background-repeat: no-repeat;
 	z-index: 0;
 }
 

@@ -6,9 +6,10 @@
 </head>
 <body>
 	<div class="container">
+		<img src="img/cadres/UD9_rouge.png" class="cadreImg">
 		<div id="player-1" class="player-banner">
 			<div id="runnerId_1" class="runner"></div>
-			<div class="Pbs">
+			<div id="PBDiv" class="Pbs hidden">
 				<span id="pbScore">0</span> (<span id="pbTime">00:00:00</span>)
 			</div>
 		</div>
@@ -20,12 +21,14 @@
 	const runnerId_1 = document.querySelector('#runnerId_1');
 	const pbScore = document.querySelector('#pbScore');
 	const pbTime = document.querySelector('#pbTime');
+	const PBDiv = document.querySelector('#PBDiv');
 
 	nodecg.listenFor('updateUser-1', async infos => {
 		runnerId_1.innerText = infos.player.toUpperCase();
 		pbScore.innerText = infos.PB.score;
 		pbTime.innerText = infos.PB.time;
 		playerDiv.classList.remove('hidden');
+		PBDiv.classList.remove('hidden');
 	})
 </script>
 </html>

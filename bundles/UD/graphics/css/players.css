@@ -7,46 +7,39 @@ html,body {
 .container {
 	overflow: hidden;
 	height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
 }
 
 .player-banner {
-	height: 60px;
 	width: 100%;
-	position: fixed; left: 0; top: 0;
+	height: 60px;
+	display: flex;
+	position: fixed;
+	left: 0;
+	top: 7px;
 }
 
-/*#player-1 {
-	background-color: #FF0000;
-	color: white;
-}
-
-#player-2 {
-	background-color: #18B0C2;
-	color: white;
-}
-
-#player-3 {
-	background-color: #09AB19;
-	color: white;
-}
-
-#player-4 {
-	background-color: #8B09AB;
-	color: white;
-}*/
-
-.runner {
-	position: relative;
+.player-banner>div {
+	flex: 1;
+	height: 100%;
+	width: 50%;
 	font-size: 3.5em;
+	line-height: 60px;
 	left: 15px;
 	top: 0;
 }
 
+.runner {
+	margin-left: 120px;
+	text-align: left;
+}
+
 .Pbs {
-	position: relative;
-	top: -56px;
-	float: right;
-	font-size: 3.5em;
+	margin-right: 120px;
+	text-align: right;
 }
 
 #cardIframe {
