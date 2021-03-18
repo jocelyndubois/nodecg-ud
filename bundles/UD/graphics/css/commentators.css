@@ -3,6 +3,7 @@ html,body {
 	width: 1920px;
 	background-color: transparent;
 	overflow: hidden;
+	font-family: roboto, monospace;
 }
 .container {
 	height: 100%;
