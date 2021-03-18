@@ -18,9 +18,11 @@
 		<div id="topRight">Jeux n° XX/XX</div>
 	</div>
 
-	<video autoplay loop muted id="bgvid">
-		<source id="sourceVid" src="#" type="video/mp4">
-	</video>
+	<div id="videoBackGround">
+		<video autoplay loop muted id="bgvid">
+			<source id="sourceVid" src="#" type="video/mp4">
+		</video>
+	</div>
 	<div id="nextGameBand">SUPER SLIP</div>
 	<div id="nextGameLogo">
 		<div id="nextGameTitle">
@@ -28,6 +30,7 @@
 		</div>
 		<img src="#" alt="" id="nextGame"/>
 	</div>
+	<div id="background"></div>
 	<div id="players">
 		<div class="players" id="player-1">
 			<div class="player-name" id="player-name-1"></div>
@@ -79,10 +82,12 @@
 
 	nodecg.listenFor('showTransition', infos => {
 		sourceVid.src = infos.background;
+		bgvid.style.filter = 'opacity(' + infos.vidOpacity + ')'
+		bgvid.style.top = infos.vidTop + 'px';
 		bgvid.load();
 		bgvid.play();
 
-		document.body.style.backgroundImage = "url('img/background.png')";
+		// document.body.style.backgroundImage = "url('img/background.png')";
 
 
 		topLeft.innerHTML = infos.topLeft;

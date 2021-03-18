@@ -1,0 +1,8 @@
+#videoBlockDemo {
+	width: 256px;
+	height: 74px;
+	position: absolute;
+	bottom: 5px;
+	border: 1px solid red;
+	z-index: 999;
+}

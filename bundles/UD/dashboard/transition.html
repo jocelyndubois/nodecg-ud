@@ -3,7 +3,7 @@
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/global.css">
-	<link rel="stylesheet" href="css/games.css">
+	<link rel="stylesheet" href="css/transition.css">
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="js/replicants.js"></script>
@@ -80,10 +80,22 @@
 			<a class="btn btn-danger" id="hideButton">Hide</a>
 		</div>
 	</div>
-	<h4>Preview :</h4>
-	<video autoplay loop muted id="demoBackground"  width="256" height="144">
-		<source id="sourceVid" src="#" type="video/mp4">
-	</video>
+	<div class="row">
+		<div class="col">
+			<h4>Preview :</h4>
+			<div id="videoBlockDemo"></div>
+			<video autoplay loop muted id="demoBackground"  width="256" height="144">
+				<source id="sourceVid" src="#" type="video/mp4">
+			</video>
+		</div>
+		<div class="col">
+			<label for="vidOpacity" class="form-label">Opacity (0 to 1)</label>
+			<input type="number" min="0" max="1" step="0.1" class="form-control" id="vidOpacity" value="1"/>
+			<label for="vidTop" class="form-label">Move (0 to 565)</label>
+			<input type="number" min="0" max="565" step="1" class="form-control" id="vidTop" value="0"/>
+		</div>
+	</div>
+
 </div>
 </body>
 
@@ -112,6 +124,10 @@
 	const showButton = document.querySelector('#showButton');
 	const hideButton = document.querySelector('#hideButton');
 
+	const vidOpacity = document.querySelector('#vidOpacity');
+	const vidTop = document.querySelector('#vidTop');
+	const videoBlockDemo = document.querySelector('#videoBlockDemo');
+
 	let selectedRunnerNames = {
 		1: '',
 		2: '',
@@ -139,6 +155,8 @@
 				topRight: topRight.value,
 				game: gameSelect.value,
 				background: backgroundClipsSelect.value,
+				vidOpacity: vidOpacity.value,
+				vidTop: parseInt(vidTop.value) + 5,
 				players: {
 					1: {
 						name: selectedRunnerNames[1],
@@ -262,5 +280,15 @@
 			eval(runnerTime).innerHTML = new Date(infos.time * 1000).toISOString().substr(11, 8);
 		}
 	});
+
+	//[VIDEO]
+	vidOpacity.onchange = () => {
+		demoBackground.style.filter = 'opacity(' + vidOpacity.value + ')';
+	}
+
+	vidTop.onchange = () => {
+		let newTop = (parseInt(vidTop.value) / 7.5) + 5;
+		videoBlockDemo.style.bottom = newTop + 'px';
+	}
 </script>
 </html>
