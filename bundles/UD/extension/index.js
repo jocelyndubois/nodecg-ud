@@ -102,7 +102,7 @@ module.exports = nodecg => {
 				}
 			});
 
-			if (sponse.data.data.activeSeasonGames) {
+			if (apiResponse.data.data.activeSeasonGames) {
 				apiResponse.data.data.activeSeasonGames.forEach(function(game){
 					results.push(game.name);
 				})
@@ -181,38 +181,36 @@ module.exports = nodecg => {
 	});
 
 	function aggregateGameInfos(query, games, gameResult) {
-		if (games) {
-			games.forEach(function(game){
-				if (query.game === game.name) {
-					gameResult.name = game.name;
-					gameResult.hexColor = game.hexColor;
-					gameResult.pathInformation = {
-						path: game.pathInformation.path,
-						width: game.pathInformation.width
-					};
+		games.forEach(function(game){
+			if (query.game === game.name) {
+				gameResult.name = game.name;
+				gameResult.hexColor = game.hexColor;
+				gameResult.pathInformation = {
+					path: game.pathInformation.path,
+					width: game.pathInformation.width
+				};
 
-					if ('light' === game.groupment || 'grind' === game.groupment) {
-						gameResult.light = {
-							category: game.category,
-							bestTime: game.bestTime,
-							middleTime: game.middleTime,
-							fewestTime: game.fewestTime,
-							minScore: game.minScore,
-							maxScore: game.maxScore,
-						}
-					} else {
-						gameResult.dark = {
-							category: game.category,
-							bestTime: game.bestTime,
-							middleTime: game.middleTime,
-							fewestTime: game.fewestTime,
-							minScore: game.minScore,
-							maxScore: game.maxScore,
-						}
+				if ('light' === game.groupment || 'grind' === game.groupment) {
+					gameResult.light = {
+						category: game.category,
+						bestTime: game.bestTime,
+						middleTime: game.middleTime,
+						fewestTime: game.fewestTime,
+						minScore: game.minScore,
+						maxScore: game.maxScore,
+					}
+				} else {
+					gameResult.dark = {
+						category: game.category,
+						bestTime: game.bestTime,
+						middleTime: game.middleTime,
+						fewestTime: game.fewestTime,
+						minScore: game.minScore,
+						maxScore: game.maxScore,
 					}
 				}
-			})
-		}
+			}
+		})
 
 		return gameResult;
 	}
