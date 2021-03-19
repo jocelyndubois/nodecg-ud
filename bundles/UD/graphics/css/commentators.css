@@ -1,18 +1,27 @@
 html,body {
 	height: 80px;
 	width: 1920px;
+	/*background-color: grey;*/
 	background-color: transparent;
 	overflow: hidden;
 	font-family: roboto, monospace;
 }
 .container {
-	height: 100%;
+	height: 80px;
+	width: 100%;
 	color: white;
-
+	position: fixed;
+	top: 0;
+	left: 0;
 	margin: 0 auto;
 	text-align: center;
+	display: inline-block;
 }
 
 #commentators {
+	height: 100%;
 	font-size: 3em;
+	display: inline-block;
+	top: -9px;
+	position: relative;
 }
