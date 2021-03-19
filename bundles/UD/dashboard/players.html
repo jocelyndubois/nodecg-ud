@@ -321,7 +321,11 @@
 		})
 
 		//[COMMENTATORS]
+		commentatorsReplicant.on('change', (newValue) => {
+			commentators.value = newValue
+		})
 		updateCommentator.onclick = () => {
+			commentatorsReplicant.value = commentators.value;
 			nodecg.sendMessage(
 				'updateCommentators',
 				commentators.value

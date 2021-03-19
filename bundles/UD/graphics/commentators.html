@@ -3,6 +3,8 @@
 <head>
 	<link rel="stylesheet" href="css/global.css">
 	<link rel="stylesheet" href="css/commentators.css">
+
+	<script type="text/javascript" src="js/replicants.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -13,6 +15,10 @@
 
 <script>
 	const commentators = document.querySelector('#commentators');
+
+	commentatorsReplicant.on('change', (newValue) => {
+		commentators.innerHTML = newValue
+	})
 
 	nodecg.listenFor('updateCommentators', async names => {
 		commentators.innerHTML = names;

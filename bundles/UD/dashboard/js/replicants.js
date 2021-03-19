@@ -30,9 +30,10 @@ const fetchPbListReplicant = nodecg.Replicant('fetchPbList');
 const fetchPbAggregatedListReplicant = nodecg.Replicant('fetchPbAggregatedList');
 const runnerListReplicant = nodecg.Replicant('runnerList');
 
-
 const backgrounds = nodecg.Replicant('assets:background');
 const background = nodecg.Replicant('background');
+
+const commentatorsReplicant = nodecg.Replicant('commentatorsReplicant');
 
 const backgroundClips = nodecg.Replicant('assets:back-clips');
 
