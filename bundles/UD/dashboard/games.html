@@ -85,11 +85,24 @@
 		</div>
 		<div class="col">
 			<h4>Chrono</h4>
-			<a class="btn btn-light" id="startLight"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 26 26"><polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 19.3 13.04 9.33 6.69"/></svg></a>
-			<a class="btn btn-dark" id="startDark"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 26 26"><polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 19.3 13.04 9.33 6.69" fill="#FFFFFF"/></svg></a>
-			<a class="btn btn-secondary" id="startBoth"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 26 26"><polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 19.3 13.04 9.33 6.69" fill="#FFFFFF"/></svg></a>
-			<a class="btn btn-danger" id="stop"><svg xmlns="http://www.w3.org/2000/svg" width="13px" height="13px" viewBox="0 0 100 100"><path d="M 10 10 H 90 V 90 H 10 L 10 10"/></svg></a>
-
+			<table>
+				<tbody>
+				<tr>
+					<td class="centeredTd">Light</td>
+					<td class="centeredTd">Dark</td>
+					<td class="centeredTd">Both</td>
+					<td class="centeredTd">None</td>
+					<td class="centeredTd">Stop</td>
+				</tr>
+				<tr>
+					<td><a class="btn btn-light" id="startLight"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 26 26"><polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 19.3 13.04 9.33 6.69"/></svg></a></td>
+					<td><a class="btn btn-dark" id="startDark"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 26 26"><polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 19.3 13.04 9.33 6.69" fill="#FFFFFF"/></svg></a></td>
+					<td><a class="btn btn-secondary" id="startBoth"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 26 26"><polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 19.3 13.04 9.33 6.69" fill="#FFFFFF"/></svg></a></td>
+					<td><a class="btn btn-primary" id="startNone"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 26 26"><polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 19.3 13.04 9.33 6.69" fill="#FFFFFF"/></svg></a></td>
+					<td><a class="btn btn-danger" id="stop"><svg xmlns="http://www.w3.org/2000/svg" width="13px" height="13px" viewBox="0 0 100 100"><path d="M 10 10 H 90 V 90 H 10 L 10 10"/></svg></a></td>
+				</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 
@@ -108,6 +121,7 @@
 	const startLight = document.querySelector('#startLight');
 	const startDark = document.querySelector('#startDark');
 	const startBoth = document.querySelector('#startBoth');
+	const startNone = document.querySelector('#startNone');
 	const stop = document.querySelector('#stop');
 
 	const gameName = document.querySelector('#gameName');
@@ -198,6 +212,26 @@
 						middleTime: gameMidTimeDark.dataset.seconds,
 						minScore: gameMinScoreDark.value,
 						maxScore: gameMaxScoreDark.value,
+					}
+				}
+			);
+		};
+		startNone.onclick = () => {
+			nodecg.sendMessage(
+				'startTimer',
+				{
+					category: 'none',
+					light : {
+						bestTime: null,
+						middleTime: null,
+						minScore: null,
+						maxScore: null,
+					},
+					dark: {
+						bestTime: null,
+						middleTime: null,
+						minScore: null,
+						maxScore: null,
 					}
 				}
 			);

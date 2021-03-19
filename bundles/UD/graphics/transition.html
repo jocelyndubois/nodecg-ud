@@ -30,7 +30,7 @@
 		</div>
 		<img src="#" alt="" id="nextGame"/>
 	</div>
-	<div id="background"></div>
+	<div id="backgroundDiv"></div>
 	<div id="players">
 		<div class="players" id="player-1">
 			<div class="player-name" id="player-name-1"></div>
@@ -64,6 +64,7 @@
 	const nextGameBand = document.querySelector('#nextGameBand');
 	const bgvid = document.querySelector('#bgvid');
 	const sourceVid = document.querySelector('#sourceVid');
+	const backgroundDiv = document.querySelector('#backgroundDiv');
 
 	const player_name_1 = document.querySelector('#player-name-1');
 	const player_name_2 = document.querySelector('#player-name-2');
@@ -81,13 +82,13 @@
 	const player_score_4 = document.querySelector('#player-score-4');
 
 	nodecg.listenFor('showTransition', infos => {
-		sourceVid.src = infos.background;
+		sourceVid.src = infos.video;
 		bgvid.style.filter = 'opacity(' + infos.vidOpacity + ')'
 		bgvid.style.top = infos.vidTop + 'px';
 		bgvid.load();
 		bgvid.play();
 
-		// document.body.style.backgroundImage = "url('img/background.png')";
+		backgroundDiv.style.backgroundImage = 'url(\'' + infos.background + '\')';
 
 
 		topLeft.innerHTML = infos.topLeft;

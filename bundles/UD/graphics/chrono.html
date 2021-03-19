@@ -132,8 +132,13 @@
 		let categories = [];
 		if ('both' === chrono.dataset.category) {
 			categories = ['light', 'dark'];
+			chrono.style.top = '60px';
+		} else if ('none' === chrono.dataset.category) {
+			//Do nothing
+			chrono.style.top = '80px';
 		} else {
 			categories = [chrono.dataset.category];
+			chrono.style.top = '60px';
 		}
 		categories.forEach(function (category) {
 			let scoreSpan = getScoreSpan(category);

@@ -12,8 +12,8 @@
 		<thead>
 			<th>
 				<div class="btn-group" role="group" aria-label="Basic example">
-					<a href="#" class="btn btn-sm btn-primary" id="submitButton">INFOS</a>
-					<a href="#" class="btn btn-sm btn-secondary" id="sendAllCards">CARDS</a>
+					<a href="#" class="btn btn-sm btn-primary" id="submitButton">FULL</a>
+					<a href="#" class="btn btn-sm btn-secondary" id="submitButtonPseudo">PSEUDO</a>
 				</div>
 			</th>
 			<th>Runner 1</th>
@@ -102,6 +102,7 @@
 	<div class="row">
 		<div class="col">
 			<h4>Actions</h4>
+			<a href="#" class="btn btn-sm btn-primary" id="sendAllCards">CARDS</a>
 			<a href="#" class="btn btn-sm btn-danger" id="hideCardsButton">Hide cards</a>
 			<button class="btn btn-sm btn-primary" id="fetchPbButton">Update PBs</button>
 		</div>
@@ -153,6 +154,7 @@
 	const runnerDarkTime_4 = document.querySelector('#runnerDarkTime_4');
 
 	const submitButton = document.querySelector('#submitButton');
+	const submitButtonPseudo = document.querySelector('#submitButtonPseudo');
 	const sendAllCards = document.querySelector('#sendAllCards');
 	const fetchPbButton = document.querySelector('#fetchPbButton');
 
@@ -237,6 +239,23 @@
 							score: score,
 							time: time,
 						}
+					}
+				);
+
+				eval('runnerIdReplicant_' + i).value = eval('runnerId_' + i).value;
+				eval('runnerLightScoreReplicant_' + i).value = eval('runnerLightScore_' + i).value;
+				eval('runnerLightTimeReplicant_' + i).value = eval('runnerLightTime_' + i).value;
+				eval('runnerDarkScoreReplicant_' + i).value = eval('runnerDarkScore_' + i).value;
+				eval('runnerDarkTimeReplicant_' + i).value = eval('runnerDarkTime_' + i).value;
+			}
+		};
+
+		submitButtonPseudo.onclick = () => {
+			for (let i = 1; i <= 4; i++) {
+				nodecg.sendMessage(
+					'updateUserPseudo-' + i,
+					{
+						player: $( "#runnerId_" + i + " option:selected" ).text(),
 					}
 				);
 

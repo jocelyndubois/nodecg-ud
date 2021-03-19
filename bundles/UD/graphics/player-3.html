@@ -9,7 +9,7 @@
 		<img src="img/cadres/UD9_bleu.png" class="cadreImg">
 		<div id="player-3" class="player-banner">
 			<div id="runnerId_3" class="runner"></div>
-			<div class="Pbs">
+			<div id="PBDiv" class="Pbs hidden">
 				<span id="pbScore">0</span> (<span id="pbTime">00:00:00</span>)
 			</div>
 		</div>
@@ -21,13 +21,20 @@
 	const runnerId_3 = document.querySelector('#runnerId_3');
 	const pbScore = document.querySelector('#pbScore');
 	const pbTime = document.querySelector('#pbTime');
+	const PBDiv = document.querySelector('#PBDiv');
 
 	nodecg.listenFor('updateUser-3', async infos => {
 		runnerId_3.innerText = infos.player.toUpperCase();
 		pbScore.innerText = infos.PB.score;
 		pbTime.innerText = infos.PB.time;
 		playerDiv.classList.remove('hidden');
-		cardIframe.classList.add('hidden');
+		PBDiv.classList.remove('hidden');
+	})
+
+	nodecg.listenFor('updateUserPseudo-3', async infos => {
+		runnerId_3.innerText = infos.player.toUpperCase();
+		playerDiv.classList.remove('hidden');
+		PBDiv.classList.add('hidden');
 	})
 </script>
 </html>

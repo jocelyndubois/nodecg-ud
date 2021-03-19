@@ -104,13 +104,13 @@ html,body {
 
 
 /*Background*/
-#background {
+#backgroundDiv {
 	position: absolute;
 	width: 100%;
 	top: 521px;
 	left: 0;
 	height: 346px;
-	background-image: url("../img/background.png");
+	/*background-image: url("../img/background.png");*/
 	background-repeat: no-repeat;
 	z-index: 0;
 }

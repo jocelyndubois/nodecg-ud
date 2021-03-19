@@ -30,5 +30,11 @@
 		playerDiv.classList.remove('hidden');
 		PBDiv.classList.remove('hidden');
 	})
+
+	nodecg.listenFor('updateUserPseudo-1', async infos => {
+		runnerId_1.innerText = infos.player.toUpperCase();
+		playerDiv.classList.remove('hidden');
+		PBDiv.classList.add('hidden');
+	})
 </script>
 </html>

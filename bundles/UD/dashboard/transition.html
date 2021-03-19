@@ -8,6 +8,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="js/replicants.js"></script>
 	<script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript" src="js/backgrounds.js"></script>
 	<script type="text/javascript" src="js/background-clips.js"></script>
 </head>
 <body>
@@ -18,7 +19,14 @@
 			<select class="form-control form-select form-select-sm" name="gameSelect" id="gameSelect"></select>
 		</div>
 		<div class="col-md-6">
-			<label for="backgroundClipsSelect" class="form-label">BACKGROUND</label>
+			<img id="gamePicture" src="../graphics/img/games/UD7/kirbys-dream-land.png" height="100px">
+		</div>
+		<div class="col-md-6">
+			<label for="backgroundSelect" class="form-label">BACKGROUND</label>
+			<select class="name-select form-control form-select form-select-sm" name="backgroundSelect" id="backgroundSelect"></select>
+		</div>
+		<div class="col-md-6">
+			<label for="backgroundClipsSelect" class="form-label">VIDEO</label>
 			<select class="name-select form-control form-select form-select-sm" name="backgroundClipsSelect" id="backgroundClipsSelect"></select>
 		</div>
 		<div class="col-6">
@@ -79,10 +87,15 @@
 			<a class="btn btn-success" id="showButton">Show</a>
 			<a class="btn btn-danger" id="hideButton">Hide</a>
 		</div>
+		<div class="col">
+			<h4>Preview background :</h4>
+			<img src="#" id="demoBack" width="256" height="144">
+		</div>
 	</div>
+	</br>
 	<div class="row">
 		<div class="col">
-			<h4>Preview :</h4>
+			<h4>Preview video :</h4>
 			<div id="videoBlockDemo"></div>
 			<video autoplay loop muted id="demoBackground"  width="256" height="144">
 				<source id="sourceVid" src="#" type="video/mp4">
@@ -95,6 +108,7 @@
 			<input type="number" min="0" max="565" step="1" class="form-control" id="vidTop" value="0"/>
 		</div>
 	</div>
+	</br>
 
 </div>
 </body>
@@ -102,6 +116,10 @@
 <script>
 	const gameSelect = document.querySelector('#gameSelect');
 	const backgroundClipsSelect = document.querySelector('#backgroundClipsSelect');
+	const backgroundSelect = document.querySelector('#backgroundSelect');
+
+	const demoBackground = document.querySelector('#demoBackground');
+	const demoBack = document.querySelector('#demoBack');
 
 	const topLeft = document.querySelector('#topLeft');
 	const topRight = document.querySelector('#topRight');
@@ -127,6 +145,8 @@
 	const vidOpacity = document.querySelector('#vidOpacity');
 	const vidTop = document.querySelector('#vidTop');
 	const videoBlockDemo = document.querySelector('#videoBlockDemo');
+
+	const gamePicture = document.querySelector('#gamePicture');
 
 	let selectedRunnerNames = {
 		1: '',
@@ -154,7 +174,8 @@
 				topLeft: topLeft.value,
 				topRight: topRight.value,
 				game: gameSelect.value,
-				background: backgroundClipsSelect.value,
+				background: backgroundSelect.value,
+				video: backgroundClipsSelect.value,
 				vidOpacity: vidOpacity.value,
 				vidTop: parseInt(vidTop.value) + 5,
 				players: {
@@ -216,6 +237,9 @@
 	backgroundClipsSelect.onchange = () => {
 		demoBackground.src = backgroundClipsSelect.value;
 	}
+	backgroundSelect.onchange = () => {
+		demoBack.src = backgroundSelect.value;
+	}
 	runnerListReplicant.on('change', (runners) => {
 		if (!runners) {
 			return;
@@ -251,6 +275,7 @@
 	//[RECALC PBs]
 	gameSelect.onchange = () => {
 		fetchPBAggregatedList();
+		gamePicture.src = '../graphics/img/games/UD' + season.value + '/' + string_to_slug(gameSelect.value) + '.png'
 	}
 	function fetchPBAggregatedList() {
 		nodecg.sendMessage(
