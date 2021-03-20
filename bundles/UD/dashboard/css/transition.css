@@ -1,8 +1,16 @@
-#videoBlockDemo {
+.blockDemo {
 	width: 256px;
-	height: 74px;
 	position: absolute;
-	bottom: 5px;
 	border: 1px solid red;
 	z-index: 999;
+}
+
+#videoBlockDemo {
+	height: 74px;
+	bottom: 5px;
+}
+
+#bgBlockDemo {
+	height: 46px;
+	top: 37px;
 }

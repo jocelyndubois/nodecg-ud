@@ -87,16 +87,24 @@
 			<a class="btn btn-success" id="showButton">Show</a>
 			<a class="btn btn-danger" id="hideButton">Hide</a>
 		</div>
+	</div>
+	</br>
+	<div class="row">
 		<div class="col">
 			<h4>Preview background :</h4>
+			<div id="bgBlockDemo" class="blockDemo"></div>
 			<img src="#" id="demoBack" width="256" height="144">
+		</div>
+		<div class="col">
+			<label for="bgTop" class="form-label">Move (0 to 736)</label>
+			<input type="number" min="0" max="736" step="1" class="form-control" id="bgTop" value="0"/>
 		</div>
 	</div>
 	</br>
 	<div class="row">
 		<div class="col">
 			<h4>Preview video :</h4>
-			<div id="videoBlockDemo"></div>
+			<div id="videoBlockDemo" class="blockDemo"></div>
 			<video autoplay loop muted id="demoBackground"  width="256" height="144">
 				<source id="sourceVid" src="#" type="video/mp4">
 			</video>
@@ -120,6 +128,8 @@
 
 	const demoBackground = document.querySelector('#demoBackground');
 	const demoBack = document.querySelector('#demoBack');
+	const bgTop = document.querySelector('#bgTop');
+	const bgBlockDemo = document.querySelector('#bgBlockDemo');
 
 	const topLeft = document.querySelector('#topLeft');
 	const topRight = document.querySelector('#topRight');
@@ -175,6 +185,7 @@
 				topRight: topRight.value,
 				game: gameSelect.value,
 				background: backgroundSelect.value,
+				bgTop: parseInt(bgTop.value),
 				video: backgroundClipsSelect.value,
 				vidOpacity: vidOpacity.value,
 				vidTop: parseInt(vidTop.value) + 5,
@@ -314,6 +325,12 @@
 	vidTop.onchange = () => {
 		let newTop = (parseInt(vidTop.value) / 7.5) + 5;
 		videoBlockDemo.style.bottom = newTop + 'px';
+	}
+
+	//[BACKGROUND]
+	bgTop.onchange = () => {
+		let newTop = (parseInt(bgTop.value) / 7.5) + 37;
+		bgBlockDemo.style.top = newTop + 'px';
 	}
 </script>
 </html>

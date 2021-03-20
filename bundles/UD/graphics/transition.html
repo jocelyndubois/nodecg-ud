@@ -11,13 +11,12 @@
 	<script type="text/javascript" src="js/utils.js"></script>
 </head>
 <body>
-<div class="container hidden">
+<div class="container ">
 	<img src="img/transition/overlay.png" id="overlay">
 	<div id="header">
 		<div id="topLeft">TOURNOIS XXX</div>
 		<div id="topRight">Jeux n° XX/XX</div>
 	</div>
-
 	<div id="videoBackGround">
 		<video autoplay loop muted id="bgvid">
 			<source id="sourceVid" src="#" type="video/mp4">
@@ -30,7 +29,9 @@
 		</div>
 		<img src="#" alt="" id="nextGame"/>
 	</div>
-	<div id="backgroundDiv"></div>
+	<div id="backgroundDiv">
+		<img src="#" id="bgImg"/>
+	</div>
 	<div id="players">
 		<div class="players" id="player-1">
 			<div class="player-name" id="player-name-1"></div>
@@ -64,7 +65,7 @@
 	const nextGameBand = document.querySelector('#nextGameBand');
 	const bgvid = document.querySelector('#bgvid');
 	const sourceVid = document.querySelector('#sourceVid');
-	const backgroundDiv = document.querySelector('#backgroundDiv');
+	const bgImg = document.querySelector('#bgImg');
 
 	const player_name_1 = document.querySelector('#player-name-1');
 	const player_name_2 = document.querySelector('#player-name-2');
@@ -88,8 +89,8 @@
 		bgvid.load();
 		bgvid.play();
 
-		backgroundDiv.style.backgroundImage = 'url(\'' + infos.background + '\')';
-
+		bgImg.src = infos.background;
+		bgImg.style.bottom = infos.bgTop + 'px';
 
 		topLeft.innerHTML = infos.topLeft;
 		topRight.innerHTML = infos.topRight;

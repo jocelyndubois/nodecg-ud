@@ -14,6 +14,7 @@ html,body {
 	z-index: 3;
 }
 
+/*Video*/
 #videoBackGround {
 	bottom: 561px;
 	position: absolute;
@@ -23,6 +24,21 @@ html,body {
 
 #bgvid {
 	top: 5px;
+	left: 0;
+	position: relative;
+	z-index: 1;
+}
+
+/*Background*/
+#backgroundDiv {
+	bottom: 215px;
+	position: absolute;
+	z-index: 1;
+	overflow: hidden;
+	height: 344px;
+}
+
+#bgImg {
 	left: 0;
 	position: relative;
 	z-index: 1;
@@ -100,19 +116,6 @@ html,body {
 	background-color: #4A6F7F;
 	margin: 0 auto;
 	text-align: center;
-}
-
-
-/*Background*/
-#backgroundDiv {
-	position: absolute;
-	width: 100%;
-	top: 521px;
-	left: 0;
-	height: 346px;
-	/*background-image: url("../img/background.png");*/
-	background-repeat: no-repeat;
-	z-index: 0;
 }
 
 /*Players*/
