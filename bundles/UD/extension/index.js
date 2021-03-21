@@ -70,8 +70,7 @@ module.exports = nodecg => {
 
 			const apiResponse = await axios.get(graphUrl, {
 				params: {
-					// query: 'query AllRunners {  activeSeasonUsers(season: ' + query.season + ', paginator: {page: 1, nbPerPage: 1000}) {    totalPages    data {      id      username      alias      pronouns    }  }}'
-					query: 'query AllRunners {  activeSeasonUsers(season: ' + query.season + ', paginator: {page: 1, nbPerPage: 1000}) {    totalPages    data {      id      username      alias    }  }}'
+					query: 'query AllRunners {  activeSeasonUsers(season: ' + query.season + ', paginator: {page: 1, nbPerPage: 1000}) {    totalPages    data {      id      username      alias      pronouns    }  }}'
 				}
 			});
 

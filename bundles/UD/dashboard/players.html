@@ -235,6 +235,7 @@
 					'updateUser-' + i,
 					{
 						player: $( "#runnerId_" + i + " option:selected" ).text(),
+						pronoun: $( "#runnerId_" + i + " option:selected" ).data('pronoun'),
 						PB : {
 							score: score,
 							time: time,
@@ -256,6 +257,7 @@
 					'updateUserPseudo-' + i,
 					{
 						player: $( "#runnerId_" + i + " option:selected" ).text(),
+						pronoun: $( "#runnerId_" + i + " option:selected" ).data('pronoun'),
 					}
 				);
 
@@ -311,6 +313,7 @@
 					let opt = document.createElement("option");
 					opt.value = runners[i].username;
 					opt.text = runnerName;
+					opt.dataset.pronoun = runners[i].pronouns;
 					if (runners[i].username === eval('runnerIdReplicant_' + j).value) {
 						opt.selected = true;
 					}

@@ -53,3 +53,13 @@ html,body {
 #cardIframe.hidden {
 	opacity: 0;
 }
+
+.badge {
+	background-color: grey;
+	border-radius: 25px;
+	padding: 5px 20px 5px 20px;
+	font-size: 0.5em;
+	font-family: roboto;
+	position: relative;
+	bottom: 8px;
+}
