@@ -9,6 +9,7 @@
 <body>
 <div class="container">
 	<img src="img/cadres/UD9_violet.png" class="cadreImg">
+	<img src="img/micro.png" id="cup" class="hide">
 	<div id="player" class="player-banner">
 		<div class="runner">
 			<span id="runnerId"></span>
@@ -28,6 +29,7 @@
 	const pbTime = document.querySelector('#pbTime');
 	const PBDiv = document.querySelector('#PBDiv');
 	const pronoun = document.querySelector('#pronoun');
+	const cup = document.querySelector('#cup');
 
 	nodecg.listenFor('updateUser-4', async infos => {
 		updatePlayer(infos);
@@ -35,6 +37,10 @@
 
 	nodecg.listenFor('updateUserPseudo-4', async infos => {
 		updatePlayerPseudo(infos);
+	})
+
+	nodecg.listenFor('cupDisplay', async infos => {
+		displayHideCup(infos, 4);
 	})
 </script>
 </html>

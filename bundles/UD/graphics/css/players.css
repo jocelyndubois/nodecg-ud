@@ -22,6 +22,19 @@ html,body {
 	top: 7px;
 }
 
+#cup {
+	z-index: 3;
+	position: fixed;
+	bottom: 19px;
+	right: 77px;
+	opacity: 1;
+	transition: opacity 1s;
+}
+
+#cup.hide {
+	opacity: 0;
+}
+
 .player-banner>div {
 	flex: 1;
 	height: 100%;

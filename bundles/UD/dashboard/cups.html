@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/global.css">
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript" src="js/replicants.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<a href="#" id="cup_1" data-player="1" class="cup btn btn-danger">Player 1</a>
+			</div>
+			<div class="col">
+				<a href="#" id="cup_2" data-player="2" class="cup btn btn-success">Player 2</a>
+			</div>
+		</div>
+		</br>
+		<div class="row">
+			<div class="col">
+				<a href="#" id="cup_3" data-player="3" class="cup btn btn-primary">Player 3</a>
+			</div>
+			<div class="col">
+				<a href="#" id="cup_4" data-player="4" class="cup btn btn-twitch">Player 4</a>
+			</div>
+		</div>
+		</br>
+		<div class="row">
+			<div class="col">
+				<a data-player="none" class="cup btn btn-danger"id="noCup"><svg xmlns="http://www.w3.org/2000/svg" width="13px" height="13px" viewBox="0 0 100 100"><path d="M 10 10 H 90 V 90 H 10 L 10 10"/></svg></a>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	$('.cup').on('click', function () {
+		nodecg.sendMessage(
+			'cupDisplay',
+			{
+				player: $(this).data('player')
+			}
+		);
+	})
+</script>
+</html>

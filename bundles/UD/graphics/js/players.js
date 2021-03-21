@@ -25,3 +25,11 @@ function updatePlayerPseudo(infos)
 	playerDiv.classList.remove('hidden');
 	PBDiv.classList.add('hidden');
 }
+
+function displayHideCup(infos, id) {
+	if (id === infos.player) {
+		cup.classList.remove('hide');
+	} else {
+		cup.classList.add('hide');
+	}
+}

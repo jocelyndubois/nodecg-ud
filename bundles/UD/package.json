@@ -19,6 +19,14 @@
         "headerColor": "#525F78"
       },
       {
+        "name": "cups",
+        "title": "Coupes",
+        "width": 2,
+        "file": "cups.html",
+        "headerColor": "#525F78",
+        "workspace": "Run tools"
+      },
+      {
         "name": "Clips",
         "title": "Clip",
         "width": 3,
