@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="css/global.css">
+	<link rel="stylesheet" href="css/sliders.css">
+
+	<script type="text/javascript" src="js/replicants.js"></script>
+</head>
+<body>
+<div class="container">
+	<video muted class="hidden" id="discord">
+		<source src="videos/sliders/slider_discord.webm" type="video/mp4">
+	</video>
+	<video muted class="hidden" id="twitter">
+		<source src="videos/sliders/slider_twitter.webm" type="video/mp4">
+	</video>
+	<video muted class="hidden" id="youtube">
+		<source src="videos/sliders/slider_youtube.webm" type="video/mp4">
+	</video>
+</div>
+</body>
+
+<script>
+	const discord = document.querySelector('#discord');
+	const twitter = document.querySelector('#twitter');
+	const youtube = document.querySelector('#youtube');
+
+	let sliders = [
+		discord,
+		twitter,
+		youtube
+	]
+
+	let actualRank = 0;
+
+	let interval = 2 * 60 * 1000;
+
+
+	function launchSlider() {
+		let videoPlayer = sliders[actualRank];
+
+		videoPlayer.load();
+		videoPlayer.classList.remove('hidden');
+		videoPlayer.play();
+		if (actualRank < sliders.length -1) {
+			++actualRank;
+		} else {
+			actualRank = 0;
+		}
+		console.log(sliders.length);
+		console.log(actualRank);
+		setTimeout(launchSlider, interval);
+	}
+	window.onload = function () {
+		setTimeout(launchSlider, interval);
+	}
+
+	discord.addEventListener('ended',function () {
+		discord.classList.add('hidden');
+	}, false);
+	twitter.addEventListener('ended',function () {
+		twitter.classList.add('hidden');
+	}, false);
+	youtube.addEventListener('ended',function () {
+		youtube.classList.add('hidden');
+	}, false);
+</script>
+</html>

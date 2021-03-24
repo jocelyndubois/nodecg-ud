@@ -1,0 +1,19 @@
+body {
+	background-color: transparent;
+	width:800px;
+	height:300px;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+.container {
+	overflow: hidden;
+	width:800px;
+	height:300px;
+	position: fixed; left: 0; top: 0;
+}
+
+video {
+	position: fixed; left: 0; top: 0;
+	width: auto; height: auto; z-index: -100;
+	background-size: cover;
+}
