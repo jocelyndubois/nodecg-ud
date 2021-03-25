@@ -1,0 +1,36 @@
+body {
+	background-color: transparent;
+	width:1920px;
+	height:1080px;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+.container {
+	overflow: hidden;
+	width:1920px;
+	height:1080px;
+	position: fixed; left: 0; top: 0;
+}
+
+video {
+	width: 424px;
+	height: 160px;
+}
+
+#discord {
+	position: fixed;
+	left: 59px;
+	top: 875px;
+}
+
+#twitter {
+	position: fixed;
+	left: 748px;
+	top: 875px;
+}
+
+#youtube {
+	position: fixed;
+	left: 1437px;
+	top: 875px;
+}

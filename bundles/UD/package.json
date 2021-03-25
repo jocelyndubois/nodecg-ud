@@ -154,6 +154,11 @@
         "file": "sliders.html",
         "width": 800,
         "height": 300
+      },
+      {
+        "file": "sliders-intro.html",
+        "width": 1920,
+        "height": 1080
       }
     ],
     "assetCategories": [
