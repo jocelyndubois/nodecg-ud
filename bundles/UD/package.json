@@ -19,6 +19,13 @@
         "headerColor": "#525F78"
       },
       {
+        "name": "sliders",
+        "title": "Sliders",
+        "width": 1,
+        "file": "sliders.html",
+        "headerColor": "#525F78"
+      },
+      {
         "name": "cups",
         "title": "Coupes",
         "width": 2,
@@ -152,6 +159,11 @@
       },
       {
         "file": "sliders.html",
+        "width": 800,
+        "height": 300
+      },
+      {
+        "file": "sliders-manuel.html",
         "width": 800,
         "height": 300
       },

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/global.css">
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript" src="js/replicants.js"></script>
+</head>
+<body>
+	<div class="container">
+		<a href="#" data-social="discord" class="btn-social btn btn-primary">DISCORD</a>
+		<a href="#" data-social="twitter" class="btn-social btn btn-secondary">TWITTER</a>
+		<a href="#" data-social="youtube" class="btn-social btn btn-danger">YOUTUBE</a>
+	</div>
+</body>
+<script>
+	$('.btn-social').on('click', function () {
+		nodecg.sendMessage(
+			'sendSocial',
+			{
+				type: $(this).data('social')
+			}
+		);
+	});
+</script>
+</html>

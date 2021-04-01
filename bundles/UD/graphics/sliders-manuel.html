@@ -31,28 +31,12 @@
 		youtube
 	]
 
-	let interval = 1 * 60 * 1000;
-
-	function launchSlider() {
-		let videoPlayer = sliders[sliderReplicant.value];
-
-		if (undefined == sliderReplicant.value) {
-			sliderReplicant.value = 0;
-		}
-
-		videoPlayer.load();
-		videoPlayer.classList.remove('hidden');
-		videoPlayer.play();
-		if (sliderReplicant.value < sliders.length -1) {
-			sliderReplicant.value = sliderReplicant.value + 1;
-		} else {
-			sliderReplicant.value = 0;
-		}
-		setTimeout(launchSlider, interval);
-	}
-	window.onload = function () {
-		setTimeout(launchSlider, interval);
-	}
+	nodecg.listenFor('sendSocial', infos => {
+		let social = eval(infos.type);
+		social.classList.remove('hidden');
+		social.load();
+		social.play();
+	});
 
 	discord.addEventListener('ended',function () {
 		discord.classList.add('hidden');

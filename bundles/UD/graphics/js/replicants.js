@@ -5,3 +5,5 @@ const background = nodecg.Replicant('background');
 const clip = nodecg.Replicant('clip');
 
 const commentatorsReplicant = nodecg.Replicant('commentatorsReplicant');
+
+const sliderReplicant = nodecg.Replicant('sliderReplicant');
