@@ -34,11 +34,11 @@
 	let interval = 1 * 60 * 1000;
 
 	function launchSlider() {
-		let videoPlayer = sliders[sliderReplicant.value];
-
 		if (undefined == sliderReplicant.value) {
 			sliderReplicant.value = 0;
 		}
+
+		let videoPlayer = sliders[sliderReplicant.value];
 
 		videoPlayer.load();
 		videoPlayer.classList.remove('hidden');
