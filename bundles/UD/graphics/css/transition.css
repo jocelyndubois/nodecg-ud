@@ -103,7 +103,14 @@ html,body {
 	font-size: 5em;
 }
 #nextGame {
+	margin: auto;
+	height: 60%;
+}
+
+#nextGameImgDiv {
 	height: 80%;
+	width: 100%;
+	display: flex;
 }
 
 #bestTime {

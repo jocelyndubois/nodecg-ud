@@ -1,3 +1,5 @@
+@import "fonts/fonts.css";
+
 @font-face {
 	font-family: pixel;
 	src: url('../font/ARCADECLASSIC.TTF');
@@ -7,7 +9,6 @@
 	font-family: roboto;
 	src: url('../font/RobotoSlab.ttf');
 }
-
 
 .hidden {
 	display: none;
