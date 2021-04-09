@@ -24,5 +24,5 @@ html,body {
 	display: inline-block;
 	top: -9px;
 	position: relative;
-	-webkit-text-stroke: 3px black;
+	-webkit-text-stroke: 1px black;
 }
