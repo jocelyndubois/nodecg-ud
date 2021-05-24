@@ -87,7 +87,7 @@
 			<h4>Chrono</h4>
 
 			<label for="countdown">Countdown</label>
-			<input id="countdown" type="checkbox" />
+			<input id="countdown" type="checkbox" checked="checked"/>
 			<table>
 				<tbody>
 				<tr>
@@ -130,7 +130,7 @@
 	const sendDark = document.querySelector('#sendDark');
 
 	const countdown = document.querySelector('#countdown');
-	let countdownTimer = 0;
+	let countdownTimer = 3500;
 
 	const startLight = document.querySelector('#startLight');
 	const startDark = document.querySelector('#startDark');
@@ -159,7 +159,7 @@
 	$( document ).ready(function() {
 		countdown.onchange = () => {
 			if (countdown.checked) {
-				countdownTimer = 3000
+				countdownTimer = 3500
 			} else {
 				countdownTimer = 0;
 			}
