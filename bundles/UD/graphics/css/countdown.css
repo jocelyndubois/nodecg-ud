@@ -1,0 +1,16 @@
+body {
+	background-color: transparent;
+	height:100%;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+.container {
+	overflow: hidden;
+	height: 100%;
+}
+video#countDownVid {
+	position: fixed; right: 0; bottom: 0;
+	min-width: 100%; min-height: 100%;
+	width: auto; height: auto; z-index: -100;
+	background-size: cover;
+}

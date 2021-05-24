@@ -85,6 +85,9 @@
 		</div>
 		<div class="col">
 			<h4>Chrono</h4>
+
+			<label for="countdown">Countdown</label>
+			<input id="countdown" type="checkbox" />
 			<table>
 				<tbody>
 				<tr>
@@ -126,6 +129,9 @@
 	const sendLight = document.querySelector('#sendLight');
 	const sendDark = document.querySelector('#sendDark');
 
+	const countdown = document.querySelector('#countdown');
+	let countdownTimer = 0;
+
 	const startLight = document.querySelector('#startLight');
 	const startDark = document.querySelector('#startDark');
 	const startBoth = document.querySelector('#startBoth');
@@ -151,6 +157,14 @@
 	const gameMaxScoreDark = document.querySelector('#gameMaxScoreDark');
 
 	$( document ).ready(function() {
+		countdown.onchange = () => {
+			if (countdown.checked) {
+				countdownTimer = 3000
+			} else {
+				countdownTimer = 0;
+			}
+		}
+
 		fetchGamesButton.onclick = () => {
 			nodecg.sendMessage(
 				'fetchGamesList',
@@ -166,83 +180,135 @@
 
 		//[CHRONO]
 		startLight.onclick = () => {
-			nodecg.sendMessage(
-				'startTimer',
-				{
-					category: 'light',
-					light : {
-						bestTime: gameMaxTimeLight.dataset.seconds,
-						middleTime: gameMidTimeLight.dataset.seconds,
-						minScore: gameMinScoreLight.value,
-						maxScore: gameMaxScoreLight.value,
-					},
-					dark: {
-						bestTime: gameMaxTimeDark.dataset.seconds,
-						middleTime: gameMidTimeDark.dataset.seconds,
-						minScore: gameMinScoreDark.value,
-						maxScore: gameMaxScoreDark.value,
+			if (countdown.checked) {
+				nodecg.sendMessage(
+					'startCountdown',
+					{
+						game: gameName.value
 					}
-				}
+				);
+			}
+			setTimeout(
+				function() {
+					nodecg.sendMessage(
+						'startTimer',
+						{
+							category: 'light',
+							light : {
+								bestTime: gameMaxTimeLight.dataset.seconds,
+								middleTime: gameMidTimeLight.dataset.seconds,
+								minScore: gameMinScoreLight.value,
+								maxScore: gameMaxScoreLight.value,
+							},
+							dark: {
+								bestTime: gameMaxTimeDark.dataset.seconds,
+								middleTime: gameMidTimeDark.dataset.seconds,
+								minScore: gameMinScoreDark.value,
+								maxScore: gameMaxScoreDark.value,
+							}
+						}
+					);
+				},
+				countdownTimer
 			);
 		};
 		startDark.onclick = () => {
-			nodecg.sendMessage(
-				'startTimer',
-				{
-					category: 'dark',
-					light : {
-						bestTime: gameMaxTimeLight.dataset.seconds,
-						middleTime: gameMidTimeLight.dataset.seconds,
-						minScore: gameMinScoreLight.value,
-						maxScore: gameMaxScoreLight.value,
-					},
-					dark: {
-						bestTime: gameMaxTimeDark.dataset.seconds,
-						middleTime: gameMidTimeDark.dataset.seconds,
-						minScore: gameMinScoreDark.value,
-						maxScore: gameMaxScoreDark.value,
+			if (countdown.checked) {
+				nodecg.sendMessage(
+					'startCountdown',
+					{
+						game: gameName.value
 					}
-				}
+				);
+			}
+			setTimeout(
+				function() {
+					nodecg.sendMessage(
+						'startTimer',
+						{
+							category: 'dark',
+							light : {
+								bestTime: gameMaxTimeLight.dataset.seconds,
+								middleTime: gameMidTimeLight.dataset.seconds,
+								minScore: gameMinScoreLight.value,
+								maxScore: gameMaxScoreLight.value,
+							},
+							dark: {
+								bestTime: gameMaxTimeDark.dataset.seconds,
+								middleTime: gameMidTimeDark.dataset.seconds,
+								minScore: gameMinScoreDark.value,
+								maxScore: gameMaxScoreDark.value,
+							}
+						}
+					);
+				},
+				countdownTimer
 			);
 		};
 		startBoth.onclick = () => {
-			nodecg.sendMessage(
-				'startTimer',
-				{
-					category: 'both',
-					light : {
-						bestTime: gameMaxTimeLight.dataset.seconds,
-						middleTime: gameMidTimeLight.dataset.seconds,
-						minScore: gameMinScoreLight.value,
-						maxScore: gameMaxScoreLight.value,
-					},
-					dark: {
-						bestTime: gameMaxTimeDark.dataset.seconds,
-						middleTime: gameMidTimeDark.dataset.seconds,
-						minScore: gameMinScoreDark.value,
-						maxScore: gameMaxScoreDark.value,
+			if (countdown.checked) {
+				nodecg.sendMessage(
+					'startCountdown',
+					{
+						game: gameName.value
 					}
-				}
+				);
+			}
+			setTimeout(
+				function() {
+					nodecg.sendMessage(
+						'startTimer',
+						{
+							category: 'both',
+							light : {
+								bestTime: gameMaxTimeLight.dataset.seconds,
+								middleTime: gameMidTimeLight.dataset.seconds,
+								minScore: gameMinScoreLight.value,
+								maxScore: gameMaxScoreLight.value,
+							},
+							dark: {
+								bestTime: gameMaxTimeDark.dataset.seconds,
+								middleTime: gameMidTimeDark.dataset.seconds,
+								minScore: gameMinScoreDark.value,
+								maxScore: gameMaxScoreDark.value,
+							}
+						}
+					);
+				},
+				countdownTimer
 			);
 		};
 		startNone.onclick = () => {
-			nodecg.sendMessage(
-				'startTimer',
-				{
-					category: 'none',
-					light : {
-						bestTime: null,
-						middleTime: null,
-						minScore: null,
-						maxScore: null,
-					},
-					dark: {
-						bestTime: null,
-						middleTime: null,
-						minScore: null,
-						maxScore: null,
+			if (countdown.checked) {
+				nodecg.sendMessage(
+					'startCountdown',
+					{
+						game: gameName.value
 					}
-				}
+				);
+			}
+			setTimeout(
+				function() {
+					nodecg.sendMessage(
+						'startTimer',
+						{
+							category: 'none',
+							light : {
+								bestTime: null,
+								middleTime: null,
+								minScore: null,
+								maxScore: null,
+							},
+							dark: {
+								bestTime: null,
+								middleTime: null,
+								minScore: null,
+								maxScore: null,
+							}
+						}
+					);
+				},
+				countdownTimer
 			);
 		};
 		pause.onclick = () => {

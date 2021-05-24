@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="css/global.css">
+	<link rel="stylesheet" href="css/clip.css">
+
+	<script type="text/javascript" src="js/replicants.js"></script>
+</head>
+<body>
+<div class="container">
+	<video id="countDownVid">
+		<source id="sourceVid" src="">
+	</video>
+</div>
+</body>
+
+<script>
+	const countDownVid = document.querySelector('#countDownVid');
+	const sourceVid = document.querySelector('#sourceVid');
+
+
+	countDownVid.addEventListener('ended',function () {
+		countDownVid.classList.add('hidden');
+	}, false);
+
+	nodecg.listenFor('startCountdown', (infos) => {
+		sourceVid.src = 'videos/countdown/321_commun.webm';
+
+		countDownVid.load();
+		countDownVid.classList.remove('hidden');
+		countDownVid.play();
+	});
+
+	nodecg.listenFor('stopTimer', () => {
+		countDownVid.pause();
+		countDownVid.classList.add('hidden');
+	});
+</script>
+</html>

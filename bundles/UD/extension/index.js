@@ -1,9 +1,16 @@
 const {OBSUtility} = require('nodecg-utility-obs');
 const axios = require('axios');
+const io = require('socket.io-client');
 
 module.exports = nodecg => {
 	const obs = new OBSUtility(nodecg);
 	const graphUrl = 'https://www.ultimedecathlon.com/graphql';
+
+	const socket = io.connect('90.27.224.124', {
+		port: 3000
+	});
+
+	socket.on('connect', function () { console.log("socket connected"); });
 
 	nodecg.listenFor('loadRTMP', async query => {
 		try {
@@ -163,7 +170,7 @@ module.exports = nodecg => {
 								};
 							}
 
-							if (!results[key].score || (PB.score && (PB.score < results[key].score))) {
+							if (!results[key].score || (PB.score && (PB.score > results[key].score))) {
 								results[key] = {
 									score: PB.score ? PB.score : 0,
 									time: PB.time
