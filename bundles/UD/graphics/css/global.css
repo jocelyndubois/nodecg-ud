@@ -1,4 +1,4 @@
-@import "fonts/fonts.css";
+@import 'fonts/fonts.css';
 
 @font-face {
 	font-family: pixel;
@@ -10,10 +10,16 @@
 	src: url('../font/RobotoSlab.ttf');
 }
 
+@font-face {
+	font-family: monofonto;
+	src: url('../font/monofonto.ttf');
+}
+
 .hidden {
 	display: none;
 }
 
-html, body {
+html,
+body {
 	font-family: pixel, monospace;
 }
