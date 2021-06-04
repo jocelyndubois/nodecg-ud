@@ -35,9 +35,13 @@
 html,
 body {
 	/*background-color: #2c3347;*/
-	background-color: darkblue;
+	background-color: transparent;
 	color: #ffffff;
 	font-family: roboto, monospace;
+}
+
+.timer-with-scores-container {
+	display: flex;
 }
 
 .timer-with-scores {
