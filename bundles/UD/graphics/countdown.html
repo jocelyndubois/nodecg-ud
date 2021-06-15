@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="css/clip.css">
 
 	<script type="text/javascript" src="js/replicants.js"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
 </head>
 <body>
 <div class="container">
@@ -24,7 +25,7 @@
 	}, false);
 
 	nodecg.listenFor('startCountdown', (infos) => {
-		sourceVid.src = 'videos/countdown/321_commun.webm';
+		sourceVid.src = 'videos/countdown/321_' + string_to_slug(infos.game) + '.webm';
 
 		countDownVid.load();
 		countDownVid.classList.remove('hidden');
