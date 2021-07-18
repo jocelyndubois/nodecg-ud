@@ -422,6 +422,16 @@
 			gameMidTimeDark.dataset.seconds = infos.dark.middleTime;
 			gameFewTimeDark.value = new Date(infos.dark.fewestTime * 1000).toISOString().substr(11, 8);
 			gameFewTimeDark.dataset.seconds = infos.dark.fewestTime;
+
+			nodecg.sendMessage(
+				'updateTimer',
+				{
+					bestTime: gameMaxTimeDark.dataset.seconds,
+					middleTime: gameMidTimeDark.dataset.seconds,
+					minScore: gameMinScoreDark.value,
+					maxScore: gameMaxScoreDark.value,
+				}
+			);
 		});
 	});
 </script>

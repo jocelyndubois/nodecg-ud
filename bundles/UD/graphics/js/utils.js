@@ -15,3 +15,25 @@ function string_to_slug (str) {
 
 	return str;
 }
+
+function hmsToSecondsOnly(str) {
+	let time = str.split('\n').shift();
+
+	time = time.split('.');
+	let millisec = parseFloat('0.' + time.pop());
+	time = time.shift();
+
+	var p = time.split(':'),
+		s = 0, m = 1;
+
+	while (p.length > 0) {
+		s += m * parseInt(p.pop(), 10);
+		m *= 60;
+	}
+
+	return s+millisec;
+}
+
+function sleep (time) {
+	return new Promise((resolve) => setTimeout(resolve, time));
+}

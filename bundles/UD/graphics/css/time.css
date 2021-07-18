@@ -1,0 +1,10 @@
+html,body {
+	height:100%;
+	background-color: transparent;
+	overflow: hidden;
+	color: white;
+}
+
+#chrono, #score {
+	font-size: 3em;
+}

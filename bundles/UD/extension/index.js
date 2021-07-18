@@ -1,6 +1,12 @@
 const {OBSUtility} = require('nodecg-utility-obs');
 const axios = require('axios');
 const io = require('socket.io-client');
+const LiveSplitClient = require('livesplit-client');
+
+const client1 = new LiveSplitClient('127.0.0.1:16834');
+const client2 = new LiveSplitClient('127.0.0.1:16835');
+const client3 = new LiveSplitClient('127.0.0.1:16836');
+const client4 = new LiveSplitClient('127.0.0.1:16837');
 
 module.exports = nodecg => {
 	const obs = new OBSUtility(nodecg);
@@ -221,4 +227,12 @@ module.exports = nodecg => {
 
 		return gameResult;
 	}
+
+	nodecg.listenFor('getTime', async (data, callback) => {
+		let client = eval('client' + data.id);
+		await client.connect();
+		const time = await client.getCurrentTime();
+
+		callback(time);
+	});
 }

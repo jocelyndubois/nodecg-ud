@@ -83,6 +83,26 @@
     ],
     "graphics": [
       {
+        "file": "player-1-time.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "player-2-time.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "player-3-time.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "player-4-time.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
         "file": "player-1.html",
         "width": 1920,
         "height": 1080
@@ -217,6 +237,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bower-npm-resolver": "^0.11.0",
+    "livesplit-client": "^1.0.0",
     "nodecg-utility-obs": "^6.1.7",
     "socket.io-client": "^4.0.1"
   }
